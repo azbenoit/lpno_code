@@ -1,0 +1,1 @@
+{"cores": 10, "threads_per_rank": 10, "export": "npz"}

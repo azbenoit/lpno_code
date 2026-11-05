@@ -1,0 +1,61 @@
+cff-version: 1.2.0
+message: >-
+  If you use this code or the data, please cite the paper given under preferred-citation,
+  and the data records listed under references.
+title: "LP-NO: neural-operator surrogates for laser melting"
+type: software
+authors:
+  - family-names: Benoit
+    given-names: Alix
+    email: alix.benoit@alumni.polytechnique.org
+    affiliation: >-
+      Light-Matter Dynamics Group, Laboratory for Multifunctional Materials and Interfaces,
+      Empa, Swiss Federal Laboratories for Materials Science and Technology
+  - family-names: Iseli
+    given-names: Elia
+    affiliation: >-
+      Light-Matter Dynamics Group, Laboratory for Multifunctional Materials and Interfaces,
+      Empa, Swiss Federal Laboratories for Materials Science and Technology
+repository-code: "https://github.com/azbenoit/lpno_code"
+license: PolyForm-Noncommercial-1.0.0
+keywords:
+  - laser melting
+  - neural operators
+  - surrogate modeling
+  - Fourier neural operator
+  - provenance
+  - AiiDA
+preferred-citation:
+  type: article
+  title: >-
+    Provenance-tracked, experimentally validated neural operator surrogates of
+    three-dimensional laser melting with keyholes and free-form paths
+  authors:
+    - family-names: Benoit
+      given-names: Alix
+    - family-names: Iseli
+      given-names: Elia
+  year: 2026
+  status: preprint
+  notes: "arXiv identifier to be added when the preprint is posted."
+references:
+  - type: data
+    title: >-
+      LP-NO data, open record: provenance graph, trained neural operator models and
+      simulation configurations
+    authors:
+      - family-names: Benoit
+        given-names: Alix
+      - family-names: Iseli
+        given-names: Elia
+    doi: 10.5281/zenodo.23325086
+    year: 2026
+  - type: data
+    title: "LP-NO data, restricted-access record: FLOW-3D WELD simulation output"
+    authors:
+      - family-names: Benoit
+        given-names: Alix
+      - family-names: Iseli
+        given-names: Elia
+    doi: 10.5281/zenodo.23325088
+    year: 2026

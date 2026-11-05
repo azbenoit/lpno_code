@@ -1,0 +1,123 @@
+{
+ "rows": [
+  {
+   "case": "in718t_022",
+   "P_w": 245.0,
+   "V_mps": 0.96,
+   "spot_um": 67.0,
+   "amb_key": [
+    245.0,
+    960.0,
+    67.0
+   ],
+   "meas_depth_um": 116.9,
+   "meas_depth_sd_um": 1.2,
+   "flow3d_depth_um": 120.0,
+   "target_depth_um": 120.0,
+   "surrogate_depth_um": 110.0,
+   "aspect": 1.0
+  },
+  {
+   "case": "in718t_009",
+   "P_w": 285.0,
+   "V_mps": 0.8,
+   "spot_um": 67.0,
+   "amb_key": [
+    285.0,
+    800.0,
+    67.0
+   ],
+   "meas_depth_um": 176.5,
+   "meas_depth_sd_um": 2.6,
+   "flow3d_depth_um": 170.0,
+   "target_depth_um": 160.0,
+   "surrogate_depth_um": 160.0,
+   "aspect": 1.4238
+  },
+  {
+   "case": "in718t_001",
+   "P_w": 285.0,
+   "V_mps": 0.96,
+   "spot_um": 49.0,
+   "amb_key": [
+    285.0,
+    960.0,
+    49.0
+   ],
+   "meas_depth_um": 227.2,
+   "meas_depth_sd_um": 3.2,
+   "flow3d_depth_um": 170.0,
+   "target_depth_um": 170.0,
+   "surrogate_depth_um": 170.0,
+   "aspect": 1.5609
+  },
+  {
+   "case": "in718t_024",
+   "P_w": 285.0,
+   "V_mps": 0.96,
+   "spot_um": 67.0,
+   "amb_key": [
+    285.0,
+    960.0,
+    67.0
+   ],
+   "meas_depth_um": 139.7,
+   "meas_depth_sd_um": 1.9,
+   "flow3d_depth_um": 140.0,
+   "target_depth_um": 140.0,
+   "surrogate_depth_um": 130.0,
+   "aspect": 1.0615
+  },
+  {
+   "case": "in718t_017",
+   "P_w": 285.0,
+   "V_mps": 0.96,
+   "spot_um": 82.0,
+   "amb_key": [
+    285.0,
+    960.0,
+    82.0
+   ],
+   "meas_depth_um": 102.4,
+   "meas_depth_sd_um": 1.1,
+   "flow3d_depth_um": 120.0,
+   "target_depth_um": 120.0,
+   "surrogate_depth_um": 110.0,
+   "aspect": 0.7593
+  },
+  {
+   "case": "in718t_006",
+   "P_w": 285.0,
+   "V_mps": 1.2,
+   "spot_um": 67.0,
+   "amb_key": [
+    285.0,
+    1200.0,
+    67.0
+   ],
+   "meas_depth_um": 109.7,
+   "meas_depth_sd_um": 1.7,
+   "flow3d_depth_um": 110.0,
+   "target_depth_um": 120.0,
+   "surrogate_depth_um": 110.0,
+   "aspect": 0.8367
+  },
+  {
+   "case": "in718t_021",
+   "P_w": 325.0,
+   "V_mps": 0.96,
+   "spot_um": 67.0,
+   "amb_key": [
+    325.0,
+    960.0,
+    67.0
+   ],
+   "meas_depth_um": 166.1,
+   "meas_depth_sd_um": 2.0,
+   "flow3d_depth_um": 160.0,
+   "target_depth_um": 160.0,
+   "surrogate_depth_um": 150.0,
+   "aspect": 1.237
+  }
+ ]
+}

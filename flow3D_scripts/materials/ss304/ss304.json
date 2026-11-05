@@ -1,0 +1,28 @@
+{
+ "schema_version": 1,
+ "material_name": "Stainless steel 304",
+ "flow3d_label": "SS304 starter SI material",
+ "source": "Starter engineering values for scripted FLOW-3D WELD tests. Verify before scientific use.",
+ "properties": {
+  "density_kg_m3": 8020.0,
+  "solid_density_kg_m3": 8020.0,
+  "liquidus_temperature_k": 1727.15,
+  "solidus_temperature_k": 1633.15,
+  "specific_heat_j_kg_k": 480.0,
+  "solid_specific_heat_j_kg_k": 480.0,
+  "thermal_conductivity_w_m_k": 14.8,
+  "solid_thermal_conductivity_w_m_k": 14.8,
+  "dynamic_viscosity_pa_s": 0.008,
+  "latent_heat_j_kg": 261000.0,
+  "surface_tension_n_m": 1.77,
+  "vapor_pressure_pa": 101300.0,
+  "vaporization_temperature_k": 3134.0,
+  "vaporization_latent_heat_j_kg": 6080000.0,
+  "vaporization_molar_mass_kg_mol": 0.055845
+ },
+ "optical": {
+  "normal_absorptivity": 0.35,
+  "prefer_resistivity": true
+ },
+ "provenance": "see materials/sources.md"
+}

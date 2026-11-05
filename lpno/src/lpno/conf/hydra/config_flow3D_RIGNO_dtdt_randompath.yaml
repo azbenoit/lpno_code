@@ -1,0 +1,18 @@
+# Causality lever 3: add an auxiliary output T_dot = dT/dt, supervised by the GT
+# finite difference to the neighbour frame. Forcing the direct per-frame model to
+# also predict the instantaneous rate of change teaches the temporal dynamics
+# directly — a causal signal — while inference stays per-frame (no autoregression).
+# Everything else matches baseline config_flow3D_RIGNO_randompath (= rp3); train from
+# scratch on random_paths and compare val T MAE to rp3 to isolate whether it helps.
+# The extra head auto-sizes (num_outputs = sum(output_key_dict)); T_dot is excluded
+# from the alpha mask (dT/dt is nonzero in the heating substrate).
+defaults:
+  - config_flow3D_RIGNO_randompath
+  - _self_
+
+custom:
+  name: rigno_dtdt_randompath
+  FNO_output_keys:
+    - T
+    - alpha
+    - T_dot

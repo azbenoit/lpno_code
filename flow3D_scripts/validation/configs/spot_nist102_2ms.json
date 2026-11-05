@@ -1,0 +1,63 @@
+{
+ "schema_version": 1,
+ "case_name": "spot_nist102_2ms",
+ "material": {
+  "file": "../materials/ti64_v3_calibrated/ti64_v3_calibrated.json"
+ },
+ "parallel": {
+  "cores": 10,
+  "threads_per_rank": 10
+ },
+ "boundary_conditions": {
+  "x_min": "wall",
+  "x_max": "wall",
+  "y_min": "wall",
+  "y_max": "wall",
+  "z_min": "wall",
+  "z_max": "pressure"
+ },
+ "geometry": {
+  "length_m": 0.0006,
+  "width_m": 0.0006,
+  "thickness_m": 0.0007,
+  "gas_clearance_m": 0.0001,
+  "placement": "centered"
+ },
+ "mesh": {
+  "cell_size_m": 1e-05
+ },
+ "laser": {
+  "power_w": 101.9,
+  "beam_radius_m": 6.125e-05,
+  "focal_distance_m": 0.001,
+  "lens_radius_m": 6.125e-05,
+  "start_point_m": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "dwell_time_s": 0.002008,
+  "turn_off_at_end": true,
+  "heat_distribution": "gaussian",
+  "radiation_distribution_flag": 2,
+  "reflection_flag": 3,
+  "max_reflections": 20,
+  "reflection_limit": 0.01,
+  "absorptivity_flag": 0,
+  "absorptivity": 1.0,
+  "reflectivity": 0.35,
+  "vapor_pressure_a": 101300.0,
+  "vapor_pressure_b": 16.077291,
+  "fresnel_from_material": true
+ },
+ "simulation": {
+  "initial_temperature_k": 273.15,
+  "boundary_temperature_k": 273.15,
+  "finish_time_s": 0.0022,
+  "solver_profile": "legacy_case_fine_1",
+  "subprocess_id": 1,
+  "max_iterations": 2000000000,
+  "recoil_model": 2,
+  "void_vapor_pressure_pa": 101325.0
+ }
+}

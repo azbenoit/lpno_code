@@ -1,0 +1,41 @@
+# ABLATION 1 of 3: full-resolution pointwise skip.
+#
+# Two readings this config was first written on did not hold:
+#
+#  1. It claimed straight-path `fl` IoU was 0.56-0.61 against RIGNO's 0.68-0.76. It is
+#     actually 0.89-0.93 across all eight straight-path GAOT arms -- the 0.56-0.61 figures
+#     come from the random-path and material sets. There is almost no `fl` headroom on
+#     THIS dataset, so this arm cannot demonstrate an interface fix. Run
+#     config_flow3D_GAOT_skip_randompath for that.
+#  2. It attributed the interface error to the MAGNO decoder acting as a SMOOTHING
+#     operator. Rendered cross-sections of a random-path GAOT model show the opposite:
+#     the predicted TEMPERATURE field is piecewise-constant in tiles with a regular
+#     +/-250 K checkerboard error, i.e. the decoder injects high-frequency structure. The
+#     mechanism is a latent-lattice representation ceiling: with k_decoder=8 on a regular
+#     lattice the decoder selects exactly the 8 corners of the enclosing latent cell, and
+#     the cosine attention uses ABSOLUTE normalised coordinates, so every physical node in
+#     a cell reads nearly the same combination -- close to a box filter over each 3x3x2
+#     block.
+#
+# The skip may still help, for a different reason than originally argued: it adds a
+# non-tiled full-resolution path, and its inputs (beam_dist, path_dose, path_dose_recent)
+# are sharp full-resolution fields, so its function class does contain a rim correction.
+# That is a weaker claim than the one this file was created on. Treat this arm as
+# exploratory, and read the T RMSE and surface RMSE rather than `fl` IoU.
+#
+# Baseline (config_flow3D_GAOT_onecycle, same seed and schedule): val T MAE 9.27 K
+# whole-domain / 11.11 K substrate-only. Note the same-config replicate spread is 0.133 K,
+# so a difference smaller than that is not a result.
+defaults:
+  - config_flow3D_GAOT_onecycle
+  - _self_
+
+arch:
+  gaot:
+    use_pointwise_skip: true
+    # 64 hidden channels: the skip only has to represent local sharpening, not the
+    # solution, so this is deliberately small (~5k params against the model's 5.6M).
+    pointwise_skip_channels: 64
+
+custom:
+  name: gaot_sp_skip

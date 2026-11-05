@@ -1,0 +1,34 @@
+# Homoscedastic-uncertainty aggregator variant of config_flow3D_RIGNO (config M),
+# for the straight-path velocity-output variants and their controls.
+#
+# Config M aggregates per-key losses with ReLoBRaLo. Adding pool-masked u/v/w
+# outputs makes the key scales wildly uneven -- the velocity terms cover ~1% of
+# the domain -- so this config uses Kendall homoscedastic uncertainty (learned
+# per-key log-variance) to absorb that instead of hand-tuned weights. The
+# velocity loss VALUE is emitted from step 0 with the model gradient detached
+# until `custom.vel_warmup_steps` (see GridGradientLoss): a key held at literal
+# zero during warmup would drive its log-variance down every step and the
+# 1/2sigma^2 weight would explode at engagement.
+#
+# The group override below only composes because config M's relobralo params
+# were moved from an inline `loss:` block into loss/relobralo_tuned.yaml:
+# an inline block merges onto whichever schema the override
+# selects and fails struct validation -- the same failure that forced
+# config_flow3D_RIGNO_onecycle to be a full copy for the scheduler group.
+#
+# IMPORTANT for comparisons: this changes the aggregation dynamics relative to
+# every relobralo run, so a velocity arm on this config is only comparable to a
+# no-velocity CONTROL on this same config, never directly to config M numbers.
+defaults:
+  - config_flow3D_RIGNO
+  - override /loss: homoscedastic
+  - _self_
+
+custom:
+  # Velocity-arm knobs (read by model_domain; defaults match the code).
+  # Warmup engages the velocity gradient only after the T/alpha/fl fields are
+  # roughly right; the loss VALUE is emitted from step 0 so the homoscedastic
+  # sigma calibrates (see GridGradientLoss).
+  vel_warmup_steps: 4000
+  vel_ramp_steps: 1000
+  vel_tau: 0.05

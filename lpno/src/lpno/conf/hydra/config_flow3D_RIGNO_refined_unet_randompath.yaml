@@ -1,0 +1,19 @@
+# RIGNO base + residual 3D U-NET refinement head (local convs + pooling) — the
+# ripple-free alternative to the spectral FNO head (config_..._refined_...). A
+# U-Net gets a near-global receptive field WITHOUT an FFT, so it can sharpen the
+# melt pool without the global spectral (Gibbs) "waves" the FNO head injects into
+# the late-frame wake. Same warm-start-from-rp3 recipe,
+# separate head-LR, and fp32 as the FNO refined run; head zero-init so the model
+# starts as exactly the warm-started rp3 base, then co-adapts.
+defaults:
+  - config_flow3D_RIGNO_refined_randompath
+  - _self_
+
+arch:
+  refine_head:
+    type: unet
+    width: 24
+    layers: 3      # U-Net levels: 40 -> 20 -> 10 -> 5 at the bottleneck (~3.0M head params)
+
+custom:
+  name: rigno_refined_unet_randompath

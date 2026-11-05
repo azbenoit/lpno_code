@@ -1,0 +1,48 @@
+__pycache__/
+*.py[cod]
+*.so
+.Python
+.venv/
+venv/
+.env
+.env.*
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+coverage.xml
+htmlcov/
+.dist/
+build/
+*.egg-info/
+.DS_Store
+*.log
+.tmp/
+deploy/nginx/local/
+pretrained_models/
+dev/.run_local_pids
+# Runtime outputs
+outputs/
+
+# Self-contained assets: models + ground truth live under data/<page>/ on disk
+# but are multi-GB, so the files are NOT committed. The directory layout, its
+# README.md docs, the per-model meta.json, and .gitkeep markers ARE tracked so
+# the structure is visible in git. Populate with `python scripts/assets.py fetch <bundle>`.
+# Authored serve-time configs (flow3D_params.yaml) and the tiny per-model grid
+# axes (grid.npz, ~4 KB) are tracked too — they encode hand-derived serving
+# constants with no upstream source to re-copy from.
+data/**
+!data/**/
+!data/**/*.md
+!data/**/meta.json
+!data/**/flow3D_params.yaml
+!data/**/grid.npz
+!data/**/.gitkeep
+
+# Tracked template (real .env stays ignored)
+!.env.example
+
+# asset bundles built by scripts/assets.py bundle
+dist/
+
+# archived (unserved) model folders: never tracked, never bundled
+data/**/models_archive/

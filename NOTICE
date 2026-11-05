@@ -1,0 +1,31 @@
+LP-NO: laser melt-pool neural operators, code
+Copyright 2026 Empa, Swiss Federal Laboratories for Materials Science and
+Technology (Light-Matter Dynamics Group, Laboratory for Multifunctional Materials
+and Interfaces)
+
+The code in this repository is licensed under the PolyForm Noncommercial
+License 1.0.0 (see LICENSE): any noncommercial use is permitted, including by
+universities and public research organizations; commercial use needs a separate
+licence from the copyright holder. The data deposit it describes is licensed
+separately under CC BY-NC-SA 4.0 (see data_deposit/record_docs/LICENSE_data.txt). Third-party
+components keep their own notices in place.
+
+Third-party code:
+
+- lpno/src/lpno/models/rigno_arch.py is a PyTorch port
+  of RIGNO (https://github.com/camlab-ethz/rigno),
+  Copyright (c) 2025 Computational and Applied Mathematics Laboratory @ ETH Zurich,
+  MIT License. The full license text is reproduced at the top of that file.
+
+- lpno/src/lpno/models/gaot_arch.py is a port of GAOT
+  (https://github.com/camlab-ethz/GAOT), and the layers under
+  lpno/src/lpno/models/gaot_layers/ (all but
+  _scatter_backend.py) are vendored from GAOT-3D (https://github.com/Shizheng-Wen/GAOT-3D),
+  Copyright (c) 2025 Computational and Applied Mathematics Laboratory @ ETH Zurich,
+  MIT License. The upstream repositories carry no license file; their authors
+  confirmed the MIT License in October 2026. The full license text is in
+  gaot_layers/LICENSE. integral_transform.py and geoembed.py carry local modifications, each marked
+  in the code.
+
+The logos in aiida-pino/web/ and self_hosted_web_demo/lpno_web_demo_frontend/public/logos/
+belong to their owners and are not covered by the licences above.

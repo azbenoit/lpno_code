@@ -1,0 +1,33 @@
+# GAOT-4b: displacement kernel + deeper processor (num_layers 5 -> 8).
+#
+# TARGETS THE WAKE TEMPERATURE DEFICIT, which is what is left after the checkerboard fix.
+#
+# Rendered cross-sections of a displacement-kernel run (one validation frame) show the
+# hard tiling is gone but a different error remains and is unmistakable: the x-y
+# temperature field has a COLD RING -- a hole where ground truth has a solid warm trailing
+# wake -- and the x-z error panel is one-signed blue, i.e. systematic UNDER-prediction of T
+# through the bulk behind the melt. Melt is correspondingly under-predicted.
+#
+# A trailing wake is a long-range structure: its temperature is set by the integrated
+# history of the beam, which reaches the model through `path_dose` and `path_dose_recent`
+# and must be propagated spatially by the processor. Five UViT layers over a
+# 4250-patch lattice may simply not carry information far enough to hold the wake warm.
+#
+# Deeper rather than wider on purpose: width raises per-token capacity, depth raises the
+# number of propagation hops, and the defect is spatial reach rather than local expressive
+# power.
+#
+# Falsifier: if the cold ring survives at 8 layers, the wake deficit is not a receptive
+# field limit and the next suspects are the loss weighting and the dose channels.
+#
+# Baseline: config_flow3D_GAOT_disp_randompath. ONLY num_layers differs.
+defaults:
+  - config_flow3D_GAOT_disp_randompath
+  - _self_
+
+arch:
+  gaot:
+    num_layers: 8
+
+custom:
+  name: gaot_cond_disp_deep

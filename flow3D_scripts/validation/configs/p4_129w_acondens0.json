@@ -1,0 +1,71 @@
+{
+ "schema_version": 1,
+ "case_name": "p4_129w_acondens0",
+ "material": {
+  "file": "../materials/ti64_marangoni/ti64_marangoni.json"
+ },
+ "parallel": {
+  "cores": 16,
+  "threads_per_rank": 16
+ },
+ "boundary_conditions": {
+  "x_min": "wall",
+  "x_max": "wall",
+  "y_min": "wall",
+  "y_max": "wall",
+  "z_min": "wall",
+  "z_max": "pressure"
+ },
+ "geometry": {
+  "length_m": 0.0009,
+  "width_m": 0.0004,
+  "thickness_m": 0.0004,
+  "gas_clearance_m": 0.0001,
+  "placement": "centered"
+ },
+ "mesh": {
+  "cell_size_m": 1e-05
+ },
+ "laser": {
+  "power_w": 129.36,
+  "beam_radius_m": 4.75e-05,
+  "focal_distance_m": 0.001,
+  "lens_radius_m": 4.75e-05,
+  "start_point_m": [
+   -0.0003,
+   0.0,
+   0.0
+  ],
+  "end_point_m": [
+   0.00029724,
+   0.0,
+   0.0
+  ],
+  "scan_speed_m_per_s": 0.4,
+  "turn_off_at_end": false,
+  "heat_distribution": "gaussian",
+  "radiation_distribution_flag": 2,
+  "reflection_flag": 3,
+  "max_reflections": 20,
+  "reflection_limit": 0.01,
+  "absorptivity_flag": 0,
+  "absorptivity": 1.0,
+  "reflectivity": 0.35,
+  "vapor_pressure_a": 101300.0,
+  "vapor_pressure_b": 18.120188,
+  "fresnel_from_material": true,
+  "plume_attenuation": 0.2,
+  "plume_radius_m": 0.00038,
+  "plume_condensation": 0.0
+ },
+ "simulation": {
+  "initial_temperature_k": 273.15,
+  "boundary_temperature_k": 300.0,
+  "finish_time_s": 0.001875,
+  "solver_profile": "legacy_case_fine_1",
+  "subprocess_id": 1,
+  "max_iterations": 2000000000,
+  "recoil_model": 2,
+  "void_vapor_pressure_pa": 101325.0
+ }
+}

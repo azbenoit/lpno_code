@@ -1,0 +1,27 @@
+# ABLATION 1 on the CONDUCTION HALF of the random-path set.
+#
+# This is where the skip can actually be tested. GAOT's `fl` IoU is close to 0.9 on the
+# original straight path, which leaves little headroom, and near 0.6 on the random-path,
+# conduction-half and material sets. Bulk accuracy is already good here, so `fl` IoU is
+# the metric that decides this arm.
+#
+# Baseline: config_flow3D_GAOT_randompath. Same steps (20000), same lr (3e-4), same one-cycle
+# schedule, same full 150x100x40 resolution: only `use_pointwise_skip` differs, and
+# the skip's last layer is zero-initialised so step 0 is identical.
+#
+# Legacy context, do NOT treat as a control: the demo's served random-path RIGNO
+# trained 32000 steps at lr 1e-4 with fp16 amp on the RESAMPLED 75x50x40 export and a
+# different split assignment. It is a 4x coarser task. A matched RIGNO control on
+# these splits does not exist yet; stride 2,2,1 here reproduces that 75x50x40
+# resolution, which is what a fair RIGNO comparison needs.
+defaults:
+  - config_flow3D_GAOT_randompath
+  - _self_
+
+arch:
+  gaot:
+    use_pointwise_skip: true
+    pointwise_skip_channels: 64
+
+custom:
+  name: gaot_cond_skip

@@ -1,0 +1,1389 @@
+{
+ "67860": {
+  "label": "gaot_rand150_newphys_16ch_38k",
+  "kwargs": {
+   "dimension": 3,
+   "latent_tokens": [
+    44,
+    20,
+    24
+   ],
+   "patch_size": 2,
+   "lifting_channels": 32,
+   "hidden_size": 256,
+   "ffn_hidden_size": 1024,
+   "num_layers": 5,
+   "num_heads": 8,
+   "num_kv_heads": 8,
+   "k_encoder": 4,
+   "k_decoder": 8,
+   "neighbor_strategy": "knn",
+   "gno_radius": 0.15,
+   "kernel_use_displacement": true,
+   "use_geoembed_encoder": false,
+   "use_geoembed_decoder": false
+  },
+  "input_keys": [
+   "V_scan",
+   "P",
+   "H_norm",
+   "x",
+   "y",
+   "z",
+   "beam_x",
+   "beam_y",
+   "beam_dist",
+   "path_dose",
+   "path_dose_recent",
+   "preheat_T0",
+   "beam_shape_uniform",
+   "focus_factor",
+   "h_norm_local",
+   "conduction_field",
+   "t_hat"
+  ],
+  "output_keys": [
+   "T",
+   "alpha"
+  ],
+  "grid": [
+   16,
+   12,
+   10
+  ],
+  "n_params": 5605506,
+  "missing": 0,
+  "unexpected": 0,
+  "ckpt_sig": {
+   "dec_agno.channel_mlp.fcs.0.bias": [
+    64
+   ],
+   "dec_agno.channel_mlp.fcs.0.weight": [
+    64,
+    9
+   ],
+   "dec_agno.channel_mlp.fcs.1.bias": [
+    64
+   ],
+   "dec_agno.channel_mlp.fcs.1.weight": [
+    64,
+    64
+   ],
+   "dec_agno.channel_mlp.fcs.2.bias": [
+    64
+   ],
+   "dec_agno.channel_mlp.fcs.2.weight": [
+    64,
+    64
+   ],
+   "dec_agno.channel_mlp.fcs.3.bias": [
+    32
+   ],
+   "dec_agno.channel_mlp.fcs.3.weight": [
+    32,
+    64
+   ],
+   "enc_agno.channel_mlp.fcs.0.bias": [
+    64
+   ],
+   "enc_agno.channel_mlp.fcs.0.weight": [
+    64,
+    9
+   ],
+   "enc_agno.channel_mlp.fcs.1.bias": [
+    64
+   ],
+   "enc_agno.channel_mlp.fcs.1.weight": [
+    64,
+    64
+   ],
+   "enc_agno.channel_mlp.fcs.2.bias": [
+    64
+   ],
+   "enc_agno.channel_mlp.fcs.2.weight": [
+    64,
+    64
+   ],
+   "enc_agno.channel_mlp.fcs.3.bias": [
+    32
+   ],
+   "enc_agno.channel_mlp.fcs.3.weight": [
+    32,
+    64
+   ],
+   "lifting.fcs.0.bias": [
+    32
+   ],
+   "lifting.fcs.0.weight": [
+    32,
+    17,
+    1
+   ],
+   "patch_linear.bias": [
+    256
+   ],
+   "patch_linear.weight": [
+    256,
+    256
+   ],
+   "processor.decoder_layers.0.attn.k_proj.weight": [
+    256,
+    256
+   ],
+   "processor.decoder_layers.0.attn.o_proj.weight": [
+    256,
+    256
+   ],
+   "processor.decoder_layers.0.attn.q_proj.weight": [
+    256,
+    256
+   ],
+   "processor.decoder_layers.0.attn.v_proj.weight": [
+    256,
+    256
+   ],
+   "processor.decoder_layers.0.attn_norm.weight": [
+    256
+   ],
+   "processor.decoder_layers.0.ffn.w1.weight": [
+    1024,
+    256
+   ],
+   "processor.decoder_layers.0.ffn.w2.weight": [
+    256,
+    1024
+   ],
+   "processor.decoder_layers.0.ffn.w3.weight": [
+    1024,
+    256
+   ],
+   "processor.decoder_layers.0.ffn_norm.weight": [
+    256
+   ],
+   "processor.decoder_layers.0.skip_proj.bias": [
+    256
+   ],
+   "processor.decoder_layers.0.skip_proj.weight": [
+    256,
+    512
+   ],
+   "processor.decoder_layers.1.attn.k_proj.weight": [
+    256,
+    256
+   ],
+   "processor.decoder_layers.1.attn.o_proj.weight": [
+    256,
+    256
+   ],
+   "processor.decoder_layers.1.attn.q_proj.weight": [
+    256,
+    256
+   ],
+   "processor.decoder_layers.1.attn.v_proj.weight": [
+    256,
+    256
+   ],
+   "processor.decoder_layers.1.attn_norm.weight": [
+    256
+   ],
+   "processor.decoder_layers.1.ffn.w1.weight": [
+    1024,
+    256
+   ],
+   "processor.decoder_layers.1.ffn.w2.weight": [
+    256,
+    1024
+   ],
+   "processor.decoder_layers.1.ffn.w3.weight": [
+    1024,
+    256
+   ],
+   "processor.decoder_layers.1.ffn_norm.weight": [
+    256
+   ],
+   "processor.decoder_layers.1.skip_proj.bias": [
+    256
+   ],
+   "processor.decoder_layers.1.skip_proj.weight": [
+    256,
+    512
+   ],
+   "processor.encoder_layers.0.attn.k_proj.weight": [
+    256,
+    256
+   ],
+   "processor.encoder_layers.0.attn.o_proj.weight": [
+    256,
+    256
+   ],
+   "processor.encoder_layers.0.attn.q_proj.weight": [
+    256,
+    256
+   ],
+   "processor.encoder_layers.0.attn.v_proj.weight": [
+    256,
+    256
+   ],
+   "processor.encoder_layers.0.attn_norm.weight": [
+    256
+   ],
+   "processor.encoder_layers.0.ffn.w1.weight": [
+    1024,
+    256
+   ],
+   "processor.encoder_layers.0.ffn.w2.weight": [
+    256,
+    1024
+   ],
+   "processor.encoder_layers.0.ffn.w3.weight": [
+    1024,
+    256
+   ],
+   "processor.encoder_layers.0.ffn_norm.weight": [
+    256
+   ],
+   "processor.encoder_layers.1.attn.k_proj.weight": [
+    256,
+    256
+   ],
+   "processor.encoder_layers.1.attn.o_proj.weight": [
+    256,
+    256
+   ],
+   "processor.encoder_layers.1.attn.q_proj.weight": [
+    256,
+    256
+   ],
+   "processor.encoder_layers.1.attn.v_proj.weight": [
+    256,
+    256
+   ],
+   "processor.encoder_layers.1.attn_norm.weight": [
+    256
+   ],
+   "processor.encoder_layers.1.ffn.w1.weight": [
+    1024,
+    256
+   ],
+   "processor.encoder_layers.1.ffn.w2.weight": [
+    256,
+    1024
+   ],
+   "processor.encoder_layers.1.ffn.w3.weight": [
+    1024,
+    256
+   ],
+   "processor.encoder_layers.1.ffn_norm.weight": [
+    256
+   ],
+   "processor.middle_layer.attn.k_proj.weight": [
+    256,
+    256
+   ],
+   "processor.middle_layer.attn.o_proj.weight": [
+    256,
+    256
+   ],
+   "processor.middle_layer.attn.q_proj.weight": [
+    256,
+    256
+   ],
+   "processor.middle_layer.attn.v_proj.weight": [
+    256,
+    256
+   ],
+   "processor.middle_layer.attn_norm.weight": [
+    256
+   ],
+   "processor.middle_layer.ffn.w1.weight": [
+    1024,
+    256
+   ],
+   "processor.middle_layer.ffn.w2.weight": [
+    256,
+    1024
+   ],
+   "processor.middle_layer.ffn.w3.weight": [
+    1024,
+    256
+   ],
+   "processor.middle_layer.ffn_norm.weight": [
+    256
+   ],
+   "projection.fcs.0.bias": [
+    256
+   ],
+   "projection.fcs.0.weight": [
+    256,
+    32,
+    1
+   ],
+   "projection.fcs.1.bias": [
+    2
+   ],
+   "projection.fcs.1.weight": [
+    2,
+    256,
+    1
+   ]
+  },
+  "out_hash": "4f9428c492ad6e8aad64561b9649822e",
+  "out_head": {
+   "T": [
+    -0.051684611,
+    -0.053255577,
+    -0.052869812,
+    -0.053099852,
+    -0.053494614,
+    -0.053259399,
+    -0.053822242,
+    -0.052074749,
+    -0.05441764,
+    -0.055186931,
+    -0.052421659,
+    -0.054622233,
+    -0.054562118,
+    -0.0531957,
+    -0.053487852,
+    -0.056342456,
+    -0.056780376,
+    -0.053813044,
+    -0.055979256,
+    -0.05621019,
+    -0.053977393,
+    -0.054678623,
+    -0.056355838,
+    -0.055039044,
+    -0.055361994,
+    -0.055572178,
+    -0.056033112,
+    -0.057805628,
+    -0.056005795,
+    -0.057113968,
+    -0.056010909,
+    -0.056090035,
+    -0.057026576,
+    -0.056730784,
+    -0.057640154,
+    -0.057993066,
+    -0.057535332,
+    -0.058354467,
+    -0.057891753,
+    -0.056950629,
+    -0.054942887,
+    -0.057672728,
+    -0.057164602,
+    -0.057534002,
+    -0.057735324,
+    -0.058081917,
+    -0.058424998,
+    -0.058495894,
+    -0.059048411,
+    -0.058092203,
+    -0.056270126,
+    -0.054925419,
+    -0.056569647,
+    -0.055093609,
+    -0.056965653,
+    -0.057267852,
+    -0.056055538,
+    -0.057978921,
+    -0.056051444,
+    -0.057029236,
+    -0.053363986,
+    -0.055057775,
+    -0.05550139,
+    -0.055178281
+   ],
+   "alpha": [
+    0.043653965,
+    0.043678675,
+    0.042628601,
+    0.043583844,
+    0.044166196,
+    0.043215584,
+    0.043102954,
+    0.042551514,
+    0.044435322,
+    0.046056617,
+    0.045018028,
+    0.049101543,
+    0.04606634,
+    0.045936536,
+    0.046479214,
+    0.04945131,
+    0.049430609,
+    0.044730984,
+    0.049911011,
+    0.048396979,
+    0.047367819,
+    0.049222562,
+    0.050833002,
+    0.050172035,
+    0.050531738,
+    0.050487507,
+    0.050526284,
+    0.053137429,
+    0.050108276,
+    0.049930997,
+    0.051866204,
+    0.050648358,
+    0.05330791,
+    0.052795511,
+    0.054109406,
+    0.054866552,
+    0.052547447,
+    0.054607671,
+    0.052962508,
+    0.051411435,
+    0.051487207,
+    0.053233206,
+    0.053515185,
+    0.054039575,
+    0.054326825,
+    0.055006199,
+    0.055031866,
+    0.05485341,
+    0.054287963,
+    0.052117236,
+    0.052578468,
+    0.050134733,
+    0.051732954,
+    0.051043596,
+    0.053618927,
+    0.053028233,
+    0.051410906,
+    0.054008346,
+    0.050998036,
+    0.051943295,
+    0.046493687,
+    0.05035305,
+    0.049691901,
+    0.05120432
+   ]
+  }
+ },
+ "80753": {
+  "label": "gaot_lab_w3_32k_seed43",
+  "kwargs": {
+   "dimension": 3,
+   "latent_tokens": [
+    44,
+    20,
+    24
+   ],
+   "patch_size": 2,
+   "lifting_channels": 32,
+   "hidden_size": 256,
+   "ffn_hidden_size": 1024,
+   "num_layers": 5,
+   "num_heads": 8,
+   "num_kv_heads": 8,
+   "k_encoder": 4,
+   "k_decoder": 8,
+   "neighbor_strategy": "knn",
+   "gno_radius": 0.15,
+   "kernel_use_displacement": true,
+   "use_geoembed_encoder": false,
+   "use_geoembed_decoder": false
+  },
+  "input_keys": [
+   "V_scan",
+   "P",
+   "H_norm",
+   "x",
+   "y",
+   "z",
+   "beam_x",
+   "beam_y",
+   "beam_dist",
+   "path_dose",
+   "path_dose_recent",
+   "preheat_T0",
+   "beam_shape_uniform",
+   "focus_factor",
+   "h_norm_local",
+   "conduction_field",
+   "t_hat"
+  ],
+  "output_keys": [
+   "T",
+   "alpha"
+  ],
+  "grid": [
+   16,
+   12,
+   10
+  ],
+  "n_params": 5605506,
+  "missing": 0,
+  "unexpected": 0,
+  "ckpt_sig": {
+   "dec_agno.channel_mlp.fcs.0.bias": [
+    64
+   ],
+   "dec_agno.channel_mlp.fcs.0.weight": [
+    64,
+    9
+   ],
+   "dec_agno.channel_mlp.fcs.1.bias": [
+    64
+   ],
+   "dec_agno.channel_mlp.fcs.1.weight": [
+    64,
+    64
+   ],
+   "dec_agno.channel_mlp.fcs.2.bias": [
+    64
+   ],
+   "dec_agno.channel_mlp.fcs.2.weight": [
+    64,
+    64
+   ],
+   "dec_agno.channel_mlp.fcs.3.bias": [
+    32
+   ],
+   "dec_agno.channel_mlp.fcs.3.weight": [
+    32,
+    64
+   ],
+   "enc_agno.channel_mlp.fcs.0.bias": [
+    64
+   ],
+   "enc_agno.channel_mlp.fcs.0.weight": [
+    64,
+    9
+   ],
+   "enc_agno.channel_mlp.fcs.1.bias": [
+    64
+   ],
+   "enc_agno.channel_mlp.fcs.1.weight": [
+    64,
+    64
+   ],
+   "enc_agno.channel_mlp.fcs.2.bias": [
+    64
+   ],
+   "enc_agno.channel_mlp.fcs.2.weight": [
+    64,
+    64
+   ],
+   "enc_agno.channel_mlp.fcs.3.bias": [
+    32
+   ],
+   "enc_agno.channel_mlp.fcs.3.weight": [
+    32,
+    64
+   ],
+   "lifting.fcs.0.bias": [
+    32
+   ],
+   "lifting.fcs.0.weight": [
+    32,
+    17,
+    1
+   ],
+   "patch_linear.bias": [
+    256
+   ],
+   "patch_linear.weight": [
+    256,
+    256
+   ],
+   "processor.decoder_layers.0.attn.k_proj.weight": [
+    256,
+    256
+   ],
+   "processor.decoder_layers.0.attn.o_proj.weight": [
+    256,
+    256
+   ],
+   "processor.decoder_layers.0.attn.q_proj.weight": [
+    256,
+    256
+   ],
+   "processor.decoder_layers.0.attn.v_proj.weight": [
+    256,
+    256
+   ],
+   "processor.decoder_layers.0.attn_norm.weight": [
+    256
+   ],
+   "processor.decoder_layers.0.ffn.w1.weight": [
+    1024,
+    256
+   ],
+   "processor.decoder_layers.0.ffn.w2.weight": [
+    256,
+    1024
+   ],
+   "processor.decoder_layers.0.ffn.w3.weight": [
+    1024,
+    256
+   ],
+   "processor.decoder_layers.0.ffn_norm.weight": [
+    256
+   ],
+   "processor.decoder_layers.0.skip_proj.bias": [
+    256
+   ],
+   "processor.decoder_layers.0.skip_proj.weight": [
+    256,
+    512
+   ],
+   "processor.decoder_layers.1.attn.k_proj.weight": [
+    256,
+    256
+   ],
+   "processor.decoder_layers.1.attn.o_proj.weight": [
+    256,
+    256
+   ],
+   "processor.decoder_layers.1.attn.q_proj.weight": [
+    256,
+    256
+   ],
+   "processor.decoder_layers.1.attn.v_proj.weight": [
+    256,
+    256
+   ],
+   "processor.decoder_layers.1.attn_norm.weight": [
+    256
+   ],
+   "processor.decoder_layers.1.ffn.w1.weight": [
+    1024,
+    256
+   ],
+   "processor.decoder_layers.1.ffn.w2.weight": [
+    256,
+    1024
+   ],
+   "processor.decoder_layers.1.ffn.w3.weight": [
+    1024,
+    256
+   ],
+   "processor.decoder_layers.1.ffn_norm.weight": [
+    256
+   ],
+   "processor.decoder_layers.1.skip_proj.bias": [
+    256
+   ],
+   "processor.decoder_layers.1.skip_proj.weight": [
+    256,
+    512
+   ],
+   "processor.encoder_layers.0.attn.k_proj.weight": [
+    256,
+    256
+   ],
+   "processor.encoder_layers.0.attn.o_proj.weight": [
+    256,
+    256
+   ],
+   "processor.encoder_layers.0.attn.q_proj.weight": [
+    256,
+    256
+   ],
+   "processor.encoder_layers.0.attn.v_proj.weight": [
+    256,
+    256
+   ],
+   "processor.encoder_layers.0.attn_norm.weight": [
+    256
+   ],
+   "processor.encoder_layers.0.ffn.w1.weight": [
+    1024,
+    256
+   ],
+   "processor.encoder_layers.0.ffn.w2.weight": [
+    256,
+    1024
+   ],
+   "processor.encoder_layers.0.ffn.w3.weight": [
+    1024,
+    256
+   ],
+   "processor.encoder_layers.0.ffn_norm.weight": [
+    256
+   ],
+   "processor.encoder_layers.1.attn.k_proj.weight": [
+    256,
+    256
+   ],
+   "processor.encoder_layers.1.attn.o_proj.weight": [
+    256,
+    256
+   ],
+   "processor.encoder_layers.1.attn.q_proj.weight": [
+    256,
+    256
+   ],
+   "processor.encoder_layers.1.attn.v_proj.weight": [
+    256,
+    256
+   ],
+   "processor.encoder_layers.1.attn_norm.weight": [
+    256
+   ],
+   "processor.encoder_layers.1.ffn.w1.weight": [
+    1024,
+    256
+   ],
+   "processor.encoder_layers.1.ffn.w2.weight": [
+    256,
+    1024
+   ],
+   "processor.encoder_layers.1.ffn.w3.weight": [
+    1024,
+    256
+   ],
+   "processor.encoder_layers.1.ffn_norm.weight": [
+    256
+   ],
+   "processor.middle_layer.attn.k_proj.weight": [
+    256,
+    256
+   ],
+   "processor.middle_layer.attn.o_proj.weight": [
+    256,
+    256
+   ],
+   "processor.middle_layer.attn.q_proj.weight": [
+    256,
+    256
+   ],
+   "processor.middle_layer.attn.v_proj.weight": [
+    256,
+    256
+   ],
+   "processor.middle_layer.attn_norm.weight": [
+    256
+   ],
+   "processor.middle_layer.ffn.w1.weight": [
+    1024,
+    256
+   ],
+   "processor.middle_layer.ffn.w2.weight": [
+    256,
+    1024
+   ],
+   "processor.middle_layer.ffn.w3.weight": [
+    1024,
+    256
+   ],
+   "processor.middle_layer.ffn_norm.weight": [
+    256
+   ],
+   "projection.fcs.0.bias": [
+    256
+   ],
+   "projection.fcs.0.weight": [
+    256,
+    32,
+    1
+   ],
+   "projection.fcs.1.bias": [
+    2
+   ],
+   "projection.fcs.1.weight": [
+    2,
+    256,
+    1
+   ]
+  },
+  "out_hash": "4f9428c492ad6e8aad64561b9649822e",
+  "out_head": {
+   "T": [
+    -0.051684611,
+    -0.053255577,
+    -0.052869812,
+    -0.053099852,
+    -0.053494614,
+    -0.053259399,
+    -0.053822242,
+    -0.052074749,
+    -0.05441764,
+    -0.055186931,
+    -0.052421659,
+    -0.054622233,
+    -0.054562118,
+    -0.0531957,
+    -0.053487852,
+    -0.056342456,
+    -0.056780376,
+    -0.053813044,
+    -0.055979256,
+    -0.05621019,
+    -0.053977393,
+    -0.054678623,
+    -0.056355838,
+    -0.055039044,
+    -0.055361994,
+    -0.055572178,
+    -0.056033112,
+    -0.057805628,
+    -0.056005795,
+    -0.057113968,
+    -0.056010909,
+    -0.056090035,
+    -0.057026576,
+    -0.056730784,
+    -0.057640154,
+    -0.057993066,
+    -0.057535332,
+    -0.058354467,
+    -0.057891753,
+    -0.056950629,
+    -0.054942887,
+    -0.057672728,
+    -0.057164602,
+    -0.057534002,
+    -0.057735324,
+    -0.058081917,
+    -0.058424998,
+    -0.058495894,
+    -0.059048411,
+    -0.058092203,
+    -0.056270126,
+    -0.054925419,
+    -0.056569647,
+    -0.055093609,
+    -0.056965653,
+    -0.057267852,
+    -0.056055538,
+    -0.057978921,
+    -0.056051444,
+    -0.057029236,
+    -0.053363986,
+    -0.055057775,
+    -0.05550139,
+    -0.055178281
+   ],
+   "alpha": [
+    0.043653965,
+    0.043678675,
+    0.042628601,
+    0.043583844,
+    0.044166196,
+    0.043215584,
+    0.043102954,
+    0.042551514,
+    0.044435322,
+    0.046056617,
+    0.045018028,
+    0.049101543,
+    0.04606634,
+    0.045936536,
+    0.046479214,
+    0.04945131,
+    0.049430609,
+    0.044730984,
+    0.049911011,
+    0.048396979,
+    0.047367819,
+    0.049222562,
+    0.050833002,
+    0.050172035,
+    0.050531738,
+    0.050487507,
+    0.050526284,
+    0.053137429,
+    0.050108276,
+    0.049930997,
+    0.051866204,
+    0.050648358,
+    0.05330791,
+    0.052795511,
+    0.054109406,
+    0.054866552,
+    0.052547447,
+    0.054607671,
+    0.052962508,
+    0.051411435,
+    0.051487207,
+    0.053233206,
+    0.053515185,
+    0.054039575,
+    0.054326825,
+    0.055006199,
+    0.055031866,
+    0.05485341,
+    0.054287963,
+    0.052117236,
+    0.052578468,
+    0.050134733,
+    0.051732954,
+    0.051043596,
+    0.053618927,
+    0.053028233,
+    0.051410906,
+    0.054008346,
+    0.050998036,
+    0.051943295,
+    0.046493687,
+    0.05035305,
+    0.049691901,
+    0.05120432
+   ]
+  }
+ },
+ "39519": {
+  "label": "gaot_1601_fullres_35k_resume21k",
+  "kwargs": {
+   "dimension": 3,
+   "latent_tokens": [
+    50,
+    34,
+    20
+   ],
+   "patch_size": 2,
+   "lifting_channels": 32,
+   "hidden_size": 256,
+   "ffn_hidden_size": 1024,
+   "num_layers": 5,
+   "num_heads": 8,
+   "num_kv_heads": 8,
+   "k_encoder": 4,
+   "k_decoder": 8,
+   "neighbor_strategy": "knn",
+   "gno_radius": 0.15,
+   "kernel_use_displacement": false,
+   "use_geoembed_encoder": false,
+   "use_geoembed_decoder": false
+  },
+  "input_keys": [
+   "V_scan",
+   "P",
+   "H_norm",
+   "x",
+   "y",
+   "z",
+   "beam_x",
+   "beam_y",
+   "beam_dist",
+   "path_dose",
+   "path_dose_recent",
+   "t_hat"
+  ],
+  "output_keys": [
+   "T",
+   "alpha"
+  ],
+  "grid": [
+   16,
+   12,
+   10
+  ],
+  "n_params": 5604962,
+  "missing": 0,
+  "unexpected": 0,
+  "ckpt_sig": {
+   "dec_agno.channel_mlp.fcs.0.bias": [
+    64
+   ],
+   "dec_agno.channel_mlp.fcs.0.weight": [
+    64,
+    6
+   ],
+   "dec_agno.channel_mlp.fcs.1.bias": [
+    64
+   ],
+   "dec_agno.channel_mlp.fcs.1.weight": [
+    64,
+    64
+   ],
+   "dec_agno.channel_mlp.fcs.2.bias": [
+    64
+   ],
+   "dec_agno.channel_mlp.fcs.2.weight": [
+    64,
+    64
+   ],
+   "dec_agno.channel_mlp.fcs.3.bias": [
+    32
+   ],
+   "dec_agno.channel_mlp.fcs.3.weight": [
+    32,
+    64
+   ],
+   "enc_agno.channel_mlp.fcs.0.bias": [
+    64
+   ],
+   "enc_agno.channel_mlp.fcs.0.weight": [
+    64,
+    6
+   ],
+   "enc_agno.channel_mlp.fcs.1.bias": [
+    64
+   ],
+   "enc_agno.channel_mlp.fcs.1.weight": [
+    64,
+    64
+   ],
+   "enc_agno.channel_mlp.fcs.2.bias": [
+    64
+   ],
+   "enc_agno.channel_mlp.fcs.2.weight": [
+    64,
+    64
+   ],
+   "enc_agno.channel_mlp.fcs.3.bias": [
+    32
+   ],
+   "enc_agno.channel_mlp.fcs.3.weight": [
+    32,
+    64
+   ],
+   "lifting.fcs.0.bias": [
+    32
+   ],
+   "lifting.fcs.0.weight": [
+    32,
+    12,
+    1
+   ],
+   "patch_linear.bias": [
+    256
+   ],
+   "patch_linear.weight": [
+    256,
+    256
+   ],
+   "processor.decoder_layers.0.attn.k_proj.weight": [
+    256,
+    256
+   ],
+   "processor.decoder_layers.0.attn.o_proj.weight": [
+    256,
+    256
+   ],
+   "processor.decoder_layers.0.attn.q_proj.weight": [
+    256,
+    256
+   ],
+   "processor.decoder_layers.0.attn.v_proj.weight": [
+    256,
+    256
+   ],
+   "processor.decoder_layers.0.attn_norm.weight": [
+    256
+   ],
+   "processor.decoder_layers.0.ffn.w1.weight": [
+    1024,
+    256
+   ],
+   "processor.decoder_layers.0.ffn.w2.weight": [
+    256,
+    1024
+   ],
+   "processor.decoder_layers.0.ffn.w3.weight": [
+    1024,
+    256
+   ],
+   "processor.decoder_layers.0.ffn_norm.weight": [
+    256
+   ],
+   "processor.decoder_layers.0.skip_proj.bias": [
+    256
+   ],
+   "processor.decoder_layers.0.skip_proj.weight": [
+    256,
+    512
+   ],
+   "processor.decoder_layers.1.attn.k_proj.weight": [
+    256,
+    256
+   ],
+   "processor.decoder_layers.1.attn.o_proj.weight": [
+    256,
+    256
+   ],
+   "processor.decoder_layers.1.attn.q_proj.weight": [
+    256,
+    256
+   ],
+   "processor.decoder_layers.1.attn.v_proj.weight": [
+    256,
+    256
+   ],
+   "processor.decoder_layers.1.attn_norm.weight": [
+    256
+   ],
+   "processor.decoder_layers.1.ffn.w1.weight": [
+    1024,
+    256
+   ],
+   "processor.decoder_layers.1.ffn.w2.weight": [
+    256,
+    1024
+   ],
+   "processor.decoder_layers.1.ffn.w3.weight": [
+    1024,
+    256
+   ],
+   "processor.decoder_layers.1.ffn_norm.weight": [
+    256
+   ],
+   "processor.decoder_layers.1.skip_proj.bias": [
+    256
+   ],
+   "processor.decoder_layers.1.skip_proj.weight": [
+    256,
+    512
+   ],
+   "processor.encoder_layers.0.attn.k_proj.weight": [
+    256,
+    256
+   ],
+   "processor.encoder_layers.0.attn.o_proj.weight": [
+    256,
+    256
+   ],
+   "processor.encoder_layers.0.attn.q_proj.weight": [
+    256,
+    256
+   ],
+   "processor.encoder_layers.0.attn.v_proj.weight": [
+    256,
+    256
+   ],
+   "processor.encoder_layers.0.attn_norm.weight": [
+    256
+   ],
+   "processor.encoder_layers.0.ffn.w1.weight": [
+    1024,
+    256
+   ],
+   "processor.encoder_layers.0.ffn.w2.weight": [
+    256,
+    1024
+   ],
+   "processor.encoder_layers.0.ffn.w3.weight": [
+    1024,
+    256
+   ],
+   "processor.encoder_layers.0.ffn_norm.weight": [
+    256
+   ],
+   "processor.encoder_layers.1.attn.k_proj.weight": [
+    256,
+    256
+   ],
+   "processor.encoder_layers.1.attn.o_proj.weight": [
+    256,
+    256
+   ],
+   "processor.encoder_layers.1.attn.q_proj.weight": [
+    256,
+    256
+   ],
+   "processor.encoder_layers.1.attn.v_proj.weight": [
+    256,
+    256
+   ],
+   "processor.encoder_layers.1.attn_norm.weight": [
+    256
+   ],
+   "processor.encoder_layers.1.ffn.w1.weight": [
+    1024,
+    256
+   ],
+   "processor.encoder_layers.1.ffn.w2.weight": [
+    256,
+    1024
+   ],
+   "processor.encoder_layers.1.ffn.w3.weight": [
+    1024,
+    256
+   ],
+   "processor.encoder_layers.1.ffn_norm.weight": [
+    256
+   ],
+   "processor.middle_layer.attn.k_proj.weight": [
+    256,
+    256
+   ],
+   "processor.middle_layer.attn.o_proj.weight": [
+    256,
+    256
+   ],
+   "processor.middle_layer.attn.q_proj.weight": [
+    256,
+    256
+   ],
+   "processor.middle_layer.attn.v_proj.weight": [
+    256,
+    256
+   ],
+   "processor.middle_layer.attn_norm.weight": [
+    256
+   ],
+   "processor.middle_layer.ffn.w1.weight": [
+    1024,
+    256
+   ],
+   "processor.middle_layer.ffn.w2.weight": [
+    256,
+    1024
+   ],
+   "processor.middle_layer.ffn.w3.weight": [
+    1024,
+    256
+   ],
+   "processor.middle_layer.ffn_norm.weight": [
+    256
+   ],
+   "projection.fcs.0.bias": [
+    256
+   ],
+   "projection.fcs.0.weight": [
+    256,
+    32,
+    1
+   ],
+   "projection.fcs.1.bias": [
+    2
+   ],
+   "projection.fcs.1.weight": [
+    2,
+    256,
+    1
+   ]
+  },
+  "out_hash": "f9d200111ccc5a3696f36474fce8c9bf",
+  "out_head": {
+   "T": [
+    -0.061070543,
+    -0.060668845,
+    -0.06287539,
+    -0.062624626,
+    -0.061727993,
+    -0.061810873,
+    -0.061014753,
+    -0.060189944,
+    -0.061276533,
+    -0.060848773,
+    -0.060419235,
+    -0.05876993,
+    -0.058109783,
+    -0.06062106,
+    -0.060032431,
+    -0.059645303,
+    -0.060722116,
+    -0.061327238,
+    -0.060439043,
+    -0.059972767,
+    -0.056066416,
+    -0.056485344,
+    -0.055705369,
+    -0.055742793,
+    -0.06016355,
+    -0.060333833,
+    -0.065578453,
+    -0.063304223,
+    -0.062391393,
+    -0.060564175,
+    -0.059751708,
+    -0.058334731,
+    -0.057680599,
+    -0.060792014,
+    -0.058900446,
+    -0.058511723,
+    -0.060263798,
+    -0.06165519,
+    -0.060808472,
+    -0.060295157,
+    -0.055868786,
+    -0.055820972,
+    -0.055060584,
+    -0.055174768,
+    -0.060278427,
+    -0.060452245,
+    -0.065724723,
+    -0.063017651,
+    -0.06216488,
+    -0.060788844,
+    -0.059869684,
+    -0.058109738,
+    -0.057418302,
+    -0.059998166,
+    -0.058011137,
+    -0.057688348,
+    -0.059318211,
+    -0.060249858,
+    -0.059493389,
+    -0.058515027,
+    -0.056512188,
+    -0.056187019,
+    -0.055374503,
+    -0.05522323
+   ],
+   "alpha": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  }
+ }
+}

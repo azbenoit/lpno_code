@@ -1,0 +1,29 @@
+{
+ "schema_version": 1,
+ "material_name": "Inconel 718",
+ "flow3d_label": "Inconel 718 starter SI material",
+ "source": "Starter engineering values for scripted FLOW-3D WELD tests. Verify before scientific use.",
+ "properties": {
+  "density_kg_m3": 8190.0,
+  "solid_density_kg_m3": 8190.0,
+  "liquidus_temperature_k": 1608.15,
+  "solidus_temperature_k": 1523.15,
+  "specific_heat_j_kg_k": 435.0,
+  "solid_specific_heat_j_kg_k": 435.0,
+  "thermal_conductivity_w_m_k": 8.9,
+  "solid_thermal_conductivity_w_m_k": 8.9,
+  "dynamic_viscosity_pa_s": 0.0072,
+  "latent_heat_j_kg": 210000.0,
+  "surface_tension_n_m": 1.88,
+  "vapor_pressure_pa": 101300.0,
+  "vaporization_temperature_k": 3186.0,
+  "vaporization_latent_heat_j_kg": 6300000.0,
+  "vaporization_molar_mass_kg_mol": 0.058693
+ },
+ "optical": {
+  "normal_absorptivity": 0.35,
+  "prefer_resistivity": true
+ },
+ "provenance": "see materials/sources.md",
+ "real_material_test_note": " | sigma extended 1873->3186 K, endpoints slope -1.023e-04 (ck300 convention)"
+}

@@ -1,0 +1,54 @@
+# =============================================================================
+# EXPERIMENTAL ARM ONLY -- NEVER A SUBMISSION BASE.
+# The topk tail loss this config exists to enable was measured to make the tail
+# deficit worse: the deficit it attacks is mostly the conditional-mean aliasing
+# floor of time_as_batch, which no loss term can remove. Inheriting this config as
+# a base carries the term into every descendant. Build on
+# config_flow3D_GAOT_disp_randompath.
+# =============================================================================
+# GAOT-5: displacement kernel + topk_tail_loss.
+#
+# ATTACKS THE COLD PEAK DIRECTLY. Every GAOT variant measured under-predicts the top of
+# the temperature distribution (tail deficits of roughly 150-540 K), and no architectural
+# change has touched it.
+#
+# `thermal_headroom_K` can read well above zero on such a model and is useless here: it asks
+# whether the PEAK clears the melt threshold, not whether the field is the right
+# temperature. Judge this arm on `tail_deficit_max_K` and `beambox_*`.
+#
+# Why a loss term and not another architecture change. Depth made the tail COLDER (-151 K),
+# the pointwise skip was 56% worse, and lattice refinement left the peak 540 K short. The
+# defect is magnitude, not resolution or reach, and nothing in the architecture search has
+# moved it. Melt is ~1% of substrate cells, so an L2 objective is nearly indifferent to the
+# tail while every thresholded quantity depends on it.
+#
+# Why not an fl-derived term. `fl` comes from T through a tanh centred on 1898 K, and in
+# float32 `d(fl)/dT` is bit-zero below 1717.8 K -- so `melt_dice` and friends are silent on
+# exactly the models that run cold. Above the liquidus `fl` saturates at 1.0, so nothing
+# derived from it carries superheat information at all. Only a term acting directly on T
+# can.
+#
+# `topk_tail_loss` (custom_utils/losses.py:13) matches the mean of the k hottest masked
+# cells between prediction and truth, squared. Gradient is 1/k on each selected cell --
+# scale-free, no tanh in the path -- so it produces gradient exactly where the deficit is.
+#
+# TRAP respected by this config: the mask is `true_outvar["alpha"] > 0.5` and falls back to
+# the WHOLE DOMAIN when true alpha is absent. With alpha masking the gas carries a ~3560 K
+# boiling fill that would then own the entire top-k. `alpha` is in FNO_output_keys here, so
+# the mask selects substrate metal.
+#
+# weight 1000 / k 256 are a first estimate and are NOT tuned: converged
+# pointwise loss is ~1e1, the tail term ~1.7e-3, so 1000 makes it ~15% of converged loss and
+# ~5% early. It bites late, once the bulk is fit.
+#
+# Baseline: config_flow3D_GAOT_disp_randompath. Same steps, lr, schedule, resolution,
+# lattice and kernel; ONLY the tail term differs. FALSIFIER: if `tail_deficit_max_K` does not fall, the term does not address the
+# cold peak and the loss-weighting line is closed too, leaving the dose channels.
+defaults:
+  - config_flow3D_GAOT_disp_randompath
+  - _self_
+
+custom:
+  name: gaot_cond_disp_tail
+  tail_weight: 1000.0
+  tail_k: 256

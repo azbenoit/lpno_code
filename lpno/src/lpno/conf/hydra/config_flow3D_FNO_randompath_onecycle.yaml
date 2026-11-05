@@ -1,0 +1,60 @@
+# THE FNO ONE-CYCLE ROOT. Use this, not an FNO config with a hand-added scheduler.
+#
+# Every other FNO config here (config_NS_energy_PINO_flow3D and its children
+# config_flow3D_FNO_randompath, config_flow3D_FNO_material*) runs
+# `scheduler: tf_exponential_lr`, while every GAOT and RIGNO result on the flow3D
+# families is one-cycle. config_flow3D_RIGNO.yaml measures one-cycle at -28 % T MAE for
+# RIGNO and -31 % for GAOT on this data, so an FNO arm on the old schedule reports an
+# architecture gap that is mostly a schedule gap.
+#
+# YOU CANNOT JUST OVERRIDE THE SCHEDULER on an FNO config. It fails at composition:
+#   ConfigCompositionException: Key 'decay_rate' not in 'OneCycleLRConf'
+# because config_NS_energy_PINO_flow3D sets `scheduler.decay_rate: 0.96`, a
+# tf_exponential key that the one-cycle schema rejects. Nor is the scheduler a
+# training-profile field, so it cannot be fixed at submission the way max_steps can, and
+# hand-setting `scheduler.*` through `++` is the path that produced the retracted LR
+# sweep where every arm silently ran 1e-4. Hence a config.
+#
+# WHY IT INHERITS A RIGNO-NAMED FILE. `config_flow3D_RIGNO_randompath_onecycle` is the
+# repository's shared one-cycle root, not a RIGNO-only config: it carries
+# physicsnemo_default, `scheduler: one_cycle`, `optimizer: lion`, `loss: sum` and the
+# flow3D custom/recording block, and GAOT already hangs off it the same way
+# (config_flow3D_GAOT_randompath: "Overriding only `custom.model_family` and the arch
+# block keeps ..."). Duplicating that block into an FNO-only file would give three
+# copies to drift apart, which this repo has been bitten by before. The name is
+# misleading and renaming it is filed as future work; this file exists so an FNO arm is
+# findable under an FNO name.
+defaults:
+  - config_flow3D_RIGNO_randompath_onecycle
+  - /arch/conv_fully_connected_cfg@arch.decoder
+  - /arch/fno_cfg@arch.fno
+  - _self_
+
+# FNO is a grid model; amp off, matching the GAOT partner (fp16 overflow on this data).
+amp:
+  enabled: false
+
+# The straight-path FNO network this family has always used, copied verbatim from
+# config_NS_energy_PINO_flow3D. Only the SCHEDULE is being changed here, not the model.
+arch:
+  decoder:
+    input_keys: [z, 32]
+    output_keys: T
+    nr_layers: 3
+    layer_size: 90
+  fno:
+    input_keys: x, y, z, V_scan, P
+    dimension: 3
+    nr_fno_layers: 3
+    fno_modes: [20, 18, 8]
+    padding: 9
+
+scheduler:
+  # total_steps is derived from training.max_steps by
+  # config_loading._sync_one_cycle_total_steps; never hand-set it.
+  max_lr: 1e-4
+  pct_start: 0.05
+  div_factor: 10.0
+
+custom:
+  model_family: fno

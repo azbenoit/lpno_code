@@ -1,0 +1,37 @@
+{
+  "backendBaseUrl": "",
+  "pathDemo": {
+    "maxPoints": 512,
+    "render": {
+      "width_px": 640,
+      "height_px": 520
+    }
+  },
+  "finalTimeoutMs": 30000,
+  "requestMaxBodyBytes": 16384,
+  "bounds": {
+    "p_watts": {
+      "min": 40,
+      "max": 200,
+      "step": 1,
+      "initial": 50
+    },
+    "v_scan_mps": {
+      "min": 0.1,
+      "max": 1.0,
+      "step": 0.01,
+      "initial": 0.26
+    }
+  },
+  "defaultView": {
+    "field": "T",
+    "plot_mode": "3d",
+    "y_index": -1,
+    "show_t_contour": true,
+    "t_contour_k": 1898.0
+  },
+  "render": {
+    "width_px": 1000,
+    "height_px": 560
+  }
+}

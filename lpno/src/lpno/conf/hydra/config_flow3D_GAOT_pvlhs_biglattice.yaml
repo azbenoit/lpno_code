@@ -1,0 +1,37 @@
+# GAOT at full resolution with the latent lattice scaled to match the input.
+#
+# THE HYPOTHESIS THIS EXISTS TO TEST. On the straight-path keyhole set, GAOT trained at
+# full resolution (90x40x40) scored worse than GAOT trained at stride 2,2,1 (45x20x40),
+# with the same frames and schedule, while RIGNO improved at full resolution and FNO,
+# which has no fixed lattice at all, did best there.
+#
+# The candidate explanation is that `latent_tokens` is a fixed config value, independent
+# of input size. At [44,20,24] = 21,120 tokens it is well matched to the strided
+# 45x20x40 = 36,000-node input (0.59 tokens/node) and under-resolves the full
+# 90x40x40 = 144,000-node one by 4x (0.15 tokens/node). RIGNO derives `rnode_count` from
+# the input cloud (`rigno_arch.py:46`) and scales automatically; FNO's spectral
+# convolution has no lattice to mismatch. Three architectures, three lattice behaviours,
+# three outcomes in the predicted order -- but that is a consistent story, not a test.
+#
+# [88,40,24] = 84,480 tokens restores the strided arm's token:node ratio exactly: the
+# stride was 2x2x1, so x and y double and z is untouched. If the hypothesis holds, this
+# arm should recover something close to the coarse arm's accuracy. If it scores like the
+# full-resolution arm, the lattice is NOT the mechanism.
+#
+# COST, and why to time it before committing. We measured a GAOT step at 51 ms on a
+# [32,20,20] lattice and 382 ms at [64,40,40] -- 7.5x for 8x tokens, far steeper than
+# scaling the neighbourhood (4x k only doubled it). This is 4x tokens on a larger grid, so
+# the curve may differ in either direction. The full-resolution GAOT arm already takes
+# about 11 h on a TITAN RTX. TIME THE FIRST HUNDRED STEPS and resize early.
+#
+# Run this arm and its baseline on the same GPU model. cudnn.allow_tf32 is True by
+# default, and TF32 on Ada cards against Turing cards gives ~3.4e-3 mean relative error on
+# convolutions, which would sit inside any cross-GPU comparison.
+defaults:
+  - config_flow3D_GAOT_pvlhs
+  - _self_
+
+arch:
+  gaot:
+    # 4x the tokens of the partner arm, restoring the coarse arm's token:node ratio.
+    latent_tokens: [88, 40, 24]

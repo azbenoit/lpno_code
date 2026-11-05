@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "material_name": "AlSi10Mg",
+  "flow3d_label": "AlSi10Mg starter SI material",
+  "source": "Starter engineering values for scripted laser welding and LPBF tests. Verify before scientific use.",
+  "properties": {
+    "density_kg_m3": 2670.0,
+    "solid_density_kg_m3": 2670.0,
+    "liquidus_temperature_k": 867.0,
+    "solidus_temperature_k": 831.0,
+    "specific_heat_j_kg_k": 910.0,
+    "solid_specific_heat_j_kg_k": 910.0,
+    "thermal_conductivity_w_m_k": 120.0,
+    "solid_thermal_conductivity_w_m_k": 120.0,
+    "dynamic_viscosity_pa_s": 0.0013,
+    "latent_heat_j_kg": 390000.0,
+    "surface_tension_n_m": 0.86,
+    "vapor_pressure_pa": 101300.0,
+    "vaporization_temperature_k": 2743.0,
+    "vaporization_latent_heat_j_kg": 10500000.0,
+    "vaporization_molar_mass_kg_mol": 0.026982
+  },
+  "optical": {
+    "normal_absorptivity": 0.1,
+    "prefer_resistivity": false
+  },
+  "provenance": "see materials/sources.md"
+}

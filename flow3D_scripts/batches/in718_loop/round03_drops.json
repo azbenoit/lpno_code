@@ -1,0 +1,8 @@
+{
+ "maximin": {
+  "in718_maximin_r03_009": "melt reaches within one 10 um cell of the x-domain wall (xmarg 10 um, XWALL threshold <=10) in a 900 um wide domain; melt WIDTH is truncated by the boundary, so the case is not a physical target"
+ },
+ "bandit": {
+  "in718_bandit_r03_013": "same lattice point as in718_maximin_r03_009 (H=41.7143, V=1.25, r0=27.37 um); identical XWALL truncation, xmarg 10 um"
+ }
+}

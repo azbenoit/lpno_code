@@ -1,0 +1,68 @@
+{
+ "schema_version": 1,
+ "case_name": "al6061_p416_v045",
+ "material": {
+  "file": "../materials/al6061/al6061.json"
+ },
+ "parallel": {
+  "cores": 16,
+  "threads_per_rank": 16
+ },
+ "boundary_conditions": {
+  "x_min": "wall",
+  "x_max": "wall",
+  "y_min": "wall",
+  "y_max": "wall",
+  "z_min": "wall",
+  "z_max": "pressure"
+ },
+ "geometry": {
+  "length_m": 0.0009,
+  "width_m": 0.0004,
+  "thickness_m": 0.00045,
+  "gas_clearance_m": 0.0001,
+  "placement": "centered"
+ },
+ "mesh": {
+  "cell_size_m": 1e-05
+ },
+ "laser": {
+  "power_w": 416.0,
+  "beam_radius_m": 4.4e-05,
+  "focal_distance_m": 0.001,
+  "lens_radius_m": 4.4e-05,
+  "start_point_m": [
+   -0.000274,
+   0.0,
+   0.0
+  ],
+  "end_point_m": [
+   0.000274,
+   0.0,
+   0.0
+  ],
+  "scan_speed_m_per_s": 0.45,
+  "turn_off_at_end": false,
+  "heat_distribution": "gaussian",
+  "radiation_distribution_flag": 2,
+  "reflection_flag": 3,
+  "max_reflections": 20,
+  "reflection_limit": 0.01,
+  "absorptivity_flag": 0,
+  "absorptivity": 1.0,
+  "reflectivity": 0.35,
+  "vapor_pressure_a": 101300.0,
+  "vapor_pressure_b": 12.422341,
+  "fresnel_from_material": true
+ },
+ "simulation": {
+  "initial_temperature_k": 273.15,
+  "boundary_temperature_k": 300.0,
+  "finish_time_s": 0.001522,
+  "solver_profile": "legacy_case_fine_1",
+  "subprocess_id": 1,
+  "max_iterations": 2000000000,
+  "recoil_model": 2,
+  "void_vapor_pressure_pa": 101325.0
+ }
+}

@@ -1,0 +1,34 @@
+build/
+.coverage
+.coverage.*
+data/*
+!data/README.md
+dist/
+*.egg-info/
+.env
+events.out.*
+figs/
+htmlcov/
+.idea/
+Important_models/figs/*.mp4
+.ipynb_checkpoints/
+.mypy_cache/
+outputs/
+past_sims/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.vscode/
+*.vti
+widget_inference_outputs/
+
+# Model artifacts live in AiiDA, not git.
+Important_models/
+
+# Model weights and array dumps under runs/. The scripts, READMEs and small JSON
+# in runs/ ARE tracked deliberately -- it is only the regenerable binaries that
+# must not be.
+runs/**/*.npz
+runs/**/*.pth
+runs/**/*.pth.bak

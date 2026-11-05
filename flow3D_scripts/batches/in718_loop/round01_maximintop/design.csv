@@ -1,0 +1,6 @@
+case_name,arm,round,H,V,P,r0_um,region,regime
+in718_maximintop_r01_000,maximintop,1,31.2381,0.573077,347.812,43.5,keyhole,extrapolation
+in718_maximintop_r01_001,maximintop,1,39.619,0.657692,169.969,22.0,keyhole,extrapolation
+in718_maximintop_r01_002,maximintop,1,41.7143,0.826923,278.528,27.37,keyhole,extrapolation
+in718_maximintop_r01_003,maximintop,1,31.2381,1.165385,247.611,27.37,keyhole,extrapolation
+in718_maximintop_r01_004,maximintop,1,20.7619,1.165385,164.571,27.37,transition,overlap

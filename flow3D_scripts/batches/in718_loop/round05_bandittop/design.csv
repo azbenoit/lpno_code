@@ -1,0 +1,11 @@
+case_name,arm,round,H,V,P,r0_um,region,regime
+in718_bandit_r05top_015,bandit,5,10.2857,0.573077,136.393,48.87,conduction,overlap
+in718_bandit_r05top_016,bandit,5,24.9524,0.403846,324.818,54.25,keyhole,extrapolation
+in718_bandit_r05top_017,bandit,5,18.6667,0.826923,249.662,43.5,transition,overlap
+in718_bandit_r05top_018,bandit,5,4.0,0.911538,102.598,65.0,lof,overlap
+in718_bandit_r05top_019,bandit,5,24.9524,0.403846,152.355,32.75,keyhole,extrapolation
+in718_bandit_r05top_020,bandit,5,10.2857,0.996154,242.304,59.62,conduction,overlap
+in718_bandit_r05top_021,bandit,5,22.8571,0.742308,104.176,22.0,keyhole,extrapolation
+in718_bandit_r05top_022,bandit,5,18.6667,0.403846,174.473,43.5,transition,overlap
+in718_bandit_r05top_023,bandit,5,22.8571,1.080769,349.496,43.5,keyhole,extrapolation
+in718_bandit_r05top_024,bandit,5,48.0,1.080769,263.974,22.0,keyhole,extrapolation

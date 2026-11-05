@@ -1,0 +1,27 @@
+# GAOT on the pvlhs/spkh123 recipe, shrunk to RIGNO's parameter count.
+#
+# WHY THIS EXISTS. The stock GAOT (5,609,570 params) and RIGNO (722,792 params)
+# configs for the straight-path keyhole set are schedule-matched (both one-cycle,
+# max_lr 1e-4, 32000 steps) and channel-matched (identical 15 FNO_input_keys,
+# power_weighted_dose true), but they are NOT capacity-matched: GAOT carries 7.8x the
+# parameters. Architecture and capacity cannot be separated until one is held fixed.
+#
+# config_flow3D_GAOT.yaml already records that on the EASY straight-path family this
+# same shrink cost only 4% (9.52 K val against 9.12 K) -- evidence that capacity is
+# not what buys GAOT its accuracy there. This arm repeats the test on data containing
+# keyholes, the regime where the two architectures differ most.
+#
+# READ THE RESULT AS: if this 1.16M GAOT still beats the 0.72M RIGNO by a wide
+# margin, the difference is ARCHITECTURAL. If it collapses toward RIGNO, the gap
+# was capacity.
+defaults:
+  - config_flow3D_GAOT_pvlhs
+  - _self_
+
+arch:
+  gaot:
+    # 1,158,706 params -- the size-matched variant named in config_flow3D_GAOT.yaml.
+    lifting_channels: 16
+    hidden_size: 128
+    ffn_hidden_size: 512
+    num_layers: 4

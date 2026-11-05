@@ -1,0 +1,36 @@
+# GAOT-4a: displacement kernel + k_decoder 12.
+#
+# RE-EXAMINES A KNOB THAT WAS REJECTED FOR A REASON WE NOW KNOW WAS WRONG.
+#
+# The `gaot_abl_kdec12` ablation raised k_decoder 8 -> 12 and made surface MAE 43% WORSE,
+# so 8 was kept. That verdict was measured with the ABSOLUTE-coordinate kernel, where the
+# decoder was close to a box filter over each latent cell: every physical node in a cell
+# read the same corner tokens with near-identical weights, so adding neighbours could only
+# widen the averaging window. Under a box filter, more neighbours = more blur. The result
+# was real, but its cause is now known to be an artefact of the kernel, not a property of
+# k_decoder.
+#
+# With `kernel_use_displacement: true` the kernel receives (query - source) and CAN vary
+# within a cell, so extra neighbours become extra interpolation support rather than extra
+# blur. The prediction is that the sign of the k_decoder effect flips.
+#
+# This matters beyond the number: the audit found that essentially every GAOT architectural
+# decision rests on an uncontrolled run or an upstream default. This is the cheapest case
+# where a decision can be re-derived under a corrected mechanism, and it tests whether the
+# earlier ablation programme needs redoing wholesale.
+#
+# Falsifier: if kdec12 is still worse WITH displacement, the box-filter account does not
+# explain the original kdec12 result and something else drives it.
+#
+# Baseline: config_flow3D_GAOT_disp_randompath. Same steps, lr, schedule, resolution,
+# lattice and kernel; ONLY k_decoder differs.
+defaults:
+  - config_flow3D_GAOT_disp_randompath
+  - _self_
+
+arch:
+  gaot:
+    k_decoder: 12
+
+custom:
+  name: gaot_cond_disp_kdec12

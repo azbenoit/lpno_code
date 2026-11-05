@@ -1,0 +1,8 @@
+{
+ "maximin": {
+  "in718_maximin_r05_009": "melt within one 10 um cell of the x-domain wall (xmarg 10 um, XWALL <=10) in a 900 um domain; melt WIDTH truncated. Same lattice point as in718_bandit_r05_008 (H=33.3333, V=1.165385, P=345.74, r0=32.75 um), bought independently by both arms."
+ },
+ "bandit": {
+  "in718_bandit_r05_008": "melt within one 10 um cell of the x-domain wall (xmarg 10 um, XWALL <=10) in a 900 um domain; melt WIDTH truncated. Same lattice point as in718_maximin_r05_009 (H=33.3333, V=1.165385, P=345.74, r0=32.75 um), bought independently by both arms."
+ }
+}

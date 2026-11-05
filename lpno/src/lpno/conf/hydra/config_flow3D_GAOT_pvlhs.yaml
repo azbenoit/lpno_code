@@ -1,0 +1,119 @@
+# GAOT on the PV-LHS beam/preheat sweep (ti64_pv_lhs_beam_preheat).
+#
+# Process-space generalization (power, speed, beam and preheat varied jointly).
+# Inherits config_flow3D_GAOT_disp_randompath, the validated lab-frame GAOT recipe,
+# and changes only what the dataset itself demands:
+#
+#   1. output_bounds T ceiling 1.3 -> 2.0. The 1.3 (3900 K) ceiling was calibrated on
+#      data whose true max was 1.041; THIS dataset's measured true max is 5387 K = 1.80
+#      normalized (deep-keyhole corners of the 6-D LHS). The old ceiling would clip
+#      TRUTH, capping predictions ~1500 K under real keyhole temperatures. 2.0 = 6000 K
+#      keeps the straight-through stability guard with margin above anything physical.
+#
+#   2. latent lattice re-sized for the 90x40x50 grid: [44, 20, 24] at patch 2 (~21k
+#      tokens, every axis divisible by the patch), against the parent's lattice sized
+#      for 150x100x40. Same token-load regime as the validated straight-path setup.
+#
+#   3. Three new conditioning channels for the axes this sweep varies and no earlier
+#      dataset did (see tests/test_pvlhs_channels.py):
+#        preheat_T0          initial temperature broadcast, raw K (293-773 across cases)
+#        beam_shape_uniform  gaussian/uniform flag; the footprint itself is also
+#                            shape-aware now (flat-top for uniform manifests)
+#        focus_factor        broadcast; the ONLY carrier of the focus axis
+#                            (the *_sigma family does not carry the physical
+#                            defocus for this sweep: every pvlhs manifest has
+#                            focus_z_m=None, so sigma(z) centres at the surface
+#                            for all cases. FLOW-3D itself gets real cone optics
+#                            via lens_radius_m = focus_factor*beam_radius_m and
+#                            focal_distance_m; the channels do not reproduce the
+#                            resulting surface spot. Scalar conditioning matches
+#                            the ablation finding that the focus axis is flat.)
+#      Radius needs no channel: the footprint is built from the per-case manifest
+#      beam_radius_m already.
+#
+#   4. case_coherent_sampling on (the full-resolution loader recipe; pair with
+#      PINO_LOADER_WORKERS=2 and host_ram_mb=40960 in the submission profile).
+#
+# NO tail loss (off by default) -- the parent chain never had it.
+# Frames vary 102-597 per case (finish_time scales with track time); time_as_batch
+# and the per-frame dt in the dose integrals handle that per case.
+defaults:
+  - config_flow3D_GAOT_disp_randompath
+  - _self_
+
+training:
+  # The parent chain resolves to max_steps 8000 (config_flow3D_RIGNO_randompath_onecycle).
+  # Stated here rather than left to the submission profile, per the rule that an arm's own
+  # Hydra config owns its schedule. 32000 is ~0.62 of ONE epoch over this split (183 cases,
+  # 51677 frames, batch 1) -- deliberately a shakedown budget, NOT a converged comparison.
+  max_steps: 32000
+  # 12 val cases x ~282 frames = ~3400 forward passes per validation. At the inherited
+  # freq 500 that is 64 passes -- validation would cost as much as the training itself.
+  # 16 passes still gives 16 checkpoint-selection points over the anneal.
+  rec_validation_freq: 2000
+  # rec_results_freq paces the constraint, monitor and inference records (and validation,
+  # where rec_validation_freq is not set). It is NOT the checkpoint interval: physicsnemo
+  # writes the weights every save_network_freq steps (its default 1000, capped to max_steps
+  # by the pipeline), and u_network.best.pth is written at every improving validation.
+  # 2000 matches the validation cadence.
+  rec_results_freq: 2000
+  summary_freq: 2000
+  # The progress line. Never raise this: it is the only per-step signal, and the stall
+  # detection, step-rate measurement and health monitor all read it.
+  print_stats_freq: 100
+  # The '[step: N] record constraint batch time' heartbeat the monitors parse. The
+  # physicsnemo default is 2000, which left these runs silent between validations and
+  # made healthy training indistinguishable from a stall.
+  rec_constraint_freq: 100
+
+stop_criterion:
+  # Must not be below max_steps: an inherited 4000 fired mid-descent on a prior run and
+  # produced an untrained model. One-cycle needs its full anneal.
+  patience: 32000
+  # MUST divide evenly with rec_validation_freq. The inherited 500 against a validation
+  # freq of 2000 is exactly what physicsnemo rejects -- and it checked only at the first
+  # criterion evaluation (~2 h in) until validate_recording_cadence caught it at startup.
+  freq: 2000
+
+custom:
+  case_coherent_sampling: true
+  # Only the fields the input/output keys actually consume. Velocity (3 components) and
+  # Pressure are ~9.6 GiB per cached case at nt=597 and are read by nothing here; the
+  # automatic pruner keeps them because the parent's list names them.
+  vtk_fields: [Temperature, Fraction Of Fluid]
+  # Score the substrate, not the 20 % of this domain that is constant-filled gas.
+  metrics_exclude_gas: true
+  # THIS sweep varies power (the first dataset that does), and the dose channels are
+  # power-blind without this: the per-case dwell normalization cancels a
+  # constant-per-case power, so a 68 W and a 500 W case with the same track produce
+  # IDENTICAL path_dose / path_dose_recent / tau-bank channels.
+  power_weighted_dose: true
+  # 12 val cases is the whole val split and cheap at this grid; the inherited 5 would
+  # select checkpoints from 5 of 199 design points in a 6-D space.
+  val_max_cases: 0
+  FNO_input_keys:
+    - V_scan
+    - P
+    - H_norm
+    - x
+    - y
+    - z
+    - beam_x
+    - beam_y
+    - beam_dist
+    - path_dose
+    - path_dose_recent
+    - preheat_T0
+    - beam_shape_uniform
+    - focus_factor
+    # Preheat as a melting-threshold modulation: H* against the LOCAL soak temperature.
+    # The stored H_norm is P/sqrt(V) and preheat-blind; this is the design's own
+    # h_norm_ti64 form with T0 -> soak_field(x,t), so it is a field, not a per-case scalar.
+    - h_norm_local
+
+arch:
+  gaot:
+    latent_tokens: [44, 20, 24]
+    patch_size: 2
+    output_bounds:
+      T: [0.0, 2.0]

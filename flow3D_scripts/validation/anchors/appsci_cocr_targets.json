@@ -1,0 +1,148 @@
+{
+ "_meta": {
+  "doi": "10.3390/app16125850",
+  "citation": "De Araujo Soares, Campion, Leclercq, Kreitcberg, Brailovski, Appl. Sci. 2026, 16, 5850 (CC-BY)",
+  "extraction": "read directly from the PDF: Table 4 (printing parameters, p.6) and Table 6 (single-track widths/depths, p.11); no digitization",
+  "measurement": "mean of 8 cross-section measurements per condition, Keyence VHX-7000 at 500x/1000x",
+  "uncertainty_covers": "track-to-track process variability + operator-dependent melt-pool boundary identification (Table 6 note, p.11)"
+ },
+ "beam": {
+  "machine": "EOS M280",
+  "laser": "400 W ytterbium fiber",
+  "beam_radius_m": 5e-05,
+  "radius_convention": "stated as 'beam radius r_f = 50 um' (p.6)",
+  "_source": "Section 2.3.1"
+ },
+ "depth_kind": "fusion",
+ "depth_measurement": "cross-section metallography, means of 8 sections (Tables 4 + 6)",
+ "process": {
+  "substrate": "stainless steel baseplates, no preheating",
+  "atmosphere": "inert argon",
+  "powder_layer_um": null,
+  "alloy": "EOS Cobalt Chrome MP1 (CoCr, Co balance, Cr 26-30, Mo 5-7)",
+  "_source": "Sections 2.2/2.3.1, Table 2"
+ },
+ "material_reference": {
+  "T_melt_C": 1330,
+  "T_vap_C": 2930,
+  "density_dense_kg_m3": 8407,
+  "cp_J_kgK": 594,
+  "k_dense_W_mK": 32.4,
+  "resistivity_nOhm_m": 99,
+  "absorptivity_dense_pct": 35,
+  "absorptivity_powder_pct": 50,
+  "_source": "Tables 3 and 5 (properties at 0.8*T_melt)"
+ },
+ "conditions": [
+  {
+   "set": "P0",
+   "power_W": 290,
+   "speed_m_per_s": 0.95,
+   "LED_J_mm": 0.3,
+   "width_um": 155,
+   "width_sigma_um": 15,
+   "depth_um": 114,
+   "depth_sigma_um": 20,
+   "_source": "Table 4 + Table 6"
+  },
+  {
+   "set": "P1",
+   "power_W": 290,
+   "speed_m_per_s": 0.75,
+   "LED_J_mm": 0.39,
+   "width_um": 170,
+   "width_sigma_um": 22,
+   "depth_um": 146,
+   "depth_sigma_um": 28,
+   "_source": "Table 4 + Table 6"
+  },
+  {
+   "set": "P2",
+   "power_W": 350,
+   "speed_m_per_s": 0.95,
+   "LED_J_mm": 0.37,
+   "width_um": 166,
+   "width_sigma_um": 19,
+   "depth_um": 147,
+   "depth_sigma_um": 26,
+   "_source": "Table 4 + Table 6"
+  },
+  {
+   "set": "P3",
+   "power_W": 121,
+   "speed_m_per_s": 0.4,
+   "LED_J_mm": 0.3,
+   "width_um": 156,
+   "width_sigma_um": 20,
+   "depth_um": 64,
+   "depth_sigma_um": 14,
+   "_source": "Table 4 + Table 6"
+  },
+  {
+   "set": "P4",
+   "power_W": 228,
+   "speed_m_per_s": 0.75,
+   "LED_J_mm": 0.3,
+   "width_um": 173,
+   "width_sigma_um": 20,
+   "depth_um": 97,
+   "depth_sigma_um": 22,
+   "_source": "Table 4 + Table 6"
+  },
+  {
+   "set": "P5",
+   "power_W": 334,
+   "speed_m_per_s": 1.1,
+   "LED_J_mm": 0.3,
+   "width_um": 170,
+   "width_sigma_um": 22,
+   "depth_um": 131,
+   "depth_sigma_um": 43,
+   "_source": "Table 4 + Table 6"
+  },
+  {
+   "set": "P6",
+   "power_W": 290,
+   "speed_m_per_s": 1.1,
+   "LED_J_mm": 0.26,
+   "width_um": 167,
+   "width_sigma_um": 30,
+   "depth_um": 107,
+   "depth_sigma_um": 36,
+   "_source": "Table 4 + Table 6"
+  },
+  {
+   "set": "P7",
+   "power_W": 200,
+   "speed_m_per_s": 0.95,
+   "LED_J_mm": 0.21,
+   "width_um": 148,
+   "width_sigma_um": 16,
+   "depth_um": 57,
+   "depth_sigma_um": 24,
+   "_source": "Table 4 + Table 6"
+  },
+  {
+   "set": "P8",
+   "power_W": 290,
+   "speed_m_per_s": 1.4,
+   "LED_J_mm": 0.21,
+   "width_um": 150,
+   "width_sigma_um": 20,
+   "depth_um": 70,
+   "depth_sigma_um": 31,
+   "_source": "Table 4 + Table 6"
+  },
+  {
+   "set": "P9",
+   "power_W": 120,
+   "speed_m_per_s": 0.95,
+   "LED_J_mm": 0.17,
+   "width_um": 114,
+   "width_sigma_um": 28,
+   "depth_um": 34,
+   "depth_sigma_um": 13,
+   "_source": "Table 4 + Table 6"
+  }
+ ]
+}

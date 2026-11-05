@@ -1,0 +1,48 @@
+# VARSPEED CONTROL: best GAOT recipe on ti64_varspeed150, current 2-timescale memory.
+#
+# Baseline for the multi-tau arm (config_flow3D_GAOT_varspeed_multitau). Carries the
+# SAME input channels the varspeed RIGNO runs used, so the only thing the paired arm
+# changes is the addition of the tau bank.
+#
+# Thermal memory here is exactly two numbers per footprint family: `path_dose`
+# (tau -> inf, carrying only the total) and `path_dose_recent` (a leaky integrator at
+# tau = 1 ms). Measured on this batch with scripts/probe_varspeed_memory.py: mean speed
+# CV 0.205, median segment dwell 190.8 us, 100% of segments shorter than tau, so ~5.2
+# speed segments fall inside one memory window and their ORDER is not recoverable from
+# the channels.
+#
+# Dataset: ti64_varspeed150 (150 cases, legacy
+# physics -- material ti_imi318_mills, not ti64_v3_calibrated). Splits 120/8/22.
+defaults:
+  - config_flow3D_GAOT_disp_randompath
+  - _self_
+
+custom:
+  name: gaot_varspeed_ctrl
+  # Two-level shuffle (cases shuffled, frames shuffled within a case). Measured need:
+  # a global frame shuffle decompresses a whole ~600 MB case (5.9 s) per 19 MB frame
+  # served -- a ~99% miss rate that starved training to 14 s/iter under co-tenancy and
+  # OOM-killed 4-worker loaders (each worker privately re-decompressing cases). Order
+  # changes, sample distribution does not; the multitau arm inherits this.
+  case_coherent_sampling: true
+  FNO_input_keys:
+    - V_scan
+    - P
+    - H_norm
+    - x
+    - y
+    - z
+    - beam_x
+    - beam_y
+    - beam_dist
+    - path_dose
+    - path_dose_recent
+    - beam_s
+    - beam_n
+    - beam_speed
+    - beam_dist_sigma
+    - path_dose_sigma
+    - path_dose_recent_sigma
+    - beam_dist_sigma_exp
+    - path_dose_sigma_exp
+    - path_dose_recent_sigma_exp

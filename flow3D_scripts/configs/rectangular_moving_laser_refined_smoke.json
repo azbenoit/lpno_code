@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "case_name": "rectangular_moving_laser_refined_smoke",
+  "material": { "name": "ti_imi318_mills" },
+  "parallel": {
+    "cores": 4,
+    "threads_per_rank": 4
+  },
+  "geometry": {
+    "length_m": 0.0024,
+    "width_m": 0.0012,
+    "thickness_m": 0.0004,
+    "gas_clearance_m": 0.0004
+  },
+  "mesh": {
+    "cell_size_m": 0.000075,
+    "refinement": {
+      "factor": 2,
+      "margin_m": 0.0002
+    }
+  },
+  "laser": {
+    "power_w": 300.0,
+    "beam_radius_m": 0.00015,
+    "focal_distance_m": 0.01,
+    "lens_radius_m": 0.0003,
+    "start_point_m": [0.0, 0.0, 0.0],
+    "end_point_m": [0.0008, 0.0, 0.0],
+    "scan_speed_m_per_s": 0.1
+  },
+  "simulation": {
+    "initial_temperature_k": 293.15,
+    "finish_time_s": 0.0085,
+    "max_iterations": 5000
+  }
+}

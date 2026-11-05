@@ -1,0 +1,80 @@
+# DeepONet on arbitrary-weld-path FLOW-3D runs (random + sinusoidal laser paths).
+# See config_flow3D_FNO_randompath.yaml for the rationale.
+#
+# DeepONet contract: the branch takes spatially-constant conditioning, the trunk
+# takes query coordinates. So the instantaneous beam centre goes in the branch as
+# scalars (beam_x/beam_y, alongside t_hat/P/V_scan), while the spatially-varying
+# fields are routed to the TRUNK via deeponet_trunk_extra_keys -- feeding a
+# spatial field to the branch would collapse the operator factorization.
+#
+# rp2: beam_dist joins path_dose in the trunk. The rp1 run dropped it and its
+# prediction degenerated into painting path_dose (the whole path stayed at
+# ~1600-2000 K where the ground truth had cooled below 900 K): a rank-limited
+# branch x trunk product cannot synthesize a sharp bump at a position given only
+# as branch scalars, so the dose field was its best available shortcut. Feeding
+# the Gaussian footprint through the trunk gives it the same instantaneous
+# localization signal the grid models get.
+defaults:
+  - config_flow3D_DEEPONet
+  - _self_
+
+# Scalar-only training records (see config_flow3D_RIGNO_randompath for the
+# rationale). The pointwise validator is the dominant recording cost here:
+# dpn_rp1/rp2 spent 520-760 s per record pushing the full val point cloud
+# through at validation batch 10000; batch 100000 cuts the batch count 10x.
+save_filetypes: ""
+# WarmupNode is CUDA-graph capture-safe; cuda_graphs kept off
+# until a capture-on training smoke is validated (see config_flow3D_RIGNO_randompath).
+cuda_graphs: false
+amp:
+  enabled: true
+
+training:
+  rec_results_freq: 12000
+  rec_validation_freq: 1500
+  print_stats_freq: 200
+  summary_freq: 12000
+  # dpn_rp1's val T error plateaued at ~9-12k (0.0804@9k, best 0.0790@13.5k,
+  # 0.0793@15k): 12000 keeps everything the run actually gained.
+  max_steps: 12000
+
+stop_criterion:
+  metric: "beambox_mae_T"
+  min_delta: 0.0
+  patience: 1000000
+  mode: "min"
+  freq: 1500
+  strict: true
+
+batch_size:
+  grid: 10000
+  validation: 100000
+
+custom:
+  name: deeponet_randompath
+  data_dir: data/flow3D/random_paths/train
+  val_data_dir: data/flow3D/random_paths/val
+  time_as_batch: true
+  moving_ref_frame: false
+  wandb_offline: true
+  deeponet_trunk_extra_keys:
+    - path_dose
+    - beam_dist
+
+  vtk_fields:
+    - Temperature
+    - Velocity
+    - Fraction Of Fluid
+    - Pressure
+
+  FNO_input_keys:
+    - V_scan
+    - P
+    - H_norm
+    - x
+    - y
+    - z
+    - beam_x
+    - beam_y
+    - path_dose
+    - beam_dist

@@ -1,0 +1,5 @@
+{
+ "batch_keyword": "in718_loop_probe",
+ "description": "IN718 PROBE SET (16 cases) for the two-alloy self-improvement loop: the per-regime error signal the bandit's learning-rate estimate b_r is fitted on. Stratified 4 per physical regime (lof / conduction / transition / keyhole) and maximin-spread within each. Bought ONCE and re-evaluated every round -- an earlier costing rejected a probe set as ~6 h of solver time PER ROUND, which was wrong: it is a one-time ~4 h. Deliberately DISJOINT from everything else: excluded from the acquisition lattice, from the frozen test set ds 87432, and from both arms' round-1 picks. It exists so the bandit is never steered on the frozen test set, which would contaminate the headline comparison and give the bandit an advantage maximin does not have. Solved in the ds86529 domain (900x600x450+100 um @ 10 um) and inside the containment constraint P/(V*2r0) <= 1.0e7, so no case is plate-bounded.",
+ "keywords": ["in718", "two-alloy", "self-improve", "probe", "bandit_signal", "straight path", "steady", "experimentally_anchored"]
+}

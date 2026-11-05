@@ -1,0 +1,57 @@
+# RIGNO steady (time-averaged) variant, trained with the LP-FNO demo protocol:
+# exponential LR schedule and no FiLM conditioning. It tests whether the one-cycle
+# schedule and FiLM that the other steady configs add on top of that protocol suit
+# RIGNO on the steady representation.
+#
+# WHY IT INHERITS randompath AND NOT pvlhs_steady. The scheduler cannot be swapped from a
+# descendant of config_flow3D_RIGNO_randompath_onecycle: that file sets `scheduler.max_lr`
+# INLINE, and an inline block survives an `override /scheduler:` and then fails struct
+# validation against the other scheduler's schema (`Key 'max_lr' not in TFExponentialLRConf`).
+# An inline `loss:` block has the same trap. So this config inherits
+# the demo-era recipe directly -- config_flow3D_RIGNO_randompath IS that recipe:
+# tf_exponential_lr 0.98/250, Lion 1e-4, sum loss, p_edge_masking 0.0, film_keys [].
+# It matches the resolved config shipped with the demo's RIGNO checkpoint.
+#
+# One-cycle and FiLM both helped on the straight-path set, so a result here describes
+# the steady representation only.
+#
+# Taken from the pvlhs side: the six steady input keys (matched to the LP-FNO demo's
+# own six), amp off, and the loader/metric settings, so this config differs from its
+# steady partners in the recipe only.
+defaults:
+  - config_flow3D_RIGNO_randompath
+  - _self_
+
+# randompath enables fp16 autocast; RIGNO trains in fp32 (fp16 can overflow the
+# gradients on this data family, above all in the keyhole corners).
+amp:
+  enabled: false
+
+training:
+  max_steps: 32000
+  rec_validation_freq: 2000
+  rec_results_freq: 2000
+  summary_freq: 2000
+  print_stats_freq: 100
+  rec_constraint_freq: 100
+
+stop_criterion:
+  patience: 32000
+  freq: 2000
+
+custom:
+  # The six keys the steady partners use, matched to config_NS_energy_PINO_flow3D (the
+  # config behind the LP-FNO demo numbers). The trajectory channels are absent from the
+  # materialised steady variant anyway -- asking for them raises KeyError: 'beam_x'.
+  FNO_input_keys:
+    - V_scan
+    - P
+    - H_norm
+    - x
+    - y
+    - z
+  power_weighted_dose: true
+  case_coherent_sampling: true
+  vtk_fields: [Temperature, Fraction Of Fluid]
+  metrics_exclude_gas: true
+  val_max_cases: 0

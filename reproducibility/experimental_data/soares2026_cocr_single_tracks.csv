@@ -1,0 +1,11 @@
+parameter_set,material,laser_power_W,scan_speed_m_per_s,linear_energy_density_J_per_mm,beam_radius_um,melt_pool_width_um,melt_pool_width_uncertainty_um,melt_pool_depth_um,melt_pool_depth_uncertainty_um,n_sections,used_in_manuscript
+P0,CoCr (EOS Cobalt Chrome MP1),290,0.95,0.3,50,155,15,114,20,8,fig:calib-materials
+P1,CoCr (EOS Cobalt Chrome MP1),290,0.75,0.39,50,170,22,146,28,8,
+P2,CoCr (EOS Cobalt Chrome MP1),350,0.95,0.37,50,166,19,147,26,8,
+P3,CoCr (EOS Cobalt Chrome MP1),121,0.4,0.3,50,156,20,64,14,8,fig:calib-materials
+P4,CoCr (EOS Cobalt Chrome MP1),228,0.75,0.3,50,173,20,97,22,8,
+P5,CoCr (EOS Cobalt Chrome MP1),334,1.1,0.3,50,170,22,131,43,8,
+P6,CoCr (EOS Cobalt Chrome MP1),290,1.1,0.26,50,167,30,107,36,8,
+P7,CoCr (EOS Cobalt Chrome MP1),200,0.95,0.21,50,148,16,57,24,8,fig:calib-materials
+P8,CoCr (EOS Cobalt Chrome MP1),290,1.4,0.21,50,150,20,70,31,8,
+P9,CoCr (EOS Cobalt Chrome MP1),120,0.95,0.17,50,114,28,34,13,8,

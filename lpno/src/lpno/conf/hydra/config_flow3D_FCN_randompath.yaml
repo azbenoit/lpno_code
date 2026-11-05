@@ -1,0 +1,75 @@
+# Plain fully-connected coordinate NN (skip connections) on arbitrary-weld-path
+# FLOW-3D runs — the "does the operator machinery earn its keep" baseline next to
+# FNO / RIGNO / DeepONet. Same conditioning channels as the FNO randompath config
+# (so any gap is architecture, not information), same fp32 / step budget / region
+# metrics. A pointwise map per voxel: no spectral conv, no graph, no branch/trunk.
+defaults:
+  - config_NS_energy_PINO_flow3D
+  - /arch/fully_connected_cfg@arch.fully_connected
+  - _self_
+
+save_filetypes: ""
+cuda_graphs: false
+amp:
+  enabled: false          # FC is small; fp32 keeps it comparable to fno/rigno
+
+arch:
+  fully_connected:
+    layer_size: 384
+    nr_layers: 6
+    skip_connections: true
+
+training:
+  rec_results_freq: 18000
+  rec_validation_freq: 1000
+  print_stats_freq: 200
+  summary_freq: 18000
+  max_steps: 18000
+
+# fully_connected uses the POINTWISE data layout (grid flattened to (N,C) rows),
+# so batch_size is a number of points, not grids (the parent's grid=1 would be
+# 1 point/step). Mirror the DeepONet pointwise batching.
+batch_size:
+  grid: 10000
+  validation: 100000
+
+stop_criterion:
+  metric: "beambox_mae_T"
+  min_delta: 0.0
+  patience: 1000000
+  mode: "min"
+  freq: 1000
+  strict: true
+
+custom:
+  name: fcn_randompath
+  # param_dir is only resolved (not read) for random-path data, but the
+  # strict default resolver requires an existing path -> point at data_dir.
+  param_dir: ${custom.data_dir}
+  model_family: fully_connected
+  # pointwise eval forwards flattened points; the parent's inference_batch_size=1
+  # (1 grid) means 1 POINT/forward here -> ~36M forwards hang. Batch points instead.
+  inference_batch_size: 100000
+  data_dir: data/flow3D/random_paths/train
+  val_data_dir: data/flow3D/random_paths/val
+  time_as_batch: true
+  moving_ref_frame: false
+  wandb_offline: true
+
+  vtk_fields:
+    - Temperature
+    - Velocity
+    - Fraction Of Fluid
+    - Pressure
+
+  FNO_input_keys:
+    - V_scan
+    - P
+    - H_norm
+    - x
+    - y
+    - z
+    - beam_x
+    - beam_y
+    - beam_dist
+    - path_dose

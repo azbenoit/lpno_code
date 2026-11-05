@@ -1,0 +1,61 @@
+{
+  "_meta": {
+    "paper": "Wang J.-H., Ren J., Liu W., Wu X.-Y., Gao M.-X., Bai P.-K. — Effect of Selective Laser Melting Process Parameters on Microstructure and Properties of Co-Cr Alloy",
+    "journal": "Materials 2018, 11(9), 1546",
+    "doi": "10.3390/ma11091546",
+    "source_document": "Open-access full text: PMC6164890 (Europe PMC PDF render, 13 pp., verified against PMC HTML)",
+    "extraction_method": "Laser parameters and the four depth values quoted in body text transcribed from typeset text. Pool width/depth per condition transcribed from Figures 6 and 8, which are annotated schematic cross-sections with the numeric values PRINTED as text labels on each pool sketch — not bar charts, so no axis digitization was needed and extraction_uncertainty_um = 0 (transcription of printed numbers). Text-quoted depths (51, 64, 61, 51 um) agree exactly with the figure labels. No table or supplementary file carries these numbers.",
+    "extraction_date": "2026-07-29",
+    "units": { "power": "W", "speed": "mm_per_s", "depth": "um", "width": "um", "pitch": "mm" }
+  },
+  "laser": {
+    "machine": "Renishaw AM 400 (Renishaw plc)",
+    "laser_model": "SPI redPOWER, stated as '200 W' model",
+    "machine_power_note": "Paper is self-contradictory: 'The equipment is equipped with a fiber laser with a power of 400 W. The laser model was an SDH Physical Interface (SPI) red POWER 200 W' — yet tested powers reach 300 W. AM 400 ships with a 400 W optic; the '200 W' is likely an error carried from the older AM 250. Recorded verbatim.",
+    "wavelength_nm": 1071,
+    "spot_diameter_um": 70,
+    "spot_convention_note": "Paper wording: 'the beam focusing diameter can reach 70 um' — explicitly a diameter. Verified.",
+    "output_mode": "pulsed (Renishaw modulated exposure); point distance and exposure time NOT stated anywhere in the paper — powers and speeds are given as continuous P (W) and v (mm/s) only",
+    "layer_thickness_um": 30,
+    "layer_thickness_source": "Sec. 3.1: 'The thickness of the paving layer used in this experiment was 30 um' — verified",
+    "scan_pitch_mm": [0.04, 0.05, 0.06],
+    "scan_pitch_note": "Sec. 3.1 says 'scan line spacing of 0.05 um' for the power series; this is a typo for 0.05 mm (Table 2 lists H = 0.05 mm for A1-A5)",
+    "shield_gas": "not stated",
+    "substrate": "not stated",
+    "powder": "remanium star CL dental CoCr (paper spells the supplier 'Denkurum Company, Pforzheim, Germany' — the actual supplier is Dentaurum, Pforzheim)",
+    "composition_wt_pct": {
+      "_source": "Table 1 as printed: only Co, W, Si, other are listed",
+      "Co": 60.5,
+      "W": 9.0,
+      "Si": 1.5,
+      "other": "<1",
+      "Cr_note": "Cr is absent from the printed table; it is the balance (~28 wt% per the remanium star CL datasheet). Inference, not from the paper."
+    },
+    "_source": "Sec. 2.1 (materials, Table 1) and 'All parts were made with the Renishaw AM 400...' paragraph, p. 2-3"
+  },
+  "conditions": {
+    "_measurement_note": "Each width/depth is the AVERAGE of 20 molten pools measured at the top of the etched cross-section of a bulk sample (optical microscopy). The paper reports NO standard deviation, error bar, or n-based uncertainty anywhere for pool geometry: error_bars = null below is a statement about the source, not an oversight. Pools are track cross-sections inside a hatched bulk build (scan pitch 0.05 mm, 90-degree layer rotation), so widths partially overlap neighbouring tracks — these are not isolated single tracks on bare plate.",
+    "_figure_note": "Figures 6 and 8 print each w and h value as a text annotation over a schematic pool arc; values below transcribed verbatim (extraction_uncertainty_um = 0). Figure 10 contains no pool dimensions — its 'h = 40/50/60 um' labels are the scan pitches of Table 2 (0.04/0.05/0.06 mm), not depths.",
+    "power_series": {
+      "_fixed": { "speed_mm_s": 900, "scan_pitch_mm": 0.05, "labels": "A1-A5 (Table 2)" },
+      "_source": "Figure 6; depths for 140 W and 220 W also quoted in body text (Sec. 3.1)",
+      "points": [
+        { "label": "A1", "power_W": 140, "width_um": 123, "depth_um": 51, "error_bars": null, "extraction_uncertainty_um": 0, "depth_confirmed_in_text": true },
+        { "label": "A2", "power_W": 180, "width_um": 134, "depth_um": 57, "error_bars": null, "extraction_uncertainty_um": 0 },
+        { "label": "A3", "power_W": 220, "width_um": 150, "depth_um": 64, "error_bars": null, "extraction_uncertainty_um": 0, "depth_confirmed_in_text": true },
+        { "label": "A4", "power_W": 260, "width_um": 175, "depth_um": 67, "error_bars": null, "extraction_uncertainty_um": 0 },
+        { "label": "A5", "power_W": 300, "width_um": 189, "depth_um": 72, "error_bars": null, "extraction_uncertainty_um": 0 }
+      ]
+    },
+    "speed_series": {
+      "_fixed": { "power_W": 180, "scan_pitch_mm": 0.05, "labels": "B1-B3 (Table 2)" },
+      "_source": "Figure 8; depths for 700 and 1100 mm/s also quoted in body text (Sec. 3.1)",
+      "_note": "B2 (900 mm/s) is the same condition as A2 and carries identical values in both figures",
+      "points": [
+        { "label": "B1", "speed_mm_s": 700, "width_um": 144, "depth_um": 61, "error_bars": null, "extraction_uncertainty_um": 0, "depth_confirmed_in_text": true },
+        { "label": "B2", "speed_mm_s": 900, "width_um": 134, "depth_um": 57, "error_bars": null, "extraction_uncertainty_um": 0 },
+        { "label": "B3", "speed_mm_s": 1100, "width_um": 126, "depth_um": 51, "error_bars": null, "extraction_uncertainty_um": 0, "depth_confirmed_in_text": true }
+      ]
+    }
+  }
+}

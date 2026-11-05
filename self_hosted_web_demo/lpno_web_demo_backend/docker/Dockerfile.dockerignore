@@ -1,0 +1,10 @@
+# Build context = the repository root (see the Dockerfile header); send only what the image copies.
+*
+!self_hosted_web_demo/lpno_web_demo_backend/pyproject.toml
+!self_hosted_web_demo/lpno_web_demo_backend/README.md
+!self_hosted_web_demo/lpno_web_demo_backend/app
+!lpno
+**/__pycache__
+**/*.pyc
+lpno/src/notebooks
+lpno/tests

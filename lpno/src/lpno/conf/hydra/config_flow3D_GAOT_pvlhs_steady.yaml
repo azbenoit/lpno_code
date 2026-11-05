@@ -1,0 +1,35 @@
+# GAOT on the STEADY (time-averaged, beam-centred) representation of spkh123.
+#
+# WHY SIX INPUT KEYS AND NOT THE LAB PARTNER'S FIFTEEN. Not because the steady
+# representation has no beam position -- it does. A steady sample is 30 frames averaged in
+# the beam's OWN frame, where the beam sits at a fixed place by construction, exactly as in
+# the moving-reference arm; the sample is then a single (averaged) frame with a
+# well-defined beam location. beam_x/beam_y/beam_dist/path_dose are all constructible here.
+#
+# They are simply ABSENT FROM THE MATERIALISED VARIANT: `materialize_derived_dataset`
+# writes 17 arrays -- the raw FLOW-3D fields plus x/y/z/P/V_scan/time_s -- and none of
+# the trajectory channels, so asking for them fails at step 0 with
+# `KeyError: 'beam_x'`. That is a gap in the materialiser, not a fact about the physics:
+# a steady sample does have a per-frame beam position.
+#
+# The six keys below are a POSITIVE choice for what this column is for:
+# `config_NS_energy_PINO_flow3D`, the config behind the LP-FNO demo numbers these arms exist
+# to be compared against, declares exactly these six. Matching them is what makes that
+# comparison mean anything. If the materialiser later carries the trajectory channels, a
+# fifteen-key steady arm is worth running as a SEPARATE row, not as a replacement for this
+# one, which has to stay key-matched to LP-FNO.
+#
+# Everything else is inherited unchanged from the lab-frame partner, so within the steady
+# column the three architectures still differ only in architecture.
+defaults:
+  - config_flow3D_GAOT_pvlhs
+  - _self_
+
+custom:
+  FNO_input_keys:
+    - V_scan
+    - P
+    - H_norm
+    - x
+    - y
+    - z

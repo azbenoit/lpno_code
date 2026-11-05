@@ -1,0 +1,27 @@
+{
+  "measurement": "FLOW-3D reference-data generation wall time per case",
+  "source": "AiiDA PinoSimulationData extras: cpu_seconds / cores, per case; median and mean over the batch",
+  "profile": "authors' database",
+  "captured_utc": "2026-09-03",
+  "batches": {
+    "original_straight_path_data_calibrated_20260731": {
+      "n": 83,
+      "median_h": 0.167,
+      "mean_h": 0.21,
+      "median_min": 10.0
+    },
+    "ti64_varspeed_newphys": {
+      "n": 140,
+      "median_h": 0.568,
+      "mean_h": 0.573,
+      "median_min": 34.1
+    },
+    "ti64_multibeam40_capped": {
+      "n": 80,
+      "median_h": 0.635,
+      "mean_h": 0.676,
+      "median_min": 38.1
+    }
+  },
+  "note": "multibeam is the slower family (38.1 min/case median) vs straight path (10.0), a 3.8x ratio."
+}

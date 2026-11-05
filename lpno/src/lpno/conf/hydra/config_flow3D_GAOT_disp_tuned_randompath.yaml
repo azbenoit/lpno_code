@@ -1,0 +1,19 @@
+# GAOT schedule variant: the two schedule settings the RIGNO configs use, which the
+# other GAOT configs leave at their defaults.
+#
+# This arm changes ONLY the two schedule settings, to the values the RIGNO runs use:
+#   scheduler.pct_start        0.03   (one-cycle warmup fraction)
+#   custom.mask_warmup_steps   4000
+#
+# Everything else -- displacement kernel, resolution, lattice, budget, optimiser -- is
+# identical to `config_flow3D_GAOT_disp_randompath`, the reference.
+defaults:
+  - config_flow3D_GAOT_disp_randompath
+  - _self_
+
+scheduler:
+  pct_start: 0.03
+
+custom:
+  name: gaot_cond_disp_tuned
+  mask_warmup_steps: 4000

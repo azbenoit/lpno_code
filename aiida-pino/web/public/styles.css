@@ -1,0 +1,347 @@
+:root {
+  --bg: #f3f0e8;
+  --panel: rgba(255, 255, 255, 0.92);
+  --panel-border: rgba(28, 45, 67, 0.12);
+  --ink: #162235;
+  --muted: #5a677a;
+  --accent: #0c6d7c;
+  --accent-2: #d6721f;
+  --ok: #1f8f4a;
+  --warn: #bf5e09;
+  --err: #b22a28;
+  --shadow: 0 18px 45px rgba(14, 21, 35, 0.08);
+  --radius: 14px;
+  --mono: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: radial-gradient(circle at 12% 8%, #fbf8ef 0, #efe7d8 30%, #e7eef0 68%, #e3eaec 100%);
+  background-attachment: fixed; /* sized to the viewport: no seam where it would repeat on tall pages */
+  font: 14px/1.45 "IBM Plex Sans", "Segoe UI", sans-serif;
+}
+
+.app-shell { max-width: 1500px; margin: 0 auto; padding: 18px 20px 40px; }
+
+.topbar { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
+.eyebrow { margin: 0; text-transform: uppercase; letter-spacing: 0.14em; font-size: 11px; color: var(--muted); }
+h1 { margin: 2px 0 0; font: 600 26px/1.1 "IBM Plex Sans", "Segoe UI", sans-serif; }
+h2 { margin: 0 0 8px; font: 600 17px/1.2 "IBM Plex Sans", "Segoe UI", sans-serif; }
+h3 { margin: 0 0 6px; font: 600 14px/1.2 "IBM Plex Sans", "Segoe UI", sans-serif; }
+
+/* --- environment status strip ------------------------------------------ */
+.env-strip {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  margin-top: 6px; min-width: 320px; justify-content: flex-end;
+}
+.env-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+.env-item strong { color: var(--ink); font-weight: 600; }
+
+.badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 3px 9px; border-radius: 999px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap;
+  background: rgba(22,34,53,0.08); color: var(--ink);
+}
+.badge.ok { background: rgba(31,143,74,0.15); color: #1b7d41; }
+.badge.warn { background: rgba(191,94,9,0.15); color: #a0520c; }
+.badge.err { background: rgba(178,42,40,0.15); color: #9a201f; }
+.badge.info { background: rgba(12,109,124,0.15); color: #0b5f6b; }
+.badge.state-finished { background: rgba(31,143,74,0.15); color: #1b7d41; }
+/* finished with a non-zero exit status: a failure, not a success */
+.badge.state-finished-err { background: rgba(191,94,9,0.15); color: #a0520c; }
+.badge.state-running, .badge.state-waiting { background: rgba(12,109,124,0.15); color: #0b5f6b; }
+.badge.state-created { background: rgba(22,34,53,0.08); }
+.badge.state-excepted, .badge.state-killed { background: rgba(178,42,40,0.15); color: #9a201f; }
+
+/* --- tabs --------------------------------------------------------------- */
+.tabbar { display: flex; gap: 6px; flex-wrap: wrap; margin: 16px 0; }
+.tabbar button {
+  padding: 7px 14px; border-radius: 999px; font-size: 13px; font-weight: 600;
+  color: var(--muted); border: 1px solid rgba(22,34,53,0.12);
+  background: rgba(255,255,255,0.6); cursor: pointer;
+}
+.tabbar button:hover { border-color: rgba(22,34,53,0.3); }
+.tabbar button.is-active { background: var(--accent); color: #fff; border-color: transparent; }
+
+/* --- panels + layout ---------------------------------------------------- */
+.panel {
+  background: var(--panel); border: 1px solid var(--panel-border);
+  border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px;
+}
+/* List gets the larger share (was 1.25fr/1fr, which truncated "Resolution" to "RESOLU" on a
+   1500px window). Declared HERE, before the @media block below: a same-specificity override
+   placed after that block won every time and the stacked layout under 1000px never applied
+   (2026-09-14 render audit, verified computed columns at 900px). */
+.split { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+/* Detail pane: sticky beside the list, scrolls on its own, never overlaps. */
+.split > .detail-pane {
+  position: sticky; top: 12px;
+  max-height: calc(100vh - 24px); overflow-y: auto; min-width: 0;
+}
+.split > * { min-width: 0; }
+
+/* Nothing selected yet: the detail pane holds only its "Select a ..." placeholder, so the
+   grid was reserving ~45% of the width for a blank column. That is what clipped the models
+   table's Keywords cell -- 13% of a half-width pane is ~7% of the screen. Give the list the
+   full width until a row is picked, and let the placeholder sit under it rather than beside
+   it (static, so a sticky hint does not follow the scroll of a long table). */
+.split:has(> .detail-pane > .detail-empty) { grid-template-columns: minmax(0, 1fr); }
+.split:has(> .detail-pane > .detail-empty) > .detail-pane { position: static; max-height: none; }
+.stack { display: grid; gap: 14px; }
+.muted { color: var(--muted); }
+.small { font-size: 12px; }
+.mono { font-family: var(--mono); font-size: 12px; }
+.row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.row.nowrap { flex-wrap: nowrap; }
+.spacer { flex: 1; }
+
+/* --- controls ----------------------------------------------------------- */
+label { display: grid; gap: 5px; font-size: 13px; }
+label > span { color: var(--muted); }
+input[type="text"], input[type="number"], input[type="search"], select, textarea {
+  width: 100%; border-radius: 9px; border: 1px solid rgba(22,34,53,0.2);
+  background: rgba(255,255,255,0.96); color: var(--ink); padding: 8px 9px; font: inherit;
+}
+textarea { font-family: var(--mono); font-size: 12px; min-height: 90px; resize: vertical; }
+.controls-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 12px; }
+/* Models: the Trained on / Evaluated on selects hold dataset names 235-292 px long, which a
+   150 px cell clipped; and a bare button in the grid stretched to the row's height. */
+.controls-grid.wide { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.controls-grid.wide > .button { align-self: end; justify-self: start; }
+.form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-bottom: 10px; }
+.form-grid .full { grid-column: 1 / -1; }
+select[multiple] { padding: 0; max-width: 640px; }
+select[multiple] option { padding: 4px 9px; }
+.checkline { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.checkline input { width: auto; }
+
+.button {
+  border: 1px solid rgba(22,34,53,0.15); background: rgba(255,255,255,0.92);
+  color: var(--ink); border-radius: 9px; padding: 8px 13px;
+  font: 600 13px/1 "IBM Plex Sans", "Segoe UI", sans-serif; cursor: pointer;
+}
+.button:hover { border-color: rgba(22,34,53,0.3); }
+.button:disabled { opacity: 0.5; cursor: not-allowed; }
+.button.primary { background: var(--accent); color: #fff; border-color: transparent; }
+.button.danger { background: rgba(178,42,40,0.1); color: #9a201f; border-color: rgba(178,42,40,0.2); }
+.button.small { padding: 5px 9px; font-size: 12px; }
+
+/* --- tables ------------------------------------------------------------- */
+.table-wrap { overflow: auto; max-height: 70vh; border-radius: 10px; border: 1px solid rgba(22,34,53,0.1); }
+table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+table.fixed { table-layout: fixed; }
+th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid rgba(22,34,53,0.07); white-space: normal; vertical-align: top; overflow-wrap: anywhere; }
+th { position: sticky; top: 0; z-index: 1; background: #f0f4f6; font-weight: 600; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; }
+tbody tr.clickable { cursor: pointer; }
+tbody tr.clickable:hover { background: rgba(12,109,124,0.06); }
+tbody tr.is-selected { background: rgba(12,109,124,0.12); }
+td.num { font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+td.nowrap { white-space: nowrap; }
+
+/* Long-text cells: clamp to two lines, click to expand. */
+.clamp {
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden; cursor: pointer;
+}
+.clamp.open { display: block; -webkit-line-clamp: unset; }
+
+/* Dataset list: name cell + nested subset rows. */
+.ds-name strong { display: block; font-size: 13px; }
+.ds-name .ds-sub { color: var(--muted); font-size: 11px; font-family: var(--mono); }
+tr.subset-row { background: rgba(22,34,53,0.025); }
+tr.subset-row .ds-name strong { font-weight: 500; font-size: 12.5px; }
+/* nth-child(2), not first-child: the first cell is the select checkbox */
+tr.subset-row td:nth-child(2) { padding-left: 24px; }
+tr.subset-row.depth-2 td:nth-child(2) { padding-left: 44px; }
+
+.bulk-bar { grid-column: 1 / -1; display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
+  padding: 6px 8px; border-radius: 8px; background: color-mix(in srgb, var(--accent) 12%, transparent); }
+.bulk-bar[hidden] { display: none; }
+.bulk-count { font-weight: 600; font-size: 12px; white-space: nowrap; }
+.bulk-msg { margin-left: auto; display: flex; gap: 6px; align-items: center; }
+/* message-only state: the bar stays for its Undo, the controls step aside */
+.bulk-bar.msg-only .bulk-count, .bulk-bar.msg-only .folder-input,
+.bulk-bar.msg-only > button { display: none; }
+.bulk-bar.msg-only .bulk-msg { margin-left: 0; }
+.folder-input { min-width: 220px; padding: 3px 8px; font-size: 12px; }
+input.pick { margin: 2px 0; cursor: pointer; }
+.star-toggle {
+  border: none; background: none; cursor: pointer; padding: 0 2px;
+  font-size: 15px; line-height: 1; color: var(--muted);
+}
+.star-toggle.is-on { color: #d6721f; }
+.star-toggle:hover { color: #d6721f; }
+tr.group-row { background: rgba(22,34,53,0.06); cursor: pointer; }
+tr.group-row .ds-name strong { font-weight: 600; }
+
+/* Lineage: expand/collapse toggle + role badges + detail links. */
+.ds-toggle {
+  border: none; background: none; cursor: pointer; padding: 0 4px 0 0;
+  font-size: 11px; color: var(--muted); vertical-align: baseline;
+}
+.ds-toggle:hover { color: var(--fg, #162235); }
+.chip.role-derived { background: rgba(110,86,207,0.14); color: #4f3fa0; margin-left: 6px; }
+.chip.role-subset { background: rgba(22,34,53,0.08); color: var(--muted); margin-left: 6px; }
+.chip.role-composed { background: rgba(214,114,31,0.14); color: #8c4a12; margin-left: 6px; }
+.chip.ds-link { cursor: pointer; border: none; margin: 0 4px 2px 0; font-family: inherit; }
+.chip.ds-link:hover { text-decoration: underline; }
+
+/* Default hr shrinks to zero width inside flex stacks; make it a real rule. */
+hr { border: none; border-top: 1px solid rgba(22, 34, 53, 0.12); width: 100%; margin: 4px 0; }
+
+/* Split composition chips. */
+.chip.split-train { background: rgba(31,143,74,0.14); color: #14622f; }
+.chip.split-val { background: rgba(12,109,124,0.14); color: #0b5f6b; }
+.chip.split-test { background: rgba(214,114,31,0.16); color: #8c4a12; }
+.chip.split-unassigned { background: rgba(22,34,53,0.08); color: var(--muted); }
+
+/* Case browser + reserved visualization slot. */
+.case-detail { border-top: 1px solid rgba(22,34,53,0.1); margin-top: 10px; padding-top: 10px; }
+.viz-placeholder {
+  border: 1.5px dashed rgba(22,34,53,0.2); border-radius: 10px;
+  padding: 22px 14px; text-align: center; color: var(--muted); font-size: 12.5px;
+}
+
+/* --- key/value detail --------------------------------------------------- */
+.kv { display: grid; grid-template-columns: max-content 1fr; gap: 4px 12px; font-size: 12.5px; }
+.kv dt { color: var(--muted); }
+.kv dd { margin: 0; word-break: break-word; }
+.detail-empty { color: var(--muted); padding: 24px 8px; text-align: center; }
+
+pre.log {
+  margin: 0; padding: 12px; border-radius: 10px; background: #12202e; color: #d7e2ea;
+  font-family: var(--mono); font-size: 12px; line-height: 1.5; max-height: 460px; overflow: auto;
+  white-space: pre-wrap; word-break: break-word;
+}
+pre.json {
+  margin: 0; padding: 10px; border-radius: 10px; background: rgba(22,34,53,0.04);
+  font-family: var(--mono); font-size: 11.5px; max-height: 320px; overflow: auto;
+  white-space: pre-wrap; word-break: break-word;
+}
+
+.notice { padding: 9px 12px; border-radius: 10px; font-size: 13px; margin-bottom: 10px; }
+.notice.err { background: rgba(178,42,40,0.08); border: 1px solid rgba(178,42,40,0.18); color: #7a1e1d; white-space: pre-wrap; }
+.notice.ok { background: rgba(31,143,74,0.08); border: 1px solid rgba(31,143,74,0.18); color: #14622f; }
+.notice.warn { background: rgba(191,94,9,0.08); border: 1px solid rgba(191,94,9,0.2); color: #7c4406; }
+
+/* --- annotation chips + split select ------------------------------------ */
+.chips { display: inline-flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+.chip {
+  display: inline-flex; align-items: center; gap: 3px;
+  padding: 2px 4px 2px 8px; border-radius: 999px; font-size: 11px;
+  background: rgba(12,109,124,0.12); color: #0b5f6b; white-space: nowrap;
+}
+.chip button { border: 0; background: none; color: inherit; cursor: pointer; font-size: 12px; padding: 0 3px; line-height: 1; }
+.chip button:hover { color: var(--err); }
+input.chip-add { width: 110px; padding: 3px 8px; font-size: 11px; border-radius: 999px; }
+/* A keyword column narrower than 110 px (the model list beside its detail pane) cut the
+   "+" input off at the table edge; let it shrink to the cell instead. */
+td .chips { max-width: 100%; }
+td input.chip-add { max-width: 100%; min-width: 0; }
+/* In a table cell the "+" input only appears on hover/focus: 500 rows each carrying an empty
+   text box read as broken fields. Chips there may wrap rather than clip at the column edge. */
+/* The + box appears when the CELL is hovered or focused, not the chips span: a row with no
+   keywords has an empty span nothing can hover, which made its + box unreachable. */
+td:not(:hover):not(:focus-within) .chip-add { display: none; }
+/* A chip in a table cell keeps to one line and ellipsises past the cell; the full text is
+   in the tooltip (autoChips) or reachable from the pane. Wrapping made a long "now ..."
+   chip five lines tall; clipping without an ellipsis (the state before) hid the fact. */
+td .chip {
+  display: inline-block; vertical-align: middle;  /* not inline-flex: text-overflow only ellipsises a block's own text */
+  white-space: nowrap; max-width: 100%; overflow: hidden; text-overflow: ellipsis;
+}
+td .chip button { margin-left: 3px; vertical-align: baseline; }
+/* Detail pane tables have ~450 px at 1280: headers may wrap and cells sit tighter, so the
+   seven-column Scores table stays inside the pane instead of scrolling under its edge. */
+.detail-pane th { white-space: normal; }
+.detail-pane th, .detail-pane td { padding: 5px 6px; }
+select.split-select { width: auto; padding: 3px 6px; font-size: 11px; }
+
+@media (max-width: 1000px) {
+  .split { grid-template-columns: 1fr; }
+  .form-grid { grid-template-columns: 1fr; }
+  .env-strip { justify-content: flex-start; }
+}
+
+/* --- typed profile editor ----------------------------------------------- */
+.profile-grid {
+  display: grid; grid-template-columns: minmax(130px, max-content) minmax(0, 1fr) auto;
+  gap: 6px 10px; align-items: center;
+}
+.profile-grid .pkey { color: var(--muted); font-size: 12.5px; }
+/* A nested config block (laser, geometry, mesh, simulation) rendered as its own
+   labelled sub-grid instead of one 191-character JSON line. Indented and ruled
+   so it reads as "inside this section". */
+.profile-grid.nested {
+  grid-column: 1 / -1; margin: 2px 0 6px 0; padding: 6px 0 6px 10px;
+  border-left: 2px solid var(--border, #3a3a3a);
+}
+.profile-editor textarea { min-height: 120px; }
+
+/* Description cells: clamped text + inline edit pencil. */
+.desc-cell { display: flex; gap: 6px; align-items: flex-start; }
+.desc-cell .clamp { flex: 1; min-width: 0; }
+.desc-cell .edit-btn { flex: none; padding: 2px 6px; font-size: 11px; min-height: 24px; }
+
+/* --- per-case slice viewer ---------------------------------------------- */
+.case-viewer .viz-frame { width: 100%; max-width: 660px; border-radius: 10px; border: 1px solid rgba(22,34,53,0.1); background: #fff; }
+/* Detail pane at 1280: a 640px stats plot (and a long mono value) set the min-content width
+   of the pane's grid stack, so every row laid out 640px wide and the right edge -- the Evict
+   button, the case split select, the viewer slider -- was cut off. Let grid children shrink
+   and keep every image inside the pane. */
+.detail-pane .stack > * { min-width: 0; }
+.detail-pane .viz-frame { max-width: 100%; height: auto; }
+.viz-controls { width: 100%; }
+.viz-controls input[type="range"] { flex: 1; min-width: 120px; }
+
+/* --- monitor tab --------------------------------------------------------- */
+.monitor-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 12px; }
+.subpanel {
+  border: 1px solid rgba(22, 34, 53, 0.1); border-radius: 10px; padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.5);
+}
+/* Cards in a grid row stretch to the tallest; keep their content at the top
+   instead of spreading the meters and the process table down the card. */
+.subpanel.stack { align-content: start; }
+.meter-wrap { display: inline-flex; align-items: center; gap: 6px; min-width: 150px; }
+.meter {
+  display: inline-block; flex: 1; height: 9px; min-width: 80px; border-radius: 5px;
+  background: rgba(22, 34, 53, 0.12); overflow: hidden;
+}
+.meter-fill { display: block; height: 100%; background: var(--accent); border-radius: 5px; }
+
+.chip.auto { background: color-mix(in srgb, var(--accent-2) 18%, transparent); color: #8c4a12; cursor: default; }
+.scorecard { display: grid; grid-template-columns: max-content max-content 1fr; gap: 4px 12px; font-size: 12.5px; align-items: baseline; }
+.scorecard .val { font-weight: 600; font-variant-numeric: tabular-nums; }
+
+.chip.evicted { background: color-mix(in srgb, #b45309 20%, transparent); color: #7c3a08; }
+
+/* Infinite-scroll sentinel: the line after a paged list that says how much is loaded and
+   pulls the next page in when it scrolls into view. Deliberately quiet -- it is a status
+   line, not a control -- but tall enough that the observer fires before the list bottoms
+   out, so the next page is usually already there when the user arrives. */
+.pager-sentinel {
+  padding: 10px 12px;
+  margin-top: 4px;
+  text-align: center;
+  border-top: 1px solid var(--line, #e4e0d8);
+  opacity: .75;
+}
+
+/* Progress cell: the meter with its beam-box MAE underneath. Tight, because the pair is
+   one reading -- how far along, and how good -- and the row should not grow to hold it. */
+.stack-tight { display: flex; flex-direction: column; gap: 2px; }
+.stack-tight .muted.small { line-height: 1.2; }
+
+/* Model/dataset names break at word boundaries, not mid-token.
+   `th, td { overflow-wrap: anywhere }` above is right for arbitrary cell text, but on a
+   name it produced "rigno_demo_replic / a_trueoriginal_sal / vaged_best7500" across three
+   lines. `anywhere` also drops the cell's min-content width to one character, which is what
+   let the column be squeezed in the first place; `break-word` keeps the token's width in
+   the layout and only breaks when it genuinely cannot fit. */
+.ds-name strong { overflow-wrap: break-word; }
+

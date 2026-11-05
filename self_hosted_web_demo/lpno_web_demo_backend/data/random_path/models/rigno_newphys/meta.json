@@ -1,0 +1,28 @@
+{
+ "label": "RIGNO",
+ "type": "rigno",
+ "order": 2,
+ "default": false,
+ "model_name": "rigno_rand150_newphys_35k_e8_12ch",
+ "physics": {
+  "p_watts": {
+   "min": 68.0,
+   "max": 237.0,
+   "default": 150.0
+  },
+  "v_scan_mps": {
+   "min": 0.21,
+   "max": 0.99,
+   "default": 0.6
+  },
+  "h_norm_denom": 250.3785065465,
+  "duration_scaled_times": true,
+  "dt_s": 1e-05,
+  "start_anywhere": true,
+  "max_path_length_m": null,
+  "presets_dir": "rand150_newphys_test",
+  "power_weighted_dose": true,
+  "power_weighted_conduction": false,
+  "conduction_source_sigma_factor": 1.0
+ }
+}

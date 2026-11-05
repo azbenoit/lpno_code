@@ -1,0 +1,69 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lpno"
+version = "0.1.0"
+description = "Neural-operator surrogates for laser melting: training and evaluation."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "PolyForm-Noncommercial-1.0.0" }
+authors = [
+  { name = "Alix Benoit", email = "alix.benoit@alumni.polytechnique.org" },
+  { name = "Elia Iseli" },
+]
+# Two NVIDIA packages are deliberately NOT here, because they made the whole
+# distribution uninstallable on a clean machine:
+#
+#   nvidia-physicsnemo-sym  is sdist-only for every published version, its
+#       build backend imports torch without declaring it in build-requires, so
+#       PEP 517 build isolation fails even when torch is already installed, and
+#       its setup.py compiles a CUDA kernel, so it fails without a CUDA toolkit.
+#       `lpno.models` does not import without it, and with it go the
+#       training and evaluation entry points and the beam-following derivation
+#       that aiida-pino's dataset exports call. Install it with
+#       `python scripts/install_physicsnemo_sym.py`, which builds the (optional,
+#       fp16-only) kernel only when CUDA_HOME is set.
+#   physicsnemo-curator     is on no index at all. It supplied one base class,
+#       which `custom_utils/dataset_loading.py` now falls back to locally.
+#
+# The `train` extra below is the plain-pip route on a machine with a CUDA toolkit.
+dependencies = [
+  "torch",
+  "lion-pytorch",
+  "wandb",
+  "numpy",
+  "scipy",
+  "scikit-learn",
+  "sympy",
+  "matplotlib",
+  "plotly",
+  "pyvista",
+  "pandas",
+  "h5py",
+  "PyYAML",
+  "omegaconf",
+  "hydra-core",
+  "nvidia-physicsnemo",
+]
+
+[project.urls]
+Repository = "https://github.com/azbenoit/lpno_code"
+
+[project.optional-dependencies]
+test = ["pytest"]
+# Needs a CUDA torch already present, a CUDA toolkit (CUDA_HOME) and
+# `--no-build-isolation`; scripts/install_physicsnemo_sym.py works without the toolkit.
+train = ["nvidia-physicsnemo-sym"]
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["lpno*"]
+
+[tool.setuptools.package-data]
+lpno = ["conf/hydra/*.yaml", "conf/hydra/**/*.yaml"]

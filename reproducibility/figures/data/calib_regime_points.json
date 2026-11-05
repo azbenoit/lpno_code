@@ -1,0 +1,215 @@
+{
+ "what": "Panel (b) of fig:calib-materials: simulated cavity aspect ratio against melt-depth error, 35 scored validation conditions (23 melt-pool depth, 12 vapor-depression depth).",
+ "rows": [
+  {
+   "mat": "Ti-6Al-4V",
+   "kind": "fusion",
+   "aspect": 0.0,
+   "err": -23.0766
+  },
+  {
+   "mat": "Ti-6Al-4V",
+   "kind": "fusion",
+   "aspect": 0.09031,
+   "err": -48.5594
+  },
+  {
+   "mat": "Ti-6Al-4V",
+   "kind": "fusion",
+   "aspect": 0.14311,
+   "err": -53.2162
+  },
+  {
+   "mat": "Ti-6Al-4V",
+   "kind": "fusion",
+   "aspect": 0.15205,
+   "err": -58.9489
+  },
+  {
+   "mat": "Ti-6Al-4V",
+   "kind": "fusion",
+   "aspect": 0.1668,
+   "err": -52.7025
+  },
+  {
+   "mat": "Ti-6Al-4V",
+   "kind": "fusion",
+   "aspect": 0.18877,
+   "err": -63.3026
+  },
+  {
+   "mat": "Ti-6Al-4V",
+   "kind": "fusion",
+   "aspect": 0.41279,
+   "err": -29.4878
+  },
+  {
+   "mat": "Ti-6Al-4V",
+   "kind": "fusion",
+   "aspect": 0.62207,
+   "err": -24.9527
+  },
+  {
+   "mat": "Ti-6Al-4V",
+   "kind": "fusion",
+   "aspect": 0.81065,
+   "err": -13.261
+  },
+  {
+   "mat": "Ti-6Al-4V",
+   "kind": "fusion",
+   "aspect": 0.95007,
+   "err": -9.3153
+  },
+  {
+   "mat": "Ti-6Al-4V",
+   "kind": "depression",
+   "aspect": 0.24478,
+   "err": -12.1769
+  },
+  {
+   "mat": "Ti-6Al-4V",
+   "kind": "depression",
+   "aspect": 0.2963,
+   "err": -15.2494
+  },
+  {
+   "mat": "Ti-6Al-4V",
+   "kind": "depression",
+   "aspect": 0.33905,
+   "err": -34.7702
+  },
+  {
+   "mat": "Ti-6Al-4V",
+   "kind": "depression",
+   "aspect": 0.4743,
+   "err": -20.185
+  },
+  {
+   "mat": "Ti-6Al-4V",
+   "kind": "depression",
+   "aspect": 0.50804,
+   "err": 0.522
+  },
+  {
+   "mat": "Ti-6Al-4V",
+   "kind": "depression",
+   "aspect": 0.6289,
+   "err": 8.9044
+  },
+  {
+   "mat": "Ti-6Al-4V",
+   "kind": "depression",
+   "aspect": 0.63636,
+   "err": 5.0378
+  },
+  {
+   "mat": "Ti-6Al-4V",
+   "kind": "depression",
+   "aspect": 0.71762,
+   "err": -12.881
+  },
+  {
+   "mat": "Ti-6Al-4V",
+   "kind": "depression",
+   "aspect": 0.8437,
+   "err": 2.8035
+  },
+  {
+   "mat": "Ti-6Al-4V",
+   "kind": "depression",
+   "aspect": 0.94679,
+   "err": 1.5903
+  },
+  {
+   "mat": "Ti-6Al-4V",
+   "kind": "depression",
+   "aspect": 1.08679,
+   "err": 20.734
+  },
+  {
+   "mat": "Ti-6Al-4V",
+   "kind": "depression",
+   "aspect": 1.52661,
+   "err": 5.1419
+  },
+  {
+   "mat": "CoCr",
+   "kind": "fusion",
+   "aspect": 0.20566,
+   "err": -21.8753
+  },
+  {
+   "mat": "CoCr",
+   "kind": "fusion",
+   "aspect": 0.27873,
+   "err": -12.2811
+  },
+  {
+   "mat": "CoCr",
+   "kind": "fusion",
+   "aspect": 0.47771,
+   "err": -21.0529
+  },
+  {
+   "mat": "304L",
+   "kind": "fusion",
+   "aspect": 0.0,
+   "err": 9.9707
+  },
+  {
+   "mat": "304L",
+   "kind": "fusion",
+   "aspect": 0.15241,
+   "err": 60.5506
+  },
+  {
+   "mat": "304L",
+   "kind": "fusion",
+   "aspect": 0.20935,
+   "err": -25.0936
+  },
+  {
+   "mat": "IN718",
+   "kind": "fusion",
+   "aspect": 0.73715,
+   "err": 17.1874
+  },
+  {
+   "mat": "IN718",
+   "kind": "fusion",
+   "aspect": 0.825,
+   "err": 9.3891
+  },
+  {
+   "mat": "IN718",
+   "kind": "fusion",
+   "aspect": 0.98995,
+   "err": 2.6517
+  },
+  {
+   "mat": "IN718",
+   "kind": "fusion",
+   "aspect": 1.04762,
+   "err": 0.2146
+  },
+  {
+   "mat": "IN718",
+   "kind": "fusion",
+   "aspect": 1.18919,
+   "err": -3.6726
+  },
+  {
+   "mat": "IN718",
+   "kind": "fusion",
+   "aspect": 1.43516,
+   "err": -3.6828
+  },
+  {
+   "mat": "IN718",
+   "kind": "fusion",
+   "aspect": 1.62537,
+   "err": -25.1761
+  }
+ ]
+}

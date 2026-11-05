@@ -1,0 +1,64 @@
+{
+ "schema_version": 1,
+ "case_name": "t2_dwell130",
+ "material": {
+  "file": "../materials/ti64_tv3520/ti64_tv3520.json"
+ },
+ "parallel": {
+  "cores": 4,
+  "threads_per_rank": 4
+ },
+ "boundary_conditions": {
+  "x_min": "wall",
+  "x_max": "wall",
+  "y_min": "wall",
+  "y_max": "wall",
+  "z_min": "wall",
+  "z_max": "pressure"
+ },
+ "geometry": {
+  "length_m": 0.0003,
+  "width_m": 0.0003,
+  "thickness_m": 0.0004,
+  "gas_clearance_m": 0.0001,
+  "placement": "centered"
+ },
+ "mesh": {
+  "cell_size_m": 1e-05
+ },
+ "laser": {
+  "power_w": 130.0,
+  "beam_radius_m": 4.95e-05,
+  "focal_distance_m": 0.001,
+  "lens_radius_m": 4.95e-05,
+  "start_point_m": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "turn_off_at_end": false,
+  "heat_distribution": "gaussian",
+  "radiation_distribution_flag": 2,
+  "reflection_flag": 3,
+  "max_reflections": 20,
+  "reflection_limit": 0.01,
+  "absorptivity_flag": 0,
+  "absorptivity": 1.0,
+  "reflectivity": 0.35,
+  "vapor_pressure_a": 101300.0,
+  "vapor_pressure_b": 16.077291,
+  "fresnel_from_material": true,
+  "dwell_time_s": 0.001
+ },
+ "simulation": {
+  "initial_temperature_k": 273.15,
+  "boundary_temperature_k": 300.0,
+  "finish_time_s": 0.00115,
+  "solver_profile": "legacy_case_fine_1",
+  "subprocess_id": 1,
+  "max_iterations": 2000000000,
+  "output_frames": 120,
+  "recoil_model": 2,
+  "void_vapor_pressure_pa": 101325.0
+ }
+}

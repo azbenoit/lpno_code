@@ -1,0 +1,28 @@
+{
+ "schema_version": 1,
+ "material_name": "Aluminum 6061-T6",
+ "flow3d_label": "Al6061-T6 starter SI material",
+ "source": "Starter engineering values for scripted FLOW-3D WELD tests. Verify before scientific use.",
+ "properties": {
+  "density_kg_m3": 2705.0,
+  "solid_density_kg_m3": 2705.0,
+  "liquidus_temperature_k": 915.15,
+  "solidus_temperature_k": 873.15,
+  "specific_heat_j_kg_k": 870.0,
+  "solid_specific_heat_j_kg_k": 870.0,
+  "thermal_conductivity_w_m_k": 195.0,
+  "solid_thermal_conductivity_w_m_k": 195.0,
+  "dynamic_viscosity_pa_s": 0.00115,
+  "latent_heat_j_kg": 336000.0,
+  "surface_tension_n_m": 0.9,
+  "vapor_pressure_pa": 101300.0,
+  "vaporization_temperature_k": 2743.0,
+  "vaporization_latent_heat_j_kg": 10500000.0,
+  "vaporization_molar_mass_kg_mol": 0.026982
+ },
+ "optical": {
+  "normal_absorptivity": 0.09,
+  "prefer_resistivity": false
+ },
+ "provenance": "see materials/sources.md"
+}

@@ -1,0 +1,29 @@
+{
+ "schema_version": 1,
+ "material_name": "Stainless steel 316L",
+ "flow3d_label": "SS316L starter SI material",
+ "source": "Starter engineering values for scripted FLOW-3D WELD tests. Verify before scientific use.",
+ "properties": {
+  "density_kg_m3": 7950.0,
+  "solid_density_kg_m3": 7950.0,
+  "liquidus_temperature_k": 1697.15,
+  "solidus_temperature_k": 1674.15,
+  "specific_heat_j_kg_k": 500.0,
+  "solid_specific_heat_j_kg_k": 500.0,
+  "thermal_conductivity_w_m_k": 14.0,
+  "solid_thermal_conductivity_w_m_k": 14.0,
+  "dynamic_viscosity_pa_s": 0.008,
+  "latent_heat_j_kg": 260000.0,
+  "surface_tension_n_m": 1.75,
+  "vapor_pressure_pa": 101300.0,
+  "vaporization_temperature_k": 3134.0,
+  "vaporization_latent_heat_j_kg": 6080000.0,
+  "vaporization_molar_mass_kg_mol": 0.055845
+ },
+ "optical": {
+  "normal_absorptivity": 0.35,
+  "prefer_resistivity": true
+ },
+ "provenance": "see materials/sources.md",
+ "real_material_test_note": " | sigma extended 1900->3134 K, endpoints slope -2.465e-04 (ck300 convention)"
+}

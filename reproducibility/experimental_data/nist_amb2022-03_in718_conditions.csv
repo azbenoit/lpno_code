@@ -1,0 +1,8 @@
+case_number,material,laser_power_W,scan_speed_m_per_s,spot_diameter_D4sigma_um,beam_radius_um,n_tracks,n_sections,melt_pool_depth_um,melt_pool_depth_sd_um,melt_pool_width_um,melt_pool_width_sd_um,used_in_manuscript
+0,IN718,285,0.96,67,33.5,3,6,139.7,1.9,136.3,2.9,fig:calib-materials; fig:closing-a; tab:closing-conditions; sec:calibration (text)
+1.1,IN718,285,0.96,49,24.5,3,6,227.2,3.2,106.2,3.6,fig:calib-materials; fig:closing-a; tab:closing-conditions; sec:calibration (text)
+1.2,IN718,285,0.96,82,41,3,6,102.4,1.1,141.7,1.8,fig:calib-materials; fig:closing-a; tab:closing-conditions; sec:calibration (text)
+2.1,IN718,285,1.2,67,33.5,3,6,109.7,1.7,112.9,1.7,fig:calib-materials; fig:closing-a; tab:closing-conditions; sec:calibration (text)
+2.2,IN718,285,0.8,67,33.5,3,6,176.5,2.6,156.1,4.9,fig:calib-materials; fig:closing-a; tab:closing-conditions; sec:calibration (text)
+3.1,IN718,325,0.96,67,33.5,3,6,166.1,2,134.3,2.5,fig:calib-materials; fig:closing-a; tab:closing-conditions; sec:calibration (text)
+3.2,IN718,245,0.96,67,33.5,3,6,116.9,1.2,129.4,1.6,fig:calib-materials; fig:closing-a; tab:closing-conditions; sec:calibration (text)

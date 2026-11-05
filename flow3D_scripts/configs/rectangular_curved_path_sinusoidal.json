@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "case_name": "rectangular_curved_path_sinusoidal",
+  "material": { "name": "ti_imi318_mills" },
+  "parallel": {
+    "cores": 1,
+    "threads_per_rank": 1
+  },
+  "geometry": {
+    "length_m": 0.004,
+    "width_m": 0.0024,
+    "thickness_m": 0.0004,
+    "gas_clearance_m": 0.0004,
+    "placement": "centered"
+  },
+  "mesh": { "cell_size_m": 0.000075 },
+  "laser": {
+    "power_w": 300.0,
+    "beam_radius_m": 0.00015,
+    "focal_distance_m": 0.01,
+    "lens_radius_m": 0.0003,
+    "scan_speed_m_per_s": 0.3,
+    "path": {
+      "type": "sinusoidal",
+      "start_point_m": [-0.0013, 0.0, 0.0],
+      "length_m": 0.0026,
+      "amplitude_m": 0.0004,
+      "periods": 2
+    }
+  },
+  "simulation": {
+    "initial_temperature_k": 293.15,
+    "finish_time_s": 0.02,
+    "max_iterations": 8000
+  }
+}

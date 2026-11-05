@@ -1,0 +1,98 @@
+{
+  "_purpose": "One command regenerates every scored comparison in the campaign. The correct flags differ per anchor -- which surface the runs are read as, which physics recipe to isolate, which material variant to compare against -- and remembering them by hand is how the wrong ones get used. Run: python3 python/score_anchors.py --plan validation/scoring_plan.json --runs runs",
+  "_standing_recipe": "aplume=0.0,tv1=3520,ereflct=0.216852515308,iereflct=1",
+  "_why_recipe_matters": "aplume+tv1 alone cannot separate the standing recipe from the REJECTED measured-absorptance arm; ereflct/iereflct are what distinguish them. Without the filter, a rejected arm pools into the shipped recipe's ladder.",
+  "anchors": [
+    {
+      "anchor": "anchors/gan_points.json",
+      "label": "Ti64 keyhole ladder (Gan 2021)",
+      "sim_kind": "depression",
+      "recipe": "aplume=0.0,tv1=3520,ereflct=0.216852515308,iereflct=1",
+      "note": "in-situ X-ray = vapour depression, NOT fusion; this is the manuscript keyhole figure"
+    },
+    {
+      "anchor": "anchors/galiegue2025_ti64_targets.json",
+      "label": "Ti64 transition-regime ladder at r0 60 um (THE manuscript figure)",
+      "sim_kind": "fusion",
+      "recipe": "aplume=0.0,tv1=3520,ereflct=0.216852515308,iereflct=1",
+      "note": "metallographic fusion depth; bare 3mm plate; r0 60um is a RADIUS (D4sigma/2 of a stated 120um D4sigma). Fixed spot, power varied -- this is the ladder, kept separate from the defocus series below",
+      "r0_um": 60.0
+    },
+    {
+      "anchor": "anchors/galiegue2025_ti64_targets.json",
+      "label": "Ti64 spot-size arm at r0 83 um (Galiegue defocus 5mm)",
+      "sim_kind": "fusion",
+      "recipe": "aplume=0.0,tv1=3520,ereflct=0.216852515308,iereflct=1",
+      "note": "same power and speed as the 100W rung at a 1.4x larger spot; the middle rung of the three-point spot-size series (60/83/130 um) that tests whether the depth deficit is spot-size dependent",
+      "r0_um": 83.0
+    },
+    {
+      "anchor": "anchors/galiegue2025_ti64_targets.json",
+      "label": "Ti64 spot-size arm at r0 130 um (Galiegue defocus 10mm)",
+      "sim_kind": "fusion",
+      "recipe": "aplume=0.0,tv1=3520,ereflct=0.216852515308,iereflct=1",
+      "note": "same power and speed as the 100W rung but a 2.2x larger spot; the falsification test for the cavity-specific attribution",
+      "r0_um": 130.0
+    },
+    {
+      "anchor": "anchors/vaglio2020_ti64_targets.json",
+      "label": "Ti64 slow-speed cross-check (Vaglio 2020)",
+      "sim_kind": "fusion",
+      "recipe": "aplume=0.0,tv1=3520,ereflct=0.216852515308,iereflct=1",
+      "note": "r0 25um is UNVERIFIED (not in the dataset); do not use for spot-size response"
+    },
+    {
+      "anchor": "anchors/appsci_cocr_targets.json",
+      "label": "CoCr (Appl. Sci. 16:5850)",
+      "sim_kind": "fusion",
+      "recipe": "tv1=3200",
+      "note": "cross-section metallography, means of 8 sections; widths are the paper's primary observable"
+    },
+    {
+      "anchor": "anchors/hawk304l_targets.json",
+      "label": "SS304L spot welds (Hawk & Simonds 2022)",
+      "sim_kind": "fusion",
+      "series": "wrought_304L_AR_GR",
+      "recipe": "tv1=2965.2",
+      "note": "stationary spot welds, speed 0, 10ms dwell; 4 material variants differ up to 2x so the series MUST be named"
+    }
+  ],
+  "_unscoreable": {
+    "anchors/amb718_targets.json": "keyed by stringified tuples; the reproducibility notebook indexes it by those keys, so converging the schema would break that consumer",
+    "anchors/wang_cocr_targets.json": "two named sweeps each with a _fixed block that must be merged into its points; not implemented"
+  },
+  "_why_r0_um": "An anchor can hold a fixed-spot power ladder AND a defocus spot-size series. Pooling them mixes two experiments: the Galiegue mean of -48% spanned r0 60um rungs (-49..-63%) and an r0 130um point (-23%). Pin the radius so each entry is one experiment.",
+  "_provenance_note": "Which conditions SELECTED the recipe and which were BLIND. The recipe carries one fitted scalar (tv1=3520 K, fitted on the Gan 129 W condition) and was frozen BEFORE the Galiegue, CoCr, SS304L and spot-size cases were run, so those cases test a fixed recipe.",
+  "_condition_provenance": {
+    "anchors/gan_points.json": {
+      "default": "blind",
+      "selection": [
+        {
+          "power_w": 129.36,
+          "speed_m_s": 0.4,
+          "why": "tv1=3520 K was fitted on this condition -- the recipe's ONLY free scalar"
+        }
+      ]
+    },
+    "anchors/galiegue2025_ti64_targets.json": {
+      "default": "blind",
+      "why": "anchor extracted and cases run 2026-07-30, after the recipe was frozen"
+    },
+    "anchors/appsci_cocr_targets.json": {
+      "default": "blind",
+      "why": "nothing was calibrated on CoCr; first contact"
+    },
+    "anchors/hawk304l_targets.json": {
+      "default": "blind",
+      "why": "SS304L used its own database material; no condition here selected anything"
+    },
+    "anchors/vaglio2020_ti64_targets.json": {
+      "default": "blind",
+      "why": "cross-check only"
+    },
+    "anchors/amb718_targets.json": {
+      "default": "selection",
+      "why": "six IN718 conditions were consumed choosing the arm; the ONE blind test (s049, 49 um spot) failed at -25.2% and must be reported as such"
+    }
+  }
+}

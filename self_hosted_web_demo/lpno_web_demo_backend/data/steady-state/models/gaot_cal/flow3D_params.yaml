@@ -1,0 +1,70 @@
+software: flow3D
+geometry:
+  x_range:
+  - -0.000155
+  - 0.000445
+  y_range:
+  - -0.000195
+  - 0.000195
+  z_range:
+  - -0.000295
+  - 9.5e-05
+  resolution:
+  - 61
+  - 40
+  - 40
+ref_scales:
+  L: 0.0001
+  T: 3000
+  V: 0.1
+  P: 10
+  Rho: 4506.0
+  H: 275.0539301382
+material_params:
+  rho: 4506.0
+  c:
+    coeffs:
+    - 0.1341
+    - 531
+  K:
+    coeffs:
+    - 0.0151
+    - 1.433
+  V_scan: null
+  L: 345000.0
+  Kl: null
+  Ks: null
+  cl: null
+  cs: null
+  rho_l: null
+  rho_s: null
+  T_s: 1873
+  T_l: 1923
+  weight: null
+  c_g: 520
+  K_g: 0.018
+  T_l_g: 10
+  T_s_g: 1
+  rho_g: 1.7
+  L_g: 1
+laser:
+  type: given
+  x0: 0.0
+  z0: -5.0e-06
+vtk_fields:
+- Temperature
+- Fraction Of Fluid
+FNO_input_keys:
+- V_scan
+- P
+- H_norm
+- x
+- y
+- z
+FNO_output_keys:
+- T
+- alpha
+serving:
+  super_res_factor: 1
+  crop_x: false
+  include_time: false

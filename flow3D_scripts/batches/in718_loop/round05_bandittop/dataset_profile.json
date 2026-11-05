@@ -1,0 +1,15 @@
+{
+ "batch_keyword": "in718_loop_bandit_r05",
+ "description": "Two-alloy IN718 self-improvement loop, arm=bandit, round 5: 10 acquired training cases. Solved in the ds86529 domain (900x600x450+100 um @ 10 um) so they compose with the Ti64 anchor set and are evaluable by base model 86651. TRAINING cases -- the frozen IN718 test set is batch 86840 and is never mixed in. Acquisition: diminishing-returns bandit -- region chosen by w_r*(E_r*b_r+c)/(n_r+1), point chosen by maximin within it.",
+ "keywords": [
+  "in718",
+  "two-alloy",
+  "self-improve",
+  "straight path",
+  "steady",
+  "training",
+  "bandit",
+  "round05",
+  "experimentally_anchored"
+ ]
+}

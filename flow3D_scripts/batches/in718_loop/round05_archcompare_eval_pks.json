@@ -1,0 +1,12 @@
+{
+ "gaot_all": 103793,
+ "gaot_overlap": 103799,
+ "gaot_extrap": 103805,
+ "gaot_ti64": 103809,
+ "gaot_in718_exp": 103814,
+ "rigno_all": 103875,
+ "rigno_overlap": 103881,
+ "rigno_extrap": 103888,
+ "rigno_ti64": 103895,
+ "rigno_in718_exp": 103902
+}

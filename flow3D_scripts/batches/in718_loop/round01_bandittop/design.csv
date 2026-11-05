@@ -1,0 +1,6 @@
+case_name,arm,round,H,V,P,r0_um,region,regime
+in718_bandittop_r01_000,bandittop,1,4.0,0.996154,94.229,59.62,lof,overlap
+in718_bandittop_r01_001,bandittop,1,31.2381,1.165385,247.611,27.37,keyhole,extrapolation
+in718_bandittop_r01_002,bandittop,1,14.4762,0.742308,218.472,48.87,transition,overlap
+in718_bandittop_r01_003,bandittop,1,35.4286,0.657692,346.737,38.12,keyhole,extrapolation
+in718_bandittop_r01_004,bandittop,1,8.1905,1.25,110.509,38.12,conduction,overlap

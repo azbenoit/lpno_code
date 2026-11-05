@@ -1,0 +1,13 @@
+# ReLoBRaLo with config M's tuned parameters, as a proper loss-group option.
+#
+# These three values used to live as an inline `loss:` block in
+# config_flow3D_RIGNO, which made the aggregator UNSWAPPABLE: any
+# `override /loss: <other>` still merged alpha/beta/tau onto the new schema
+# and failed struct validation (the scheduler version of this is documented on
+# config_flow3D_RIGNO_onecycle). As a group option the params travel WITH the
+# relobralo choice, so `override /loss: homoscedastic` composes cleanly.
+defaults:
+  - relobralo
+alpha: 0.95
+beta: 0.99
+tau: 3.0

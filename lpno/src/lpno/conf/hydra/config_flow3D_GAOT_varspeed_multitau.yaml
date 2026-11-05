@@ -1,0 +1,70 @@
+# VARSPEED MULTI-TAU: four extra thermal-memory timescales, everything else identical.
+#
+# THE HYPOTHESIS. `path_dose` (tau -> inf) and `path_dose_recent` (tau = 1 ms) are a
+# two-number summary of the exposure history. That is nearly sufficient for a
+# constant-speed path, where the history is parameterised by (P, V) and geometry, but
+# it ALIASES a variable-speed path: "fast then slow" and "slow then fast" deposit the
+# same total and nearly the same leaky integral while leaving different thermal states.
+#
+# THE MEASUREMENT that motivates it (scripts/probe_varspeed_memory.py, 40 configs of
+# ti64_varspeed150): mean speed CV 0.205, within-case ranges up to 0.50 -> 1.67 m/s,
+# median segment dwell 190.8 us, and 100% of segments shorter than tau = 1 ms. About
+# 5.2 segments sit inside one memory window. Distinguishing histories that vary on
+# timescale d over a window tau needs roughly tau/d exponential basis functions: ~5
+# demanded, 2 supplied.
+#
+# WHY EXPONENTIALS. The linear heat equation's Green's function is well approximated by
+# a sum of exponentials in time, so leaky integrators at several tau are a truncated
+# basis for the exact diffusive memory kernel, leaving the network only the nonlinear
+# corrections (latent heat, convection, temperature-dependent properties). Each tau is
+# a diffusion length sqrt(alpha*tau); for Ti (alpha ~ 3e-6 m^2/s): 30 us ~ 9 um,
+# 100 us ~ 17 um, 300 us ~ 30 um, 1 ms ~ 55 um (already present), 3 ms ~ 95 um.
+#
+# This is a CONDITIONING fix, not the stochastic one. Unlike melt-pool pulsation, the
+# speed profile is known exactly from the trajectory -- the information exists and is
+# being discarded by the encoding, so it is recoverable.
+#
+# vs `config_flow3D_GAOT_varspeed_ctrl`: identical steps, lr, schedule, resolution,
+# lattice, kernel and architecture. ONLY the four bank channels differ (+4 on 20).
+#
+# FALSIFIER: if T MAE and the interface metrics do not improve over the control, the
+# aliasing account is wrong and the varspeed ceiling is not a conditioning limit --
+# which would also weaken the case for spending effort on richer history encodings.
+#
+# PREDICTION worth checking separately: this should help varspeed MORE than the
+# constant-speed random-path sets, where a single tau aliases only revisit times at
+# path self-intersections (~30 of 150 cases in ti64_random150) rather than every
+# segment. If it helps both equally, the mechanism is not speed-profile aliasing.
+defaults:
+  - config_flow3D_GAOT_varspeed_ctrl
+  - _self_
+
+custom:
+  name: gaot_varspeed_multitau
+  FNO_input_keys:
+    - V_scan
+    - P
+    - H_norm
+    - x
+    - y
+    - z
+    - beam_x
+    - beam_y
+    - beam_dist
+    - path_dose
+    - path_dose_recent
+    - beam_s
+    - beam_n
+    - beam_speed
+    - beam_dist_sigma
+    - path_dose_sigma
+    - path_dose_recent_sigma
+    - beam_dist_sigma_exp
+    - path_dose_sigma_exp
+    - path_dose_recent_sigma_exp
+    # The bank. tau = 1 ms is deliberately absent: `path_dose_recent` above already
+    # provides it, so these four give five distinct timescales with no duplicate.
+    - path_dose_tau30us
+    - path_dose_tau100us
+    - path_dose_tau300us
+    - path_dose_tau3ms

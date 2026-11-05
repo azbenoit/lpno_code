@@ -1,0 +1,386 @@
+{
+ "measurement": "training time per optimizer step: PhysicsNeMo's time/iteration, printed every print_every steps, median over the intervals after warmup_steps and before max_steps; validation, constraint records and checkpoints run only at step 0 and max_steps, so the intervals used hold training steps only (data loading included)",
+ "how": "each tabled seed-42 model's own training profile (configuration, overrides, datasets, derivation) re-submitted through aiida-pino for max_steps steps, one run at a time; laboratory-frame models train at PINO_LAZY_STRIDE=2,2,1 as their profiles set; ms_per_step x 32000 is the 32,000-step equivalent",
+ "code": "the pre-rename tree of this repository (package pino_simulations, CLI aiida-pino) deployed for the uniform-drawing re-run; it carries no git metadata",
+ "slurm_jobs": [
+  "3240615",
+  "3240646",
+  "3240651"
+ ],
+ "gpu": "Tesla V100-PCIE-32GB",
+ "exclusive": "one run on the GPU at a time",
+ "runs": [
+  {
+   "architecture": "FNO",
+   "formulation": "quasi-steady",
+   "model_label": "fno_spkh123_steady_32k",
+   "model_uuid": "155020c6-d598-4641-9314-b586907cfa09",
+   "timing_run": "fno_spkh123_steady_32k_timing",
+   "max_steps": 150,
+   "print_every": 25,
+   "warmup_steps": 25,
+   "steps_timed": [
+    25,
+    125
+   ],
+   "intervals": 4,
+   "ms_per_step_median": 55.129999999999995,
+   "ms_per_step_mean": 51.995,
+   "ms_per_step_min": 37.9,
+   "ms_per_step_max": 59.82,
+   "wallclock_ms_per_step": 53.333333333333336,
+   "batch_size": {
+    "grid": 1,
+    "validation": 1
+   },
+   "served_grid": [
+    61,
+    40,
+    30
+   ],
+   "slurm_job": "3240651",
+   "note": "page cache warmed before the run; a first attempt on a cold node read the cases from the shared filesystem on most steps until step 100 (289-356 ms per step)",
+   "arch_differences_vs_archived_model": [],
+   "time_per_iteration_ms_logged": [
+    [
+     25,
+     75.88
+    ],
+    [
+     50,
+     58.61
+    ],
+    [
+     75,
+     59.82
+    ],
+    [
+     100,
+     51.65
+    ],
+    [
+     125,
+     37.9
+    ],
+    [
+     150,
+     136.9
+    ]
+   ]
+  },
+  {
+   "architecture": "GAOT",
+   "formulation": "quasi-steady",
+   "model_label": "gaot_spkh123_steady_32k",
+   "model_uuid": "3ab4f902-f816-4cfa-b490-ff4fb06fa769",
+   "timing_run": "gaot_spkh123_steady_32k_timing",
+   "max_steps": 150,
+   "print_every": 25,
+   "warmup_steps": 25,
+   "steps_timed": [
+    25,
+    125
+   ],
+   "intervals": 4,
+   "ms_per_step_median": 118.25,
+   "ms_per_step_mean": 115.525,
+   "ms_per_step_min": 101.4,
+   "ms_per_step_max": 124.2,
+   "wallclock_ms_per_step": 120.0,
+   "batch_size": {
+    "grid": 1,
+    "validation": 1
+   },
+   "served_grid": [
+    61,
+    40,
+    30
+   ],
+   "slurm_job": "3240651",
+   "note": "page cache warmed before the run, as for the quasi-steady FNO",
+   "arch_differences_vs_archived_model": [],
+   "time_per_iteration_ms_logged": [
+    [
+     25,
+     123.4
+    ],
+    [
+     50,
+     121.1
+    ],
+    [
+     75,
+     124.2
+    ],
+    [
+     100,
+     115.4
+    ],
+    [
+     125,
+     101.4
+    ],
+    [
+     150,
+     117.8
+    ]
+   ]
+  },
+  {
+   "architecture": "RIGNO",
+   "formulation": "quasi-steady",
+   "model_label": "rigno_spkh123_steady_32k_fill3520",
+   "model_uuid": "21e5e326-7e5a-4e49-bd8f-44375e1f7ff3",
+   "timing_run": "rigno_spkh123_steady_32k_fill3520_timing",
+   "max_steps": 150,
+   "print_every": 25,
+   "warmup_steps": 25,
+   "steps_timed": [
+    25,
+    125
+   ],
+   "intervals": 4,
+   "ms_per_step_median": 188.2,
+   "ms_per_step_mean": 185.175,
+   "ms_per_step_min": 173.4,
+   "ms_per_step_max": 190.9,
+   "wallclock_ms_per_step": 186.66666666666666,
+   "batch_size": {
+    "grid": 1,
+    "validation": 1
+   },
+   "served_grid": [
+    61,
+    40,
+    30
+   ],
+   "slurm_job": "3240646",
+   "note": "open-file limit raised to 65536 (the reader memory-maps every array of all 96 members); the derived collection was rebuilt from the same simulations by the current code",
+   "arch_differences_vs_archived_model": [],
+   "time_per_iteration_ms_logged": [
+    [
+     25,
+     195.5
+    ],
+    [
+     50,
+     190.9
+    ],
+    [
+     75,
+     188.7
+    ],
+    [
+     100,
+     187.7
+    ],
+    [
+     125,
+     173.4
+    ],
+    [
+     150,
+     193.2
+    ]
+   ]
+  },
+  {
+   "architecture": "FNO",
+   "formulation": "laboratory",
+   "model_label": "uni_fno_lab_b8_32k_s42",
+   "model_uuid": "7d385883-011a-41a2-85a2-2aed4ba0e3ef",
+   "timing_run": "uni_fno_lab_b8_32k_s42_timing",
+   "max_steps": 200,
+   "print_every": 25,
+   "warmup_steps": 75,
+   "steps_timed": [
+    75,
+    175
+   ],
+   "intervals": 4,
+   "ms_per_step_median": 75.56,
+   "ms_per_step_mean": 87.955,
+   "ms_per_step_min": 75.5,
+   "ms_per_step_max": 125.2,
+   "wallclock_ms_per_step": 66.66666666666667,
+   "batch_size": {
+    "grid": 8,
+    "validation": 1
+   },
+   "served_grid": [
+    45,
+    20,
+    40
+   ],
+   "slurm_job": "3240646",
+   "note": "PINO_ALLOW_FNO_MODE_OVERLAP=1: the current code refuses 18 y-modes on the 20 + 9 padded y-points of the strided grid, the configuration this model was trained with",
+   "arch_differences_vs_archived_model": [],
+   "time_per_iteration_ms_logged": [
+    [
+     25,
+     4733.0
+    ],
+    [
+     50,
+     849.2
+    ],
+    [
+     75,
+     217.5
+    ],
+    [
+     100,
+     125.2
+    ],
+    [
+     125,
+     75.53
+    ],
+    [
+     150,
+     75.5
+    ],
+    [
+     175,
+     75.59
+    ],
+    [
+     200,
+     163.1
+    ]
+   ]
+  },
+  {
+   "architecture": "GAOT",
+   "formulation": "laboratory",
+   "model_label": "uni_gaot_lab_b8_32k_s42",
+   "model_uuid": "d4bec77c-5613-42d2-b310-f5a0732665df",
+   "timing_run": "uni_gaot_lab_b8_32k_s42_timing",
+   "max_steps": 200,
+   "print_every": 25,
+   "warmup_steps": 75,
+   "steps_timed": [
+    75,
+    175
+   ],
+   "intervals": 4,
+   "ms_per_step_median": 467.3,
+   "ms_per_step_mean": 467.325,
+   "ms_per_step_min": 467.3,
+   "ms_per_step_max": 467.4,
+   "wallclock_ms_per_step": 466.6666666666667,
+   "batch_size": {
+    "grid": 8,
+    "validation": 1
+   },
+   "served_grid": [
+    45,
+    20,
+    40
+   ],
+   "slurm_job": "3240615",
+   "note": null,
+   "arch_differences_vs_archived_model": [],
+   "time_per_iteration_ms_logged": [
+    [
+     25,
+     5066.0
+    ],
+    [
+     50,
+     719.9
+    ],
+    [
+     75,
+     511.1
+    ],
+    [
+     100,
+     467.4
+    ],
+    [
+     125,
+     467.3
+    ],
+    [
+     150,
+     467.3
+    ],
+    [
+     175,
+     467.3
+    ],
+    [
+     200,
+     480.6
+    ]
+   ]
+  },
+  {
+   "architecture": "RIGNO",
+   "formulation": "laboratory",
+   "model_label": "uni_rigno_lab_b8_32k_s42",
+   "model_uuid": "3d91eb45-eea6-456c-873a-188cae329056",
+   "timing_run": "uni_rigno_lab_b8_32k_s42_timing",
+   "max_steps": 200,
+   "print_every": 25,
+   "warmup_steps": 75,
+   "steps_timed": [
+    75,
+    175
+   ],
+   "intervals": 4,
+   "ms_per_step_median": 1210.0,
+   "ms_per_step_mean": 1212.25,
+   "ms_per_step_min": 1210.0,
+   "ms_per_step_max": 1219.0,
+   "wallclock_ms_per_step": 1213.3333333333333,
+   "batch_size": {
+    "grid": 8,
+    "validation": 1
+   },
+   "served_grid": [
+    45,
+    20,
+    40
+   ],
+   "slurm_job": "3240615",
+   "note": null,
+   "arch_differences_vs_archived_model": [],
+   "time_per_iteration_ms_logged": [
+    [
+     25,
+     5216.0
+    ],
+    [
+     50,
+     1219.0
+    ],
+    [
+     75,
+     1210.0
+    ],
+    [
+     100,
+     1210.0
+    ],
+    [
+     125,
+     1210.0
+    ],
+    [
+     150,
+     1219.0
+    ],
+    [
+     175,
+     1210.0
+    ],
+    [
+     200,
+     1248.0
+    ]
+   ]
+  }
+ ]
+}

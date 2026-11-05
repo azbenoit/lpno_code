@@ -1,0 +1,25 @@
+# RIGNO base + residual 3D-FNO head with NYQUIST modes + FFT domain padding —
+# second remedy tried for the head's spectral ringing. Two changes vs
+# the baseline FNO head (modes [12,12,8], no padding):
+#   - modes = Nyquist [38,25,21] (N//2+1 on the 75x50x40 grid): keep ~all modes so
+#     a LOCAL melt-pool correction is not forced through a few global low modes
+#     (that truncation is what spreads compensating sinusoids = the "waves").
+#   - padding 8: zero-pad each spatial dim before the rFFT so the periodic
+#     wraparound sees the padded region, not the hot-pool/cold-edge discontinuity.
+# Width dropped 24 -> 12 to keep params sane (Nyquist modes are ~17x the [12,12,8]
+# set; at width 24 the head would be ~92M params). Same warm-start-from-rp3 +
+# separate head-LR + fp32 recipe as the baseline FNO refined run. ~23M head params.
+defaults:
+  - config_flow3D_RIGNO_refined_randompath
+  - _self_
+
+arch:
+  refine_head:
+    type: fno
+    width: 12
+    modes: [38, 25, 21]   # Nyquist: N//2+1 per dim for (75, 50, 40)
+    layers: 4
+    padding: 8            # zero-pad high side of each spatial dim before rFFT
+
+custom:
+  name: rigno_refined_fno_nyquist_randompath

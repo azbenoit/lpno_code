@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LP-NO demo · Steady (P–V)</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="bg-grid" aria-hidden="true"></div>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <h1>LP-NO web demo</h1>
+          <nav class="page-nav" aria-label="Demo pages">
+            <a href="index.html" class="is-active" aria-current="page">Steady (P–V)</a>
+            <a href="line.html">Straight track (time)</a>
+            <a href="path.html">Free-form path (time)</a>
+          </nav>
+        </div>
+        <div class="partner-logos" aria-label="Institution">
+          <img src="logos/Empa_logo.png" alt="Empa" class="partner-logo partner-logo--empa">
+        </div>
+        <div class="status-cluster">
+          <span id="statusBadge" class="badge idle">idle</span>
+          <span id="latencyText" class="muted">No requests yet</span>
+        </div>
+      </header>
+
+      <div class="layout-grid">
+        <section class="panel controls-panel">
+          <h2>Controls</h2>
+
+          <div class="control-block">
+            <div class="control-head">
+              <label for="pSlider">Power (W)</label>
+              <output id="pValue">-</output>
+            </div>
+            <input id="pSlider" type="range">
+          </div>
+
+          <div class="control-block">
+            <div class="control-head">
+              <label for="vSlider">Scan Speed (m/s)</label>
+              <output id="vValue">-</output>
+            </div>
+            <input id="vSlider" type="range">
+          </div>
+
+          <div class="control-block">
+            <div class="control-head">
+              <label for="hSlider">Normalized Enthalpy H (-)</label>
+              <output id="hValue">-</output>
+            </div>
+            <input id="hSlider" type="range">
+            <div class="muted small">Adjusts scan speed at fixed power</div>
+          </div>
+
+          <div class="control-block">
+            <div class="control-head">
+              <span>Selection Maps</span>
+              <span class="muted small">Drag directly on either map</span>
+            </div>
+            <details class="legacy-pad map-details" open>
+              <summary>
+                <span>Interactive P-V Enthalpy Map</span>
+                <span class="muted small">Drag to set power + scan speed directly</span>
+              </summary>
+              <div class="pv-map-wrap pv-map-primary">
+                <canvas id="pvMapCanvas" width="640" height="435" aria-label="Interactive power versus scan-speed enthalpy map"></canvas>
+              </div>
+              <label class="checkbox-row compact">
+                <input id="gtCompareCheckbox" type="checkbox" disabled>
+                <span>Compare to ground truth (train / val / test points; click a dot)</span>
+              </label>
+            </details>
+            <details class="legacy-pad map-details">
+              <summary>
+                <span>Interactive H-P Map</span>
+                <span class="muted small">Drag to set power + enthalpy (scan speed derived)</span>
+              </summary>
+              <div class="pv-map-wrap hp-map-wrap">
+                <canvas id="hpMapCanvas" width="640" height="435" aria-label="Interactive normalized enthalpy versus power map"></canvas>
+              </div>
+            </details>
+          </div>
+
+          <div class="form-grid">
+            <div class="view-mode-row">
+              <div class="plot-mode-group">
+                <span>Plot Mode</span>
+                <div class="segmented-toggle" role="group" aria-label="Plot mode">
+                  <button id="plotMode2dBtn" type="button" class="segmented-toggle__button" aria-pressed="false">2D</button>
+                  <button id="plotMode3dBtn" type="button" class="segmented-toggle__button is-active" aria-pressed="true">3D</button>
+                </div>
+                <div class="muted small">3D uses backend surface rendering</div>
+              </div>
+              <div class="plot-mode-group">
+                <span>Orientation</span>
+                <div class="segmented-toggle" role="group" aria-label="Orientation">
+                  <button id="planeXzBtn" type="button" class="segmented-toggle__button is-active" aria-pressed="true">Cross section</button>
+                  <button id="planeTopBtn" type="button" class="segmented-toggle__button" aria-pressed="false">Top view</button>
+                </div>
+                <div class="muted small">Cross section cuts the block; top view looks down</div>
+              </div>
+            </div>
+            <label>
+              <span>Model</span>
+              <select id="modelSelect">
+                <!-- Populated from GET /models?page=steady; fallback only. -->
+                <option value="fno_cal" selected>FNO</option>
+                <option value="gaot_cal">GAOT</option>
+                <option value="rigno_cal">RIGNO</option>
+              </select>
+            </label>
+            <label>
+              <span>Field</span>
+              <select id="fieldSelect">
+                <option value="T">T</option>
+                <option value="alpha">alpha</option>
+                <option value="fl">fl</option>
+              </select>
+            </label>
+            <label id="yIndexLabel">
+              <span>Y Index</span>
+              <input id="yIndexInput" type="number" step="1" value="-1">
+            </label>
+            <label id="tContourLabel">
+              <span>T Contour (K)</span>
+              <input id="tContourInput" type="number" step="0.1" value="1898">
+            </label>
+            <label id="showContourLabel" class="checkbox-row compact">
+              <input id="showContourCheckbox" type="checkbox" checked>
+              <span>Show T contour</span>
+            </label>
+          </div>
+
+          <div class="button-row">
+            <button id="finalNowBtn" type="button" class="button primary">Render</button>
+          </div>
+
+          <div class="meta-list">
+            <div><span class="muted">Selected P</span><strong id="metaP">-</strong></div>
+            <div><span class="muted">Selected Vscan</span><strong id="metaV">-</strong></div>
+            <div><span class="muted">H*</span><strong id="metaHStar">-</strong></div>
+            <div><span class="muted">H_model = P/sqrt(|V|)</span><strong id="metaHModel">-</strong></div>
+            <div><span class="muted">H_norm (model input)</span><strong id="metaHNorm">-</strong></div>
+          </div>
+        </section>
+
+        <section class="panel result-panel">
+          <div class="panel-title-row">
+            <h2>Result</h2>
+            <div class="result-meta-inline">
+              <span id="resultModeTag" class="badge idle">none</span>
+              <span id="resultInfoText" class="muted">Awaiting first render</span>
+            </div>
+          </div>
+
+          <div class="result-frame">
+            <img id="resultImage" class="hidden" alt="Inference result plot will appear here">
+            <div id="resultPlaceholder" class="placeholder">No result yet</div>
+          </div>
+          <p id="gtMetrics" class="gt-metrics hidden"></p>
+          <p id="inferTiming" class="gt-metrics infer-timing hidden"></p>
+
+          <div class="result-supporting-copy">
+            <section class="info-card" aria-labelledby="demoExplanationTitle">
+              <h3 id="demoExplanationTitle">About this demo &mdash; created by Alix Benoit</h3>
+              <p>
+                Melt pool of a laser scanning a Ti-6Al-4V plate at power P and scan speed V, averaged over time
+                in a window that moves with the beam. The prediction comes from a neural operator (FNO, GAOT or
+                RIGNO), a neural network trained on FLOW-3D WELD simulations run with the validated simulation
+                settings from the paper. Set P and V with the sliders or by dragging on either map. Tick
+                "Compare to ground truth" to show the 123 simulated cases (96 used for training, 14 for
+                validation, 13 for testing) and click one to compare the prediction with its simulation. The
+                error under a comparison is the mean absolute temperature error over the substrate (every cell
+                at or below its surface).
+              </p>
+            </section>
+
+            <section class="info-card" aria-labelledby="citationTitle">
+              <h3 id="citationTitle">Citation</h3>
+              <p class="citation-block">
+                Benoit, A., and Iseli, E. (2026). Provenance-tracked, experimentally validated neural operator
+                surrogates of three-dimensional laser melting with keyholes and free-form paths. Preprint,
+                arXiv:[TO FILL].
+              </p>
+              <p class="citation-block">
+                Earlier work: Benoit, A., Ivas, T., Papierz, M., Sagingalieva, A., Melnikov, A., and Iseli, E. (2026).
+                A fast and accurate Fourier neural operator-based surrogate for melt-pool prediction in
+                laser processing. <em>Journal of Intelligent Manufacturing</em>.
+                <a href="https://doi.org/10.1007/s10845-026-02917-0" target="_blank" rel="noreferrer">doi:10.1007/s10845-026-02917-0</a>
+                (preprint <a href="https://arxiv.org/abs/2602.06241" target="_blank" rel="noreferrer">arXiv:2602.06241</a>).
+              </p>
+            </section>
+          </div>
+
+          <pre id="errorBox" class="error-box hidden"></pre>
+        </section>
+      </div>
+    </main>
+
+    <script src="common.js" defer></script>
+    <script src="pvmap.js" defer></script>
+    <script src="app.js" defer></script>
+  </body>
+</html>

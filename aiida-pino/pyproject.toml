@@ -1,0 +1,115 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aiida-pino"
+version = "0.1.0"
+description = "AiiDA workflows of the LP-NO pipeline: provenance-tracked simulation ingest, training and evaluation."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "PolyForm-Noncommercial-1.0.0" }
+authors = [
+  { name = "Alix Benoit", email = "alix.benoit@alumni.polytechnique.org" },
+  { name = "Elia Iseli" },
+]
+dependencies = [
+  # Upper bound is not caution: aiida-core 2.9 migrates ~/.aiida/config.json
+  # from CONFIG_VERSION 9 to 10 IN PLACE, and AIIDA_PATH is unset on a normal
+  # install, so one `pip install -e .` into a scratch venv silently breaks
+  # every other environment on the machine (2026-08-07, round 8).
+  "aiida-core>=2.5,<2.9",
+  "PyYAML>=6",
+  # The `aiida-pino` command builds its service from console.config, which needs this;
+  # as a `web` extra only, a plain install crashed every CLI call at import (2026-10-07).
+  "pydantic-settings>=2",
+]
+
+[project.urls]
+Repository = "https://github.com/azbenoit/lpno_code"
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=7",
+  # `starlette.testclient` needs httpx, and says so only at import time with a
+  # message naming a package that does not exist ("requires the httpx2
+  # package"). Without it the whole fast tier fails to collect.
+  "httpx>=0.24",
+  "pytest-timeout",
+]
+web = [
+  "fastapi>=0.110",
+  "uvicorn>=0.29",
+  "pydantic-settings>=2",
+  # The plotting and stats endpoints import these at call time, so a console
+  # installed without them starts fine and then answers 500 on every plot,
+  # every training curve and the melt-pool stats -- with an error body that
+  # names only the exception class, so the cause is invisible.
+  "matplotlib>=3.7",
+  "scipy>=1.10",
+]
+
+[project.scripts]
+"aiida-pino" = "aiida_pino.cli:main"
+
+[project.entry-points."aiida.calculations"]
+"pino.flow3d_to_vtk" = "aiida_pino.calculations.flow3d_to_vtk:Flow3DToVtkCalculation"
+"pino.vtk_to_dataset" = "aiida_pino.calculations.vtk_to_dataset:VtkToDatasetCalculation"
+"pino.raw_flow3d_to_dataset" = "aiida_pino.calculations.raw_flow3d_to_dataset:RawFlow3DToDatasetCalculation"
+"pino.train" = "aiida_pino.calculations.train:PinoTrainCalculation"
+"pino.warm_runtime_cache" = "aiida_pino.calculations.warm_runtime_cache:WarmRuntimeCacheCalculation"
+"pino.eval" = "aiida_pino.calculations.eval:PinoEvalCalculation"
+"pino.kfold" = "aiida_pino.calculations.kfold:PinoKfoldCalculation"
+"pino.flow3d_run" = "aiida_pino.calculations.flow3d_run:Flow3DRunCalculation"
+
+[project.entry-points."aiida.schedulers"]
+"pino.direct_pgid" = "aiida_pino.schedulers.direct_pgid:DirectPgidScheduler"
+
+[project.entry-points."aiida.parsers"]
+"pino.flow3d_to_vtk" = "aiida_pino.parsers.flow3d_to_vtk:Flow3DToVtkParser"
+"pino.vtk_to_dataset" = "aiida_pino.parsers.vtk_to_dataset:VtkToDatasetParser"
+"pino.train" = "aiida_pino.parsers.train:PinoTrainParser"
+"pino.eval" = "aiida_pino.parsers.eval:PinoEvalParser"
+"pino.kfold" = "aiida_pino.parsers.kfold:PinoKfoldParser"
+"pino.flow3d_run" = "aiida_pino.parsers.flow3d_run:Flow3DRunParser"
+
+[project.entry-points."aiida.data"]
+"pino.dataset" = "aiida_pino.data.pino_dataset:PinoDatasetData"
+"pino.simulation" = "aiida_pino.data.pino_simulation:PinoSimulationData"
+"pino.dataset_collection" = "aiida_pino.data.pino_dataset_collection:PinoDatasetCollectionData"
+"pino.dataset_union" = "aiida_pino.data.pino_dataset_union:PinoDatasetUnionData"
+"pino.model" = "aiida_pino.data.pino_model:PinoModelData"
+"pino.model_evaluation" = "aiida_pino.data.pino_model_evaluation:PinoModelEvaluationData"
+"pino.kfold_run" = "aiida_pino.data.pino_kfold_run:PinoKfoldRunData"
+
+[project.entry-points."aiida.workflows"]
+"pino.derive_dataset" = "aiida_pino.workflows.derive_dataset:DeriveDatasetWorkChain"
+"pino.flow3d_ingest" = "aiida_pino.workflows.flow3d_ingest:Flow3DIngestWorkChain"
+"pino.train_model" = "aiida_pino.workflows.train_model:TrainModelWorkChain"
+"pino.evaluate_model" = "aiida_pino.workflows.evaluate_model:EvaluateModelWorkChain"
+"pino.import_model" = "aiida_pino.workflows.import_model:ImportModelWorkChain"
+"pino.train_eval" = "aiida_pino.workflows.train_eval:TrainEvalWorkChain"
+"pino.eval_only" = "aiida_pino.workflows.eval_only:EvalOnlyWorkChain"
+"pino.kfold_train_eval" = "aiida_pino.workflows.kfold_train_eval:KfoldTrainEvalWorkChain"
+"pino.full_flow3d_train_eval" = "aiida_pino.workflows.full_flow3d_train_eval:FullFlow3DTrainEvalWorkChain"
+"pino.raw_flow3d_import" = "aiida_pino.workflows.raw_flow3d_import:RawFlow3DImportWorkChain"
+"pino.flow3d_generate" = "aiida_pino.workflows.flow3d_generate:Flow3DGenerateWorkChain"
+"pino.flow3d_batch" = "aiida_pino.workflows.flow3d_batch:Flow3DBatchWorkChain"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+aiida_pino = ["scripts/*.py", "scripts/*.sh"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+markers = [
+    "slow: needs an AiiDA profile (storage setup/teardown per test). Applied automatically by tests/conftest.py, never by hand -- run the fast tier with `pytest -m 'not slow'`.",
+    "requires_lpno: asserts on a value that comes from the sibling lpno package; skipped when it is not importable (a direct ModuleNotFoundError for it is translated into the same skip by tests/conftest.py).",
+]

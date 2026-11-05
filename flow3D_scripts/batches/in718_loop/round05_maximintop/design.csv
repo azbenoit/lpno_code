@@ -1,0 +1,11 @@
+case_name,arm,round,H,V,P,r0_um,region,regime
+in718_maximin_r05top_015,maximin,5,8.1905,1.080769,102.757,38.12,conduction,overlap
+in718_maximin_r05top_016,maximin,5,14.4762,1.25,195.319,38.12,transition,overlap
+in718_maximin_r05top_017,maximin,5,37.5238,0.657692,223.444,27.37,keyhole,extrapolation
+in718_maximin_r05top_018,maximin,5,24.9524,0.403846,233.224,43.5,keyhole,extrapolation
+in718_maximin_r05top_019,maximin,5,16.5714,1.080769,253.385,43.5,transition,overlap
+in718_maximin_r05top_020,maximin,5,18.6667,0.319231,155.122,43.5,transition,overlap
+in718_maximin_r05top_021,maximin,5,14.4762,0.996154,295.963,54.25,transition,overlap
+in718_maximin_r05top_022,maximin,5,10.2857,1.080769,287.27,65.0,conduction,overlap
+in718_maximin_r05top_023,maximin,5,22.8571,1.080769,349.496,43.5,keyhole,extrapolation
+in718_maximin_r05top_024,maximin,5,48.0,1.080769,263.974,22.0,keyhole,extrapolation

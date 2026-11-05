@@ -1,0 +1,25 @@
+# GAOT capacity variant: width.
+#
+# The `deep` variant (`config_flow3D_GAOT_disp_deep_randompath`) raised `num_layers`
+# alone and scored worse than its baseline, the usual signature of depth without
+# width, so this variant varies width.
+#
+# This arm widens the processor and lifting path while holding depth at the baseline:
+#   hidden_size       -> 128  (from the config default)
+#   ffn_hidden_size   -> 512
+#   lifting_channels  -> 128
+#
+# Same displacement kernel, resolution, lattice, schedule and budget as
+# `config_flow3D_GAOT_disp_randompath`.
+defaults:
+  - config_flow3D_GAOT_disp_randompath
+  - _self_
+
+arch:
+  gaot:
+    hidden_size: 128
+    ffn_hidden_size: 512
+    lifting_channels: 128
+
+custom:
+  name: gaot_cond_disp_capacity

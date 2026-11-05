@@ -1,0 +1,33 @@
+# FLOW-3D WELD generated cases: native result databases, solver/preprocessor
+# inputs, logs, restart files, and ParaView exports are all written here.
+/runs/
+
+# Task spooler queue state and per-task logs (see "Task spooler" in README).
+/spool/
+
+# Python bytecode and local test/tool caches.
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+
+# Local environment and license material. License endpoints, license files,
+# and machine-specific secrets must stay out of the repository.
+.env
+.env.*
+license.env
+*.lic
+licenses/
+
+# FLOW-3D and operating-system crash/temporary files outside a case directory.
+core
+core.*
+*.tmp
+*.fgz
+
+# Editor backup files.
+*~
+*.swp
+*.swo
+
+validation/figures/

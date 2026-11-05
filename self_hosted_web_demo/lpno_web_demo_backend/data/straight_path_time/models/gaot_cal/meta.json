@@ -1,0 +1,23 @@
+{
+ "label": "GAOT",
+ "type": "gaot",
+ "order": 2,
+ "default": false,
+ "model_name": "uni_gaot_lab_b8_32k_s42",
+ "physics": {
+  "p_watts": {
+   "min": 40.0,
+   "max": 215.0,
+   "default": 150.0
+  },
+  "v_scan_mps": {
+   "min": 0.101,
+   "max": 0.96,
+   "default": 0.6
+  },
+  "h_norm_denom": 275.0539301381671,
+  "power_weighted_dose": true,
+  "power_weighted_conduction": true,
+  "conduction_source_sigma_factor": 0.5
+ }
+}

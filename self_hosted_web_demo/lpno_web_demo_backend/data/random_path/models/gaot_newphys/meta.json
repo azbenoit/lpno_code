@@ -1,0 +1,28 @@
+{
+ "label": "GAOT",
+ "type": "gaot",
+ "order": 3,
+ "default": false,
+ "model_name": "uni_gaot_rand150_b2_12ch_35k_s43",
+ "physics": {
+  "p_watts": {
+   "min": 68.0,
+   "max": 237.0,
+   "default": 150.0
+  },
+  "v_scan_mps": {
+   "min": 0.21,
+   "max": 0.99,
+   "default": 0.6
+  },
+  "h_norm_denom": 250.37850654650833,
+  "duration_scaled_times": true,
+  "dt_s": 1e-05,
+  "start_anywhere": true,
+  "max_path_length_m": null,
+  "presets_dir": "rand150_newphys_test",
+  "power_weighted_dose": true,
+  "power_weighted_conduction": true,
+  "conduction_source_sigma_factor": 0.5
+ }
+}

@@ -1,0 +1,9 @@
+case_name,arm,round,H,V,P,r0_um,region,regime
+in718_banditrepl_r02_000,banditrepl,2,27.0476,1.25,159.97,22.0,keyhole,extrapolation
+in718_banditrepl_r02_001,banditrepl,2,31.2381,0.657692,186.015,27.37,keyhole,extrapolation
+in718_banditrepl_r02_002,banditrepl,2,10.2857,0.826923,251.279,65.0,conduction,overlap
+in718_banditrepl_r02_003,banditrepl,2,6.0952,0.826923,97.09,48.87,lof,overlap
+in718_banditrepl_r02_004,banditrepl,2,27.0476,0.573077,247.099,38.12,keyhole,extrapolation
+in718_banditrepl_r02_005,banditrepl,2,16.5714,0.234615,189.453,59.62,transition,overlap
+in718_banditrepl_r02_006,banditrepl,2,39.619,0.742308,327.969,32.75,keyhole,extrapolation
+in718_banditrepl_r02_007,banditrepl,2,8.1905,1.25,187.579,54.25,conduction,overlap

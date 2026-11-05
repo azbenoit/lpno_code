@@ -1,0 +1,20 @@
+{
+ "bandit_m1_all": 89091,
+ "bandit_m1_overlap": 89095,
+ "bandit_m1_extrap": 89099,
+ "bandit_m2_all": 89107,
+ "bandit_m2_overlap": 89112,
+ "bandit_m2_extrap": 89115,
+ "bandit_m3_all": 89123,
+ "bandit_m3_overlap": 89131,
+ "bandit_m3_extrap": 89136,
+ "maximin_m1_all": 89140,
+ "maximin_m1_overlap": 89144,
+ "maximin_m1_extrap": 89154,
+ "maximin_m2_all": 89164,
+ "maximin_m2_overlap": 89171,
+ "maximin_m2_extrap": 89174,
+ "maximin_m3_all": 89177,
+ "maximin_m3_overlap": 89180,
+ "maximin_m3_extrap": 89186
+}

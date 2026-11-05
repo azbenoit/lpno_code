@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LP-NO demo · Straight track (time)</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="bg-grid" aria-hidden="true"></div>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <h1>LP-NO web demo</h1>
+          <nav class="page-nav" aria-label="Demo pages">
+            <a href="index.html">Steady (P–V)</a>
+            <a href="line.html" class="is-active" aria-current="page">Straight track (time)</a>
+            <a href="path.html">Free-form path (time)</a>
+          </nav>
+        </div>
+        <div class="partner-logos" aria-label="Institution">
+          <img src="logos/Empa_logo.png" alt="Empa" class="partner-logo partner-logo--empa">
+        </div>
+        <div class="status-cluster">
+          <span id="statusBadge" class="badge idle">idle</span>
+          <span id="latencyText" class="muted">No requests yet</span>
+        </div>
+      </header>
+
+      <div class="layout-grid">
+        <section class="panel controls-panel">
+          <h2>Controls</h2>
+
+          <div class="control-block">
+            <div class="control-head">
+              <label for="pSlider">Power (W)</label>
+              <output id="pValue">-</output>
+            </div>
+            <input id="pSlider" type="range">
+          </div>
+
+          <div class="control-block">
+            <div class="control-head">
+              <label for="vSlider">Scan Speed (m/s)</label>
+              <output id="vValue">-</output>
+            </div>
+            <input id="vSlider" type="range">
+          </div>
+
+          <div class="control-block">
+            <div class="control-head">
+              <span>Interactive P-V Enthalpy Map</span>
+              <span class="muted small">Drag to set P + scan speed; click a dot for a ground-truth case</span>
+            </div>
+            <div class="pv-map-wrap pv-map-primary">
+              <canvas id="pvMapCanvas" width="640" height="420" aria-label="Interactive power versus scan-speed map with ground-truth points"></canvas>
+            </div>
+            <label class="checkbox-row compact">
+              <input id="showGtCheckbox" type="checkbox" disabled>
+              <span>Compare to ground truth (train / val / test points; click a dot)</span>
+            </label>
+          </div>
+
+          <div class="form-grid">
+            <label>
+              <span>Model</span>
+              <select id="modelSelect">
+                <!-- Populated from GET /models?page=straight; these are the
+                     fallback if that request fails (ids match data/.../models/). -->
+                <option value="fno_cal" selected>FNO</option>
+                <option value="gaot_cal">GAOT</option>
+                <option value="rigno_cal">RIGNO</option>
+              </select>
+            </label>
+            <label>
+              <span>Field</span>
+              <select id="fieldSelect">
+                <option value="T">T</option>
+                <option value="fl">fl</option>
+                <option value="alpha">alpha</option>
+              </select>
+            </label>
+            <label>
+              <span>Z slice</span>
+              <select id="zIndexSelect"></select>
+            </label>
+          </div>
+
+          <div class="button-row">
+            <button id="runBtn" type="button" class="button primary">Run inference</button>
+            <div class="segmented-toggle" role="group" aria-label="Result view">
+              <button id="view2dBtn" type="button" class="segmented-toggle__button">2D slice</button>
+              <button id="view3dBtn" type="button" class="segmented-toggle__button is-active">3D surface</button>
+            </div>
+            <div class="segmented-toggle" role="group" aria-label="2D plane">
+              <button id="planeTopBtn" type="button" class="segmented-toggle__button is-active">Top view</button>
+              <button id="planeXzBtn" type="button" class="segmented-toggle__button">Cross section</button>
+            </div>
+          </div>
+
+          <div class="meta-list">
+            <div><span class="muted">Selected P</span><strong id="metaP">-</strong></div>
+            <div><span class="muted">Selected Vscan</span><strong id="metaV">-</strong></div>
+            <div><span class="muted">Ground truth</span><strong id="metaGt">-</strong></div>
+            <div><span class="muted">Laser off at</span><strong id="metaLaserOff">-</strong></div>
+            <div><span class="muted">Server timing</span><strong id="metaTiming">-</strong></div>
+          </div>
+        </section>
+
+        <section class="panel result-panel">
+          <div class="panel-title-row">
+            <h2>Result</h2>
+            <div class="result-meta-inline">
+              <span id="resultModeTag" class="badge idle">none</span>
+              <span id="resultInfoText" class="muted">Awaiting first inference</span>
+            </div>
+          </div>
+
+          <div class="result-frame">
+            <img id="resultImage" class="hidden" alt="Time-dependent straight-line inference frame will appear here">
+            <div id="resultPlaceholder" class="placeholder">No result yet</div>
+          </div>
+          <p id="gtMetrics" class="gt-metrics gt-metrics-lg hidden"></p>
+          <p id="inferTiming" class="gt-metrics infer-timing hidden"></p>
+
+          <div class="frame-controls">
+            <button id="playBtn" type="button" class="button secondary" disabled>Play</button>
+            <input id="frameSlider" type="range" min="0" max="19" step="1" value="0" disabled>
+            <output id="frameTimeValue">- ms</output>
+          </div>
+
+          <div class="result-supporting-copy">
+            <section class="info-card" aria-labelledby="demoExplanationTitle">
+              <h3 id="demoExplanationTitle">About this demo &mdash; created by Alix Benoit</h3>
+              <p>
+                Melt pool over time for a laser scanning a Ti-6Al-4V plate along a 0.6 mm straight track at
+                power P and scan speed V. Each of the 20 frames is predicted on its own, from where the beam is
+                and where it has already been, by a neural operator (FNO, GAOT or RIGNO), a neural network
+                trained on FLOW-3D WELD simulations run with the validated simulation settings from the paper.
+                Set P and V with the sliders or by dragging on the map. Tick "Compare to ground truth" to show
+                the 123 simulated cases (96 used for training, 14 for validation, 13 for testing) and click one
+                to see simulation, prediction and their difference side by side. The error under a comparison
+                is the mean absolute temperature error over the substrate (every cell at or below its surface).
+              </p>
+            </section>
+
+            <section class="info-card" aria-labelledby="citationTitle">
+              <h3 id="citationTitle">Citation</h3>
+              <p class="citation-block">
+                Benoit, A., and Iseli, E. (2026). Provenance-tracked, experimentally validated neural operator
+                surrogates of three-dimensional laser melting with keyholes and free-form paths. Preprint,
+                arXiv:[TO FILL].
+              </p>
+              <p class="citation-block">
+                Earlier work: Benoit, A., Ivas, T., Papierz, M., Sagingalieva, A., Melnikov, A., and Iseli, E. (2026).
+                A fast and accurate Fourier neural operator-based surrogate for melt-pool prediction in
+                laser processing. <em>Journal of Intelligent Manufacturing</em>.
+                <a href="https://doi.org/10.1007/s10845-026-02917-0" target="_blank" rel="noreferrer">doi:10.1007/s10845-026-02917-0</a>
+                (preprint <a href="https://arxiv.org/abs/2602.06241" target="_blank" rel="noreferrer">arXiv:2602.06241</a>).
+              </p>
+            </section>
+          </div>
+
+          <pre id="errorBox" class="error-box hidden"></pre>
+        </section>
+      </div>
+    </main>
+
+    <script src="common.js" defer></script>
+    <script src="pvmap.js" defer></script>
+    <script src="line.js" defer></script>
+  </body>
+</html>

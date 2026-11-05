@@ -1,0 +1,28 @@
+# Straight-path counterpart of the z-refined latent ablation (see
+# config_flow3D_GAOT_zlat_randompath for the full rationale and the images).
+#
+# Cheap confirmation of the tiling hypothesis: this set runs 20k steps in ~40 min against
+# ~3.5 h on the conduction half, and it has a matched RIGNO one-cycle control at 9.11 K
+# plus six measured GAOT ablation arms, so a change here is interpretable immediately.
+#
+# The grid the model sees is 61 x 40 x 40 after the moving-frame crop, against a
+# 32 x 20 x 20 lattice -- about 2 physical cells per latent token per axis, so the same
+# tiling mechanism applies, just at a finer scale than the conduction half's 3 x 3 x 2.
+#
+# NOTE the caveat: `fl` IoU here is already 0.89-0.93, so there is little headroom on the
+# interface metric. The informative signals on this set are T RMSE and surface RMSE, which
+# is where a +/-250 K checkerboard should show up if it is present here too.
+#
+# Baseline: config_flow3D_GAOT_onecycle, val T MAE 9.27 K, RMSE 33.07, surface RMSE
+# 27.03 (9.12 K with the geometry embedding off). Only latent_tokens[2] differs from
+# the parent.
+defaults:
+  - config_flow3D_GAOT_onecycle
+  - _self_
+
+arch:
+  gaot:
+    latent_tokens: [32, 20, 40]
+
+custom:
+  name: gaot_sp_zlat

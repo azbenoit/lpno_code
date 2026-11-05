@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LP-NO demo · Free-form path (time)</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="bg-grid" aria-hidden="true"></div>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <h1>LP-NO web demo</h1>
+          <nav class="page-nav" aria-label="Demo pages">
+            <a href="index.html">Steady (P–V)</a>
+            <a href="line.html">Straight track (time)</a>
+            <a href="path.html" class="is-active" aria-current="page">Free-form path (time)</a>
+          </nav>
+        </div>
+        <div class="partner-logos" aria-label="Institution">
+          <img src="logos/Empa_logo.png" alt="Empa" class="partner-logo partner-logo--empa">
+        </div>
+        <div class="status-cluster">
+          <span id="statusBadge" class="badge idle">idle</span>
+          <span id="latencyText" class="muted">No requests yet</span>
+        </div>
+      </header>
+
+      <div class="layout-grid">
+        <section class="panel controls-panel">
+          <h2>Controls</h2>
+
+          <div class="control-block">
+            <div class="control-head">
+              <span>Scan Path (substrate top view)</span>
+              <output id="pathLengthValue">0.000 mm</output>
+            </div>
+            <div class="path-canvas-wrap">
+              <canvas id="pathCanvas" width="640" height="440" aria-label="Freehand scan path drawing canvas"></canvas>
+            </div>
+            <div class="muted small">
+              Draw inside the dashed keep-out box. The orange halo is a one-beam-radius exclusion
+              zone the path may not re-enter.
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <label>
+              <span>Preset path</span>
+              <select id="presetSelect">
+                <option value="">Freehand drawing</option>
+              </select>
+            </label>
+            <label>
+              <span>Model</span>
+              <select id="modelSelect">
+                <!-- Populated from GET /models?page=path; these are the fallback
+                     if that request fails (ids match data/random_path/models/). -->
+                <option value="fno_newphys" selected>FNO</option>
+                <option value="rigno_newphys">RIGNO</option>
+                <option value="gaot_newphys">GAOT</option>
+              </select>
+            </label>
+            <label>
+              <span>Laser power [W]</span>
+              <!-- Slider; range and default come from the model's /models physics
+                   block (enabled once it loads; greyed out while a preset replays its
+                   stored physics). The live value is echoed in the adjacent <output>. -->
+              <span class="slider-row">
+                <input id="pInput" type="range" min="30" max="150" step="1" value="150" disabled>
+                <output id="pValue" for="pInput">150 W</output>
+              </span>
+            </label>
+            <label>
+              <span>Scan speed [m/s]</span>
+              <span class="slider-row">
+                <input id="vInput" type="range" min="0.2" max="1" step="0.01" value="0.6" disabled>
+                <output id="vValue" for="vInput">0.60 m/s</output>
+              </span>
+            </label>
+            <label>
+              <span>Frame step [µs]</span>
+              <!-- Frames are spaced by this step, so the frame COUNT follows
+                   from the weld duration (length / speed) instead of being
+                   pinned at 20. The adjacent output shows how many frames the
+                   current step works out to, and is capped to 5..100. -->
+              <span class="slider-row">
+                <input id="frameDtInput" type="range" min="20" max="400" step="10" value="130">
+                <output id="frameDtValue" for="frameDtInput">130 µs</output>
+              </span>
+            </label>
+            <label>
+              <span>Field</span>
+              <select id="fieldSelect">
+                <option value="T">T</option>
+                <option value="fl">fl</option>
+                <option value="alpha">alpha</option>
+              </select>
+            </label>
+            <label>
+              <span>Z slice</span>
+              <select id="zIndexSelect"></select>
+            </label>
+          </div>
+
+          <div class="button-row">
+            <button id="clearBtn" type="button" class="button secondary">Clear</button>
+            <button id="runBtn" type="button" class="button primary">Run inference</button>
+            <div class="segmented-toggle" role="group" aria-label="Result view">
+              <button id="view2dBtn" type="button" class="segmented-toggle__button">2D slice</button>
+              <button id="view3dBtn" type="button" class="segmented-toggle__button is-active">3D surface</button>
+            </div>
+          </div>
+
+          <div class="meta-list">
+            <div><span class="muted">Points used</span><strong id="metaPoints">-</strong></div>
+            <div><span class="muted">Path length</span><strong id="metaLength">-</strong></div>
+            <div><span class="muted">Laser off at</span><strong id="metaLaserOff">-</strong></div>
+            <div><span class="muted">Frames</span><strong id="metaFrames">-</strong></div>
+            <div><span class="muted">Clamped</span><strong id="metaClamped">-</strong></div>
+            <div><span class="muted">Server timing</span><strong id="metaTiming">-</strong></div>
+          </div>
+        </section>
+
+        <section class="panel result-panel">
+          <div class="panel-title-row">
+            <h2>Result</h2>
+            <div class="result-meta-inline">
+              <span id="resultModeTag" class="badge idle">none</span>
+              <span id="resultInfoText" class="muted">Awaiting first inference</span>
+            </div>
+          </div>
+
+          <div class="result-frame">
+            <img id="resultImage" class="hidden" alt="Time-dependent inference frame will appear here">
+            <div id="resultPlaceholder" class="placeholder">No result yet</div>
+          </div>
+          <p id="gtMetrics" class="gt-metrics gt-metrics-lg hidden"></p>
+          <p id="inferTiming" class="gt-metrics infer-timing hidden"></p>
+
+          <div class="frame-controls">
+            <button id="playBtn" type="button" class="button secondary" disabled>Play</button>
+            <input id="frameSlider" type="range" min="0" max="19" step="1" value="0" disabled>
+            <output id="frameTimeValue">- ms</output>
+          </div>
+
+          <div class="result-supporting-copy">
+            <section class="info-card" aria-labelledby="demoExplanationTitle">
+              <h3 id="demoExplanationTitle">About this demo &mdash; created by Alix Benoit</h3>
+              <p>
+                Melt pool over time for a laser scanning a Ti-6Al-4V plate along a path you draw, or along one
+                of the 22 simulated test paths in the preset list, which the models never saw during training.
+                The prediction comes from a neural operator (FNO, GAOT or RIGNO), a neural network trained on
+                FLOW-3D WELD simulations run with the validated simulation settings from the paper. Laser power
+                and scan speed can be set anywhere in the range the models were trained on, and frames are
+                spaced by the chosen time step. Predictions are computed on the 75&times;50&times;40 grid the
+                models were trained on (the paper reports errors on a finer 150&times;100&times;40 grid).
+                Hand-drawn paths that look nothing like the random paths used in training will be less
+                reliable. The error under a comparison is the mean absolute temperature error over the
+                substrate (every cell at or below its surface).
+              </p>
+            </section>
+
+            <section class="info-card" aria-labelledby="citationTitle">
+              <h3 id="citationTitle">Citation</h3>
+              <p class="citation-block">
+                Benoit, A., and Iseli, E. (2026). Provenance-tracked, experimentally validated neural operator
+                surrogates of three-dimensional laser melting with keyholes and free-form paths. Preprint,
+                arXiv:[TO FILL].
+              </p>
+              <p class="citation-block">
+                Earlier work: Benoit, A., Ivas, T., Papierz, M., Sagingalieva, A., Melnikov, A., and Iseli, E. (2026).
+                A fast and accurate Fourier neural operator-based surrogate for melt-pool prediction in
+                laser processing. <em>Journal of Intelligent Manufacturing</em>.
+                <a href="https://doi.org/10.1007/s10845-026-02917-0" target="_blank" rel="noreferrer">doi:10.1007/s10845-026-02917-0</a>
+                (preprint <a href="https://arxiv.org/abs/2602.06241" target="_blank" rel="noreferrer">arXiv:2602.06241</a>).
+              </p>
+            </section>
+          </div>
+
+          <pre id="errorBox" class="error-box hidden"></pre>
+        </section>
+      </div>
+    </main>
+
+    <script src="common.js" defer></script>
+    <script src="path.js" defer></script>
+  </body>
+</html>

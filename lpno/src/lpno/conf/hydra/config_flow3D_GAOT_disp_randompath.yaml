@@ -1,0 +1,44 @@
+# ABLATION 3: displacement-aware decoder kernel, on the conduction half.
+#
+# THE MECHANISTIC FIX. An audit traced GAOT's interface failure to an exact
+# line of code rather than a hypothesis:
+#
+#   * on a regular lattice with k_decoder=8, every physical node inside a latent cell
+#     selects exactly the 8 CORNERS of that cell (gaot_arch._knn_edges);
+#   * the cosine attention scores ABSOLUTE normalised coordinates
+#     (gaot_layers/integral_transform.py), which are near-identical across a small cell,
+#     so the weights barely discriminate between nodes in it;
+#   * the kernel MLP is fed cat([source_pos, query_pos]) -- absolute again. It is never
+#     told WHERE INSIDE the cell the query sits.
+#
+# The decoder is therefore close to a box filter over each 3x3x2 block. Rendered
+# cross-sections of the baseline model show exactly that: the predicted
+# temperature field is piecewise-constant in tiles with a regular +/-250 K checkerboard
+# error extending into the bulk, which displaces the 1898 K melt isotherm and
+# under-predicts pool depth.
+#
+# This arm passes the DISPLACEMENT (query - source) to the kernel, the standard GNO
+# argument, so the output can vary continuously within a cell. Kernel input goes 2*dim ->
+# 3*dim; everything else is identical to the baseline.
+#
+# Prefer this over the latent-refinement and pointwise-skip arms: those add capacity to
+# work around the box filter, this removes it. If the tiling explanation is right, this
+# should reduce the checkerboard in T and recover melt depth. If it changes nothing, the
+# box-filter account is wrong and both other arms lose their motivation too.
+#
+# Baseline: config_flow3D_GAOT_randompath. Same steps, lr, schedule, resolution and
+# lattice; ONLY the kernel input differs.
+#
+# Caveat to respect when reading the result: the same-config replicate spread measured on
+# the straight path is 0.133 K, and no replicate spread has been measured on THIS dataset.
+# A difference smaller than a few tenths of a Kelvin is not a result.
+defaults:
+  - config_flow3D_GAOT_randompath
+  - _self_
+
+arch:
+  gaot:
+    kernel_use_displacement: true
+
+custom:
+  name: gaot_cond_disp

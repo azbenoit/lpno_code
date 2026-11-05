@@ -1,0 +1,29 @@
+{
+ "schema_version": 1,
+ "material_name": "ti64_v4_measured",
+ "flow3d_label": "Titanium Alloy Ti Al V IMI 318 Mills data",
+ "source": "Material values transcribed from a local FLOW-3D case input for reproducibility testing. | measured-absorptance route 2026-07-29: A=0.33 at 1070 nm on flat molten Ti64 (Simonds NIST, AMT 23:101049 / PRApplied 10:044061) replaces the Drude estimate (A0=0.358, 8.5% high vs measurement); tv1=3520.0 | v4 NOT ADOPTED (reverted 2026-07-29 after adversarial review): the onset 'repair' was a windowing artifact, Gan's eta is model-derived not measured, and adopting tv1=3520 violated the pre-registered rule that selects 3420 when it lands in band (+1.5%). Kept as the tv3520+measured-A experimental arm; NOT the standing recipe.",
+ "properties": {
+  "density_kg_m3": 4420.0,
+  "solid_density_kg_m3": 4420.0,
+  "liquidus_temperature_k": 1923.15,
+  "solidus_temperature_k": 1873.15,
+  "specific_heat_j_kg_k": 546.0,
+  "solid_specific_heat_j_kg_k": 546.0,
+  "thermal_conductivity_w_m_k": 7.0,
+  "solid_thermal_conductivity_w_m_k": 7.0,
+  "dynamic_viscosity_pa_s": 0.00325,
+  "latent_heat_j_kg": 345000.0,
+  "surface_tension_n_m": 1.58287,
+  "vapor_pressure_pa": 101300.0,
+  "vaporization_temperature_k": 3520.0,
+  "vaporization_latent_heat_j_kg": 9830000.0,
+  "vaporization_molar_mass_kg_mol": 0.047867
+ },
+ "optical": {
+  "normal_absorptivity": 0.33,
+  "prefer_resistivity": false
+ },
+ "provenance": "see materials/sources.md",
+ "real_material_test_note": "molar mass added: computed tvexp (correct Clausius-Clapeyron) for the v2 physics bundle | sigma LIQUID branch rebuilt per review: sigma(Tl)=1.52 N/m, dsigma/dT=-2.6e-4 N/m/K (Mills liquid values) from liquidus to Tv=3123 K -> sigma(Tv)=1.208. Prior extension used the sub-liquidus endpoints slope -5.93e-4 (2.3x the liquid value)."
+}

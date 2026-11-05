@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "material_name": "Titanium Alloy Ti Al V IMI 318 Mills data",
+  "flow3d_label": "Titanium Alloy Ti Al V IMI 318 Mills data",
+  "source": "Material values transcribed from a local FLOW-3D case input for reproducibility testing.",
+  "properties": {
+    "density_kg_m3": 4420.0,
+    "solid_density_kg_m3": 4420.0,
+    "liquidus_temperature_k": 1923.15,
+    "solidus_temperature_k": 1873.15,
+    "specific_heat_j_kg_k": 546.0,
+    "solid_specific_heat_j_kg_k": 546.0,
+    "thermal_conductivity_w_m_k": 7.0,
+    "solid_thermal_conductivity_w_m_k": 7.0,
+    "dynamic_viscosity_pa_s": 0.00325,
+    "latent_heat_j_kg": 345000.0,
+    "surface_tension_n_m": 1.58287,
+    "vapor_pressure_pa": 101300.0,
+    "vaporization_temperature_k": 3123.15,
+    "vaporization_latent_heat_j_kg": 9830000.0,
+    "vaporization_molar_mass_kg_mol": 0.047867
+  },
+  "optical": {
+    "normal_absorptivity": 0.35,
+    "prefer_resistivity": true
+  },
+  "provenance": "see materials/sources.md"
+}

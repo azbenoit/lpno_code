@@ -1,0 +1,17 @@
+{
+ "_why_a_sidecar": "gan_points.json is a bare JSON list and cannot carry these fields itself; the reproducibility notebook reads it with json.loads(...) as a list, so wrapping it in an object would break that consumer. score_anchors.load_anchor() merges this file.",
+ "source": {
+  "citation": "Gan et al. 2021, universal keyhole scaling, dataset SD1",
+  "provenance_verified": true
+ },
+ "depth_kind": "depression",
+ "depth_measurement": "in-situ synchrotron X-ray imaging of the vapour depression. NOT a metallographic fusion depth -- fusion is always the larger, and comparing our fusion depth against these values inflates the apparent gap.",
+ "warning_eta_is_not_measured": "the `eta` column is a ray-tracing MODEL OUTPUT, not a measurement. Never cite it as experimental absorptance; doing so was retracted on 2026-07-29.",
+ "fields": {
+  "P": "laser power, W",
+  "V": "scan speed, m/s",
+  "r0": "beam radius, m (spot_d / 2)",
+  "depth_um": "vapour-depression depth, um",
+  "group": "alloy and spot size"
+ }
+}

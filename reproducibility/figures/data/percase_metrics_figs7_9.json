@@ -1,0 +1,75 @@
+{
+ "what": "Per-case metrics of the Fig 7-9 cases: each tabled tab:paths-accuracy model scored on the one simulation its figure shows, over every frame, with the settings of its published evaluation (full resolution, inference batch 1); columns as in tab:paths-accuracy (substrate T MAE/RMSE, beam-box MAE, substrate relative error, melt-pool IoU of fl > 0.5).",
+ "rows": [
+  {
+   "model": "fno_mb80_ft6k_from_rand150_v2",
+   "case": "mbc40_026",
+   "T_MAE_K": 21.22516247052603,
+   "T_RMSE_K": 62.90742492399409,
+   "BB_MAE_K": 107.69331267028787,
+   "rel_err_pct": 6.410956324923754,
+   "meltpool_iou": 0.3304599614775108,
+   "frames": 386
+  },
+  {
+   "model": "fno_mb80_ft6k_from_rand150_v2",
+   "case": "mbc40_031",
+   "T_MAE_K": 20.909424664851088,
+   "T_RMSE_K": 55.95121961812694,
+   "BB_MAE_K": 87.97497689634395,
+   "rel_err_pct": 5.979013722758834,
+   "meltpool_iou": 0.44186254868678265,
+   "frames": 639
+  },
+  {
+   "model": "fno_rand150_newphys_16ch_32k",
+   "case": "r150np_136",
+   "T_MAE_K": 23.40585300160103,
+   "T_RMSE_K": 49.106749085048946,
+   "BB_MAE_K": 93.03032056045045,
+   "rel_err_pct": 4.91605630272904,
+   "meltpool_iou": 0.7901986041027163,
+   "frames": 392
+  },
+  {
+   "model": "fno_varspeed_newphys_16ch_32k",
+   "case": "vsn_066",
+   "T_MAE_K": 7.275334256647056,
+   "T_RMSE_K": 32.42938629936033,
+   "BB_MAE_K": 107.70642585417677,
+   "rel_err_pct": 2.2670319823209026,
+   "meltpool_iou": 0.5469444668143881,
+   "frames": 81
+  },
+  {
+   "model": "fno_varspeed_newphys_16ch_32k",
+   "case": "vsn_091",
+   "T_MAE_K": 7.698932920895082,
+   "T_RMSE_K": 25.78840413077299,
+   "BB_MAE_K": 147.8981817145495,
+   "rel_err_pct": 2.3773901901108547,
+   "meltpool_iou": 0.5949446852003133,
+   "frames": 194
+  },
+  {
+   "model": "gaot_rand150_newphys_16ch_38k",
+   "case": "r150np_136",
+   "T_MAE_K": 42.21309754923087,
+   "T_RMSE_K": 73.77100146068915,
+   "BB_MAE_K": 143.14207965263373,
+   "rel_err_pct": 8.866242313425499,
+   "meltpool_iou": 0.7127452491267422,
+   "frames": 392
+  },
+  {
+   "model": "rigno_rand150_newphys_35k_e8_12ch",
+   "case": "r150np_136",
+   "T_MAE_K": 29.532192392673622,
+   "T_RMSE_K": 57.29929158080602,
+   "BB_MAE_K": 101.52391981419645,
+   "rel_err_pct": 6.20280408218743,
+   "meltpool_iou": 0.7470404127377247,
+   "frames": 392
+  }
+ ]
+}

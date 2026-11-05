@@ -1,0 +1,19 @@
+{
+ "stride": [
+  1,
+  1,
+  1
+ ],
+ "crop_z_top": 0,
+ "time_as_dim": false,
+ "time_frames": null,
+ "include_time": true,
+ "time_as_batch": false,
+ "derived_fields": [
+  "conduction_field"
+ ],
+ "time_avg_window": 30,
+ "moving_ref_frame": true,
+ "super_res_factor": 1,
+ "moving_frame_steps": 30
+}

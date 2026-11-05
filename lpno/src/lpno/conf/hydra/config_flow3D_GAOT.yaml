@@ -1,0 +1,135 @@
+# GAOT (Geometry-Aware Operator Transformer) on the straight-path FLOW-3D set.
+#
+# This is an ARCHITECTURE SWAP, nothing else. It inherits config_flow3D_RIGNO
+# ("config M") wholesale and overrides only `custom.model_family` and the arch
+# block, so every hyperparameter that is not the architecture -- lion lr 3e-4,
+# one-cycle LR (config M's default; total_steps is derived from
+# training.max_steps in code), relobralo, batch 1/1, 32000 steps, val_max_cases=0,
+# time-averaged moving frame (time_as_batch=false), alpha masking, the input and
+# output key lists -- is byte-identical to the recipe the RIGNO numbers were
+# measured with. Inheriting rather than copying is deliberate: a copied config
+# drifts, and then the comparison silently stops being an architecture
+# measurement.
+#
+# The like-for-like reference is a RIGNO trained with this recipe (config M
+# unchanged except one knob); RIGNO's tuned extras (FiLM, one-cycle) are
+# RIGNO-specific and not enabled here.
+#
+# Config M sets no `amp` block, so this runs fp32. Keep it that way: GAOT's
+# attention uses a segment softmax over neighbourhoods and the geometry
+# embedding runs `torch.linalg.eigvalsh`, both fp16 overflow candidates, and the
+# whole point of this config is that only the architecture differs.
+defaults:
+  - config_flow3D_RIGNO
+  - _self_
+
+arch:
+  gaot:
+    # Physical ceiling on T, with a straight-through estimator.
+    #
+    # NOT just a metric guard -- a TRAINING STABILITY guard. A 32k-step GAOT control
+    # trained cleanly to step 12000 (val T MAE 22.4 K), spiked at 14000,
+    # and from step 16000 diverged monotonically: 1.4e6 K -> 3.8e8 K by step 28000, with
+    # alpha collapsing to a constant (val alpha MAE pinned at 0.74988, exactly the metal
+    # fraction). Nothing bounded T, so once the high-LR part of the one-cycle destabilised
+    # it there was no restoring force. The 20k runs finish before this window and so never
+    # showed it -- which is why the bound was first scoped only to the material configs.
+    #
+    # 1.3 is physics: Ti-6Al-4V boils at 3123 K and ref_scales.T = 3000, so 1.3 -> 3900 K
+    # sits comfortably above anything physical while the true field never exceeds 1.041.
+    # Straight-through so a drifted cell still receives corrective gradient, and so one
+    # wild cell cannot dominate the batch gradient.
+    output_bounds:
+      T: [0.0, 1.3]
+    # MAGNO encoder -> UViT processor -> MAGNO decoder (models/gaot_arch.py).
+    # dimension and latent_tokens are rewritten by config_loading from use_2D.
+    dimension: 3
+
+    # --- latent lattice ---
+    # Sized against the grid the model ACTUALLY sees, which is not the config
+    # box: custom.geometry.resolution is [90, 40, 30], but this config runs
+    # moving_ref_frame=true with time_avg_window/moving_frame_steps=30, and the
+    # frame crop makes every field arrive as 61 x 40 x 40 (confirmed in the
+    # log of a RIGNO control run). Coordinates are
+    # normalised per-axis to [-1, 1], so the latent lattice should track that
+    # 61:40:40 index aspect, not the physical box aspect: 32 x 20 x 20 is about
+    # half the grid resolution per axis, 12800 tokens, 1600 patches at patch 2.
+    # GAOT builds its graph lazily from the true shape, so a different crop just
+    # rebuilds the edges -- only this lattice is a human choice.
+    latent_tokens: [32, 20, 20]
+    patch_size: 2
+    lifting_channels: 32
+
+    # --- processor (UViT) ---
+    # 5,609,570 parameters against config-M RIGNO's 722,792 (7.8x), ~5.3M of it
+    # the transformer. The capacity is NOT what buys the accuracy: the
+    # size-matched arm (lifting_channels 16, hidden_size 128, ffn_hidden_size 512,
+    # num_layers 4 -> 1,158,706 params) reached 9.52 K val against this config's
+    # 9.12 K, i.e. 4% off at a fifth of the parameters. Use that variant when
+    # memory or parameter count matters.
+    hidden_size: 256
+    ffn_hidden_size: 1024
+    num_layers: 5
+    num_heads: 8
+    num_kv_heads: 8
+    atten_dropout: 0.0
+    # 'rope' needs the optional rotary-embedding-torch package; 'absolute' is
+    # the upstream GAOT default and needs no extra dependency.
+    positional_embedding: absolute
+    use_long_range_skip: true
+
+    # --- MAGNO encoder/decoder ---
+    mlp_hidden_layers: [64, 64, 64]
+    projection_channels: 256
+    # knn, not radius: a fixed neighbour count is density-independent, bounds the
+    # edge budget exactly, and cannot leave a latent token with zero neighbours
+    # (which a fixed radius can, silently zeroing that token's contribution).
+    #
+    # Both directions bound the PHYSICAL side, which is the one that has to be
+    # covered. The encoder is source-centric (every physical node pushes to its
+    # k_encoder nearest latent tokens) so 100% of the input field is read; the
+    # decoder is query-centric (every physical node pulls from its k_decoder
+    # nearest latent tokens) so 100% of the output is produced. Getting the
+    # encoder direction wrong is not a crash, it is a silent information loss:
+    # the query-centric build on this 61x40x40 / 32x20x20 pairing reads only
+    # 80.6% of the physical nodes at k=8 and 47.1% at k=4 (measured).
+    #
+    # Edge budget on the 61x40x40 grid: encoder 97600*4 = 390k, decoder
+    # 97600*8 = 781k -- same order as RIGNO's r2p set at this resolution.
+    neighbor_strategy: knn
+    k_encoder: 4
+    k_decoder: 8
+    gno_radius: 0.15
+    max_neighbors: 0
+    use_attention: true
+    attention_type: cosine
+    transform_type: linear
+    # BOTH OFF, contrary to upstream (whose DrivAerNet config runs
+    # use_geoembed: [true, false]). Measured on this task: turning the
+    # ENCODER embedding off improved every metric slightly -- val T MAE
+    # 9.27 -> 9.12 K, RMSE 33.07 -> 31.98, surface 27.73 -> 27.03 -- while saving
+    # 1.5 GiB of peak memory and removing the eigvalsh failure mode of the
+    # geometry embedding. The statistical descriptors (neighbour count, distance
+    # mean/variance, neighbourhood PCA) are near-degenerate on a uniform Cartesian
+    # lattice, which is what this grid is; they earn their keep on the irregular
+    # point clouds the paper ablated them on. Set true to reproduce upstream.
+    use_geoembed_encoder: false
+    use_geoembed_decoder: false
+    # knn: the decoder reads its neighbour set (neighbor_strategy) with attention, as every model before
+    # 2026-11-03. trilinear: the 8 corner tokens of each node's latent cell with trilinear weights (a partition of
+    # unity), so the decoded field cannot jump at latent cell walls (gaot_arch._trilinear_edges).
+    decoder_stencil: knn
+    # agno: the decoder's kernel integral. none (trilinear stencil only): plain trilinear interpolation of the token
+    # features, so the decoder cannot itself put structure inside a latent cell.
+    decoder_kernel: agno
+    # null, or per-axis scales applied to the coordinates of the kNN / radius searches only (physical half-extents
+    # over the largest one make them isotropic in physical distance).
+    neighbor_metric: null
+    use_pointwise_skip: false
+    pointwise_skip_channels: 64
+    embedding_method: statistical
+    cache_dir: outputs/gaot_graphs
+
+custom:
+  name: gaot_sp
+  model_family: gaot

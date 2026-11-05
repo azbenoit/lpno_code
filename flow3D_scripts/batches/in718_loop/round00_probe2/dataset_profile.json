@@ -1,0 +1,15 @@
+{
+ "batch_keyword": "in718_loop_probe2",
+ "description": "IN718 PROBE SET v2 (16 cases, 4 per regime) -- REPLACES ds 89701, which round 2 contaminated by acquiring 9/25 and 8/25 of its points (most at distance exactly 0.0000) because the probe was never in the acquisition exclusion list. A probe measured on cases the model trained on is in-sample and biases E_r, hence b_r. Verified disjoint (min normalized distance 0.134) from both arms rounds 1-2, both top-ups, the old probe and the frozen test set. The probe is now seeded into taken by round.py init so this cannot recur.",
+ "keywords": [
+  "in718",
+  "two-alloy",
+  "self-improve",
+  "probe",
+  "bandit_signal",
+  "straight path",
+  "steady",
+  "experimentally_anchored",
+  "replaces_89701"
+ ]
+}

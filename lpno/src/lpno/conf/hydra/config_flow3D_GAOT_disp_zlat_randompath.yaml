@@ -1,0 +1,30 @@
+# GAOT-4c: displacement kernel + anisotropic z-refined lattice.
+#
+# TARGETS THE RESIDUAL BLOCK STRUCTURE. The displacement kernel removed the hard
+# checkerboard, but the predicted `fl` blob in an x-y slice of a displacement run is still
+# noticeably SQUARE, so some cell-scale structure survives. Displacement lets the kernel
+# interpolate within a cell; it does not add information the lattice never captured. If a
+# representation ceiling is what is left, halving the z spacing should move it.
+#
+# z only: the melt/keyhole interface is a thin z-localised shell, and the earlier ISOTROPIC
+# refinement (gaot_abl_lat40) was a wash because it spent tokens where nothing happens.
+# 150x100x40 over [50,34,40] gives one token per z cell where the discontinuity lives.
+#
+# This is the same test as config_flow3D_GAOT_zlat_randompath but stacked on the corrected
+# kernel. Running it alone was always going to be ambiguous: under a box filter a finer
+# lattice just makes smaller boxes.
+#
+# Falsifier: if this adds nothing over displacement alone, the residual squareness is not a
+# lattice-resolution limit, and lattice refinement can be dropped from the programme.
+#
+# Baseline: config_flow3D_GAOT_disp_randompath. ONLY latent_tokens[2] differs.
+defaults:
+  - config_flow3D_GAOT_disp_randompath
+  - _self_
+
+arch:
+  gaot:
+    latent_tokens: [50, 34, 40]
+
+custom:
+  name: gaot_cond_disp_zlat

@@ -1,0 +1,36 @@
+# ABLATION 2: anisotropic latent refinement in z, on the conduction half.
+#
+# DIRECT TEST OF THE TILING HYPOTHESIS. Rendered cross-sections of the baseline model
+# show the predicted TEMPERATURE field is piecewise-constant in rectangular tiles, with a
+# regular +/-250 K checkerboard error extending well beyond the melt pool into the bulk.
+# Ground truth is smooth; RIGNO on the identical frame is smooth. The melt pool is then
+# under-predicted (too shallow) because the melt boundary is the 1898 K isotherm and a
+# +/-250 K blocky perturbation displaces it.
+#
+# The tile scale matches the latent spacing: a 150x100x40 grid over a 50x34x20 lattice is
+# 3 x ~3 x 2 physical cells per latent token. If the tiling causes the `fl` error, halving
+# the z spacing (20 -> 40, so 1 cell per token in z) should shrink the tiles in z and
+# improve `fl` IoU and melt depth. If `fl` does NOT improve, the tiling is not the cause
+# and the pointwise-skip/lattice line of attack is wrong -- that is the falsification.
+#
+# z first because the melt/keyhole interface is a thin z-localised shell, and because the
+# earlier ISOTROPIC refinement was a wash, which is a different
+# experiment: isotropic spends tokens where nothing happens.
+#
+# Cost: 34000 -> 68000 tokens. The measured scaling on this architecture is mild -- 19760
+# -> 34000 tokens cost only +235 MiB, because the transformer works on PATCHES
+# (patch_size 2) and the edge sets are set by the input, not the lattice. Declared VRAM is
+# generous in case that scaling does not hold at 68000.
+#
+# Baseline: config_flow3D_GAOT_randompath. Same steps, lr, schedule and resolution;
+# ONLY latent_tokens[2] differs.
+defaults:
+  - config_flow3D_GAOT_randompath
+  - _self_
+
+arch:
+  gaot:
+    latent_tokens: [50, 34, 40]
+
+custom:
+  name: gaot_cond_zlat

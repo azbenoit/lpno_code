@@ -1,0 +1,587 @@
+{
+ "source": {
+  "citation": "Vaglio et al., 'Single Tracks Data obtained by Selective Laser Melting of Ti6Al4V with a Small Laser Spot Diameter' (Mendeley Data)",
+  "doi": "10.17632/s9438vb5xd",
+  "provenance_verified": "PARTIAL",
+  "verified_2026_07_30": "Depth/width/height tables read directly from the dataset's Allegati/Data.xlsx. Depth at 100 W / 0.25 m/s = 110.94 um CONFIRMED.",
+  "NOT_verified": "The beam radius (25 um) and the 25 um powder-layer thickness come from a literature-search summary, NOT from the dataset -- the zip contains only Data.xlsx and section/top images, no paper or README."
+ },
+ "material": "Ti-6Al-4V",
+ "substrate": "powder layer reported as 25 um (UNVERIFIED)",
+ "depth_kind": "fusion",
+ "depth_measurement": "cross-section ('Section' images in the dataset); the sheets are labelled Track depth (D) / width (W) / height (H)",
+ "beam": {
+  "r0_um": 25.0,
+  "spot_convention": "radius, from a reported 50 um 1/e^2 diameter (UNVERIFIED)",
+  "SUSPECT": "At 100 W / 0.25 m/s this dataset gives depth 110.94 um and width 193.04 um, while Galiegue at the SAME power and speed with a VERIFIED 2.4x larger radius (60 um) gives 98.7 um and 192.8 um -- identical to within 2%. Either the pool is conduction-limited here (so spot size barely matters, the physical reading), or the 25 um radius is wrong. Do not use this anchor to score spot-size response until the radius is verified from the paper."
+ },
+ "primary_scoring_point": {
+  "power_w": 100.0,
+  "speed_m_s": 0.25,
+  "depth_um": 110.94,
+  "width_um": 193.04,
+  "height_um": 39.06
+ },
+ "points": [
+  {
+   "power_w": 50.0,
+   "speed_m_s": 0.25,
+   "depth_um": 77.73,
+   "width_um": 134.57,
+   "height_um": 43.36
+  },
+  {
+   "power_w": 50.0,
+   "speed_m_s": 0.5,
+   "depth_um": 44.92,
+   "width_um": 92.2,
+   "height_um": 57.42
+  },
+  {
+   "power_w": 50.0,
+   "speed_m_s": 0.75,
+   "depth_um": 63.67,
+   "width_um": 97.96,
+   "height_um": 49.61
+  },
+  {
+   "power_w": 50.0,
+   "speed_m_s": 1.0,
+   "depth_um": 15.23,
+   "width_um": 83.55,
+   "height_um": 69.14
+  },
+  {
+   "power_w": 50.0,
+   "speed_m_s": 1.25,
+   "depth_um": 82.81,
+   "width_um": 70.5,
+   "height_um": 10.16
+  },
+  {
+   "power_w": 50.0,
+   "speed_m_s": 1.5,
+   "depth_um": 16.41,
+   "width_um": 76.1,
+   "height_um": 6.25
+  },
+  {
+   "power_w": 50.0,
+   "speed_m_s": 1.75,
+   "depth_um": 8.2,
+   "width_um": 62.88,
+   "height_um": 1.17
+  },
+  {
+   "power_w": 50.0,
+   "speed_m_s": 2.0,
+   "depth_um": 5.47,
+   "width_um": 39.15,
+   "height_um": 3.12
+  },
+  {
+   "power_w": 50.0,
+   "speed_m_s": 2.25,
+   "depth_um": 3.91,
+   "width_um": 68.81,
+   "height_um": 1.56
+  },
+  {
+   "power_w": 50.0,
+   "speed_m_s": 2.5,
+   "depth_um": 5.86,
+   "width_um": 54.4,
+   "height_um": 6.64
+  },
+  {
+   "power_w": 100.0,
+   "speed_m_s": 0.25,
+   "depth_um": 110.94,
+   "width_um": 193.04,
+   "height_um": 39.06
+  },
+  {
+   "power_w": 100.0,
+   "speed_m_s": 0.5,
+   "depth_um": 104.69,
+   "width_um": 167.95,
+   "height_um": 57.81
+  },
+  {
+   "power_w": 100.0,
+   "speed_m_s": 0.75,
+   "depth_um": 100.39,
+   "width_um": 125.08,
+   "height_um": 38.67
+  },
+  {
+   "power_w": 100.0,
+   "speed_m_s": 1.0,
+   "depth_um": 65.62,
+   "width_um": 119.99,
+   "height_um": 28.91
+  },
+  {
+   "power_w": 100.0,
+   "speed_m_s": 1.25,
+   "depth_um": 66.02,
+   "width_um": 113.72,
+   "height_um": 12.89
+  },
+  {
+   "power_w": 100.0,
+   "speed_m_s": 1.5,
+   "depth_um": 50.0,
+   "width_um": 83.55,
+   "height_um": 56.25
+  },
+  {
+   "power_w": 100.0,
+   "speed_m_s": 1.75,
+   "depth_um": 35.55,
+   "width_um": 94.4,
+   "height_um": 24.61
+  },
+  {
+   "power_w": 100.0,
+   "speed_m_s": 2.0,
+   "depth_um": 34.38,
+   "width_um": 103.38,
+   "height_um": 34.38
+  },
+  {
+   "power_w": 100.0,
+   "speed_m_s": 2.25,
+   "depth_um": 44.14,
+   "width_um": 88.98,
+   "height_um": 31.64
+  },
+  {
+   "power_w": 100.0,
+   "speed_m_s": 2.5,
+   "depth_um": 58.2,
+   "width_um": 112.87,
+   "height_um": 6.64
+  },
+  {
+   "power_w": 150.0,
+   "speed_m_s": 0.25,
+   "depth_um": 423.05,
+   "width_um": 221.68,
+   "height_um": 67.58
+  },
+  {
+   "power_w": 150.0,
+   "speed_m_s": 0.5,
+   "depth_um": 195.7,
+   "width_um": 169.14,
+   "height_um": 49.61
+  },
+  {
+   "power_w": 150.0,
+   "speed_m_s": 0.75,
+   "depth_um": 177.73,
+   "width_um": 132.19,
+   "height_um": 31.64
+  },
+  {
+   "power_w": 150.0,
+   "speed_m_s": 1.0,
+   "depth_um": 79.3,
+   "width_um": 136.77,
+   "height_um": 53.52
+  },
+  {
+   "power_w": 150.0,
+   "speed_m_s": 1.25,
+   "depth_um": 100.0,
+   "width_um": 121.01,
+   "height_um": 36.72
+  },
+  {
+   "power_w": 150.0,
+   "speed_m_s": 1.5,
+   "depth_um": 88.28,
+   "width_um": 115.76,
+   "height_um": 43.75
+  },
+  {
+   "power_w": 150.0,
+   "speed_m_s": 1.75,
+   "depth_um": 88.28,
+   "width_um": 123.38,
+   "height_um": 52.34
+  },
+  {
+   "power_w": 150.0,
+   "speed_m_s": 2.0,
+   "depth_um": 52.34,
+   "width_um": 93.72,
+   "height_um": 32.03
+  },
+  {
+   "power_w": 150.0,
+   "speed_m_s": 2.25,
+   "depth_um": 50.78,
+   "width_um": 105.76,
+   "height_um": 22.66
+  },
+  {
+   "power_w": 150.0,
+   "speed_m_s": 2.5,
+   "depth_um": 44.92,
+   "width_um": 98.13,
+   "height_um": 44.14
+  },
+  {
+   "power_w": 200.0,
+   "speed_m_s": 0.25,
+   "depth_um": 553.37,
+   "width_um": 218.29,
+   "height_um": 45.4
+  },
+  {
+   "power_w": 200.0,
+   "speed_m_s": 0.5,
+   "depth_um": 377.82,
+   "width_um": 169.48,
+   "height_um": 38.52
+  },
+  {
+   "power_w": 200.0,
+   "speed_m_s": 0.75,
+   "depth_um": 245.53,
+   "width_um": 131.69,
+   "height_um": 36.96
+  },
+  {
+   "power_w": 200.0,
+   "speed_m_s": 1.0,
+   "depth_um": 65.76,
+   "width_um": 114.4,
+   "height_um": 45.53
+  },
+  {
+   "power_w": 200.0,
+   "speed_m_s": 1.25,
+   "depth_um": 121.4,
+   "width_um": 114.23,
+   "height_um": 53.7
+  },
+  {
+   "power_w": 200.0,
+   "speed_m_s": 1.5,
+   "depth_um": 106.61,
+   "width_um": 107.62,
+   "height_um": 28.79
+  },
+  {
+   "power_w": 200.0,
+   "speed_m_s": 1.75,
+   "depth_um": 82.88,
+   "width_um": 111.01,
+   "height_um": 51.75
+  },
+  {
+   "power_w": 200.0,
+   "speed_m_s": 2.0,
+   "depth_um": 71.6,
+   "width_um": 85.42,
+   "height_um": 45.91
+  },
+  {
+   "power_w": 200.0,
+   "speed_m_s": 2.25,
+   "depth_um": 49.03,
+   "width_um": 95.59,
+   "height_um": 35.02
+  },
+  {
+   "power_w": 200.0,
+   "speed_m_s": 2.5,
+   "depth_um": 46.69,
+   "width_um": 93.38,
+   "height_um": 63.04
+  },
+  {
+   "power_w": 250.0,
+   "speed_m_s": 0.25,
+   "depth_um": 601.39,
+   "width_um": 216.43,
+   "height_um": 52.78
+  },
+  {
+   "power_w": 250.0,
+   "speed_m_s": 0.5,
+   "depth_um": 463.42,
+   "width_um": 165.07,
+   "height_um": 40.86
+  },
+  {
+   "power_w": 250.0,
+   "speed_m_s": 0.75,
+   "depth_um": 336.19,
+   "width_um": 134.74,
+   "height_um": 52.14
+  },
+  {
+   "power_w": 250.0,
+   "speed_m_s": 1.0,
+   "depth_um": 180.93,
+   "width_um": 114.23,
+   "height_um": 47.08
+  },
+  {
+   "power_w": 250.0,
+   "speed_m_s": 1.25,
+   "depth_um": 133.07,
+   "width_um": 121.86,
+   "height_um": 75.49
+  },
+  {
+   "power_w": 250.0,
+   "speed_m_s": 1.5,
+   "depth_um": 122.96,
+   "width_um": 101.35,
+   "height_um": 33.46
+  },
+  {
+   "power_w": 250.0,
+   "speed_m_s": 1.75,
+   "depth_um": 103.5,
+   "width_um": 92.54,
+   "height_um": 23.35
+  },
+  {
+   "power_w": 250.0,
+   "speed_m_s": 2.0,
+   "depth_um": 89.88,
+   "width_um": 92.2,
+   "height_um": 55.64
+  },
+  {
+   "power_w": 250.0,
+   "speed_m_s": 2.25,
+   "depth_um": 68.48,
+   "width_um": 99.32,
+   "height_um": 102.72
+  },
+  {
+   "power_w": 250.0,
+   "speed_m_s": 2.5,
+   "depth_um": 61.09,
+   "width_um": 87.96,
+   "height_um": 1.95
+  },
+  {
+   "power_w": 300.0,
+   "speed_m_s": 0.25,
+   "depth_um": 770.21,
+   "width_um": 223.88,
+   "height_um": 36.88
+  },
+  {
+   "power_w": 300.0,
+   "speed_m_s": 0.5,
+   "depth_um": 566.24,
+   "width_um": 174.23,
+   "height_um": 51.59
+  },
+  {
+   "power_w": 300.0,
+   "speed_m_s": 0.75,
+   "depth_um": 387.16,
+   "width_um": 147.96,
+   "height_um": 53.31
+  },
+  {
+   "power_w": 300.0,
+   "speed_m_s": 1.0,
+   "depth_um": 338.13,
+   "width_um": 132.03,
+   "height_um": 28.4
+  },
+  {
+   "power_w": 300.0,
+   "speed_m_s": 1.25,
+   "depth_um": 268.48,
+   "width_um": 110.33,
+   "height_um": 53.7
+  },
+  {
+   "power_w": 300.0,
+   "speed_m_s": 1.5,
+   "depth_um": 176.26,
+   "width_um": 96.1,
+   "height_um": 28.4
+  },
+  {
+   "power_w": 300.0,
+   "speed_m_s": 1.75,
+   "depth_um": 143.97,
+   "width_um": 94.57,
+   "height_um": 35.02
+  },
+  {
+   "power_w": 300.0,
+   "speed_m_s": 2.0,
+   "depth_um": 118.29,
+   "width_um": 86.94,
+   "height_um": 52.14
+  },
+  {
+   "power_w": 300.0,
+   "speed_m_s": 2.25,
+   "depth_um": 59.14,
+   "width_um": 96.1,
+   "height_um": 52.92
+  },
+  {
+   "power_w": 300.0,
+   "speed_m_s": 2.5,
+   "depth_um": 66.54,
+   "width_um": 89.82,
+   "height_um": 32.3
+  },
+  {
+   "power_w": 350.0,
+   "speed_m_s": 0.25,
+   "depth_um": 987.39,
+   "width_um": 245.75,
+   "height_um": 50.45
+  },
+  {
+   "power_w": 350.0,
+   "speed_m_s": 0.5,
+   "depth_um": 637.74,
+   "width_um": 174.23,
+   "height_um": 49.06
+  },
+  {
+   "power_w": 350.0,
+   "speed_m_s": 0.75,
+   "depth_um": 480.54,
+   "width_um": 153.89,
+   "height_um": 26.07
+  },
+  {
+   "power_w": 350.0,
+   "speed_m_s": 1.0,
+   "depth_um": 372.76,
+   "width_um": 124.23,
+   "height_um": 60.7
+  },
+  {
+   "power_w": 350.0,
+   "speed_m_s": 1.25,
+   "depth_um": 293.77,
+   "width_um": 106.43,
+   "height_um": 56.42
+  },
+  {
+   "power_w": 350.0,
+   "speed_m_s": 1.5,
+   "depth_um": 212.84,
+   "width_um": 120.67,
+   "height_um": 113.23
+  },
+  {
+   "power_w": 350.0,
+   "speed_m_s": 1.75,
+   "depth_um": 252.53,
+   "width_um": 111.01,
+   "height_um": 32.3
+  },
+  {
+   "power_w": 350.0,
+   "speed_m_s": 2.0,
+   "depth_um": 166.15,
+   "width_um": 112.37,
+   "height_um": 99.22
+  },
+  {
+   "power_w": 350.0,
+   "speed_m_s": 2.25,
+   "depth_um": 152.53,
+   "width_um": 80.16,
+   "height_um": 27.24
+  },
+  {
+   "power_w": 350.0,
+   "speed_m_s": 2.5,
+   "depth_um": 131.52,
+   "width_um": 89.49,
+   "height_um": 7.0
+  },
+  {
+   "power_w": 400.0,
+   "speed_m_s": 0.25,
+   "depth_um": 1076.27,
+   "width_um": 242.02,
+   "height_um": 59.32
+  },
+  {
+   "power_w": 400.0,
+   "speed_m_s": 0.5,
+   "depth_um": 741.22,
+   "width_um": 168.29,
+   "height_um": 81.76
+  },
+  {
+   "power_w": 400.0,
+   "speed_m_s": 0.75,
+   "depth_um": 525.15,
+   "width_um": 154.06,
+   "height_um": 46.11
+  },
+  {
+   "power_w": 400.0,
+   "speed_m_s": 1.0,
+   "depth_um": 409.47,
+   "width_um": 120.33,
+   "height_um": 78.11
+  },
+  {
+   "power_w": 400.0,
+   "speed_m_s": 1.25,
+   "depth_um": 322.96,
+   "width_um": 114.4,
+   "height_um": 86.38
+  },
+  {
+   "power_w": 400.0,
+   "speed_m_s": 1.5,
+   "depth_um": 259.92,
+   "width_um": 109.65,
+   "height_um": 9.34
+  },
+  {
+   "power_w": 400.0,
+   "speed_m_s": 1.75,
+   "depth_um": 185.21,
+   "width_um": 116.94,
+   "height_um": 21.01
+  },
+  {
+   "power_w": 400.0,
+   "speed_m_s": 2.0,
+   "depth_um": 157.59,
+   "width_um": 90.84,
+   "height_um": 29.18
+  },
+  {
+   "power_w": 400.0,
+   "speed_m_s": 2.25,
+   "depth_um": 141.63,
+   "width_um": 84.57,
+   "height_um": 66.15
+  },
+  {
+   "power_w": 400.0,
+   "speed_m_s": 2.5,
+   "depth_um": 132.68,
+   "width_um": 87.96,
+   "height_um": 64.98
+  }
+ ]
+}

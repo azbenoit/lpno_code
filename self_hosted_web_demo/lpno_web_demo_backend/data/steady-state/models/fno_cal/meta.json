@@ -1,0 +1,20 @@
+{
+ "label": "FNO",
+ "type": "fno",
+ "order": 1,
+ "default": true,
+ "model_name": "fno_spkh123_steady_32k_s44",
+ "physics": {
+  "p_watts": {
+   "min": 40.0,
+   "max": 215.0,
+   "default": 150.0
+  },
+  "v_scan_mps": {
+   "min": 0.101,
+   "max": 0.96,
+   "default": 0.6
+  },
+  "h_norm_denom": 275.0539301382
+ }
+}

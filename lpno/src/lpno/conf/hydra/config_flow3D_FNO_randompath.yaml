@@ -1,0 +1,70 @@
+# FNO on arbitrary-weld-path FLOW-3D runs (random + sinusoidal laser paths).
+#
+# Inherits the straight-line flow3D FNO config and overrides only what the
+# arbitrary-path task changes:
+#   - lab frame (moving_ref_frame=false) + time inference (time_as_batch=true),
+#   - explicit laser-trajectory input channels (beam_x/beam_y/beam_dist/path_dose)
+#     derived from each case's manifest, replacing the moving-frame position cue,
+#   - the random_paths train/val directories.
+# ref_scales, output keys, arch and step budget stay identical to the straight-line
+# baseline so temperature MAE/RMSE are comparable.
+defaults:
+  - config_NS_energy_PINO_flow3D
+  - _self_
+
+# Scalar-only training records (see config_flow3D_RIGNO_randompath for the
+# rationale): no validator/constraint file dumps, no slice figures, weight
+# histograms off. The val curve Validators/data/l2_relative_error_* remains.
+save_filetypes: ""
+# WarmupNode is CUDA-graph capture-safe; cuda_graphs kept off
+# until a capture-on training smoke is validated (see config_flow3D_RIGNO_randompath).
+cuda_graphs: false
+# FNO cannot run fp16: cuFFT requires power-of-two signal sizes in half
+# precision and the padded spectral grid here is [84, 59, 49]
+# ("cuFFT only supports dimensions whose sizes are powers of two"). RIGNO and
+# DeepONet keep amp.enabled=true (1.5-1.7x measured); FNO stays fp32.
+amp:
+  enabled: false
+
+training:
+  rec_results_freq: 18000
+  rec_validation_freq: 1000
+  print_stats_freq: 200
+  summary_freq: 18000
+  # fno_rp2's proven step budget (parent default 6000 is too short; rp2's val
+  # error still improved at 18k).
+  max_steps: 18000
+
+stop_criterion:
+  metric: "beambox_mae_T"
+  min_delta: 0.0
+  patience: 1000000
+  mode: "min"
+  freq: 1000
+  strict: true
+
+custom:
+  name: fno_randompath
+  data_dir: data/flow3D/random_paths/train
+  val_data_dir: data/flow3D/random_paths/val
+  time_as_batch: true
+  moving_ref_frame: false
+  wandb_offline: true
+
+  vtk_fields:
+    - Temperature
+    - Velocity
+    - Fraction Of Fluid
+    - Pressure
+
+  FNO_input_keys:
+    - V_scan
+    - P
+    - H_norm
+    - x
+    - y
+    - z
+    - beam_x
+    - beam_y
+    - beam_dist
+    - path_dose

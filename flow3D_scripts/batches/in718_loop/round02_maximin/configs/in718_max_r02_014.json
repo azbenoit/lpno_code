@@ -1,0 +1,68 @@
+{
+  "boundary_conditions": {
+    "x_max": "wall",
+    "x_min": "wall",
+    "y_max": "wall",
+    "y_min": "wall",
+    "z_max": "pressure",
+    "z_min": "wall"
+  },
+  "case_name": "in718_max_r02_014",
+  "geometry": {
+    "gas_clearance_m": 0.0001,
+    "length_m": 0.0009,
+    "placement": "centered",
+    "thickness_m": 0.00045,
+    "width_m": 0.0006
+  },
+  "laser": {
+    "absorptivity": 1.0,
+    "absorptivity_flag": 0,
+    "beam_radius_m": 6.5e-05,
+    "end_point_m": [
+      0.00029862,
+      0.0,
+      0.0
+    ],
+    "focal_distance_m": 0.001,
+    "fresnel_from_material": true,
+    "heat_distribution": "gaussian",
+    "lens_radius_m": 6.5e-05,
+    "max_reflections": 20,
+    "power_w": 247.14518516832769,
+    "radiation_distribution_flag": 2,
+    "reflection_flag": 3,
+    "reflection_limit": 0.01,
+    "reflectivity": 0.35,
+    "scan_speed_m_per_s": 0.40384615384615385,
+    "start_point_m": [
+      -0.00029862,
+      0.0,
+      0.0
+    ],
+    "turn_off_at_end": true,
+    "vapor_pressure_a": 101300.0,
+    "vapor_pressure_b": 13.958762
+  },
+  "material": {
+    "file": "../materials/in718_full/in718_full.json"
+  },
+  "mesh": {
+    "cell_size_m": 1e-05
+  },
+  "parallel": {
+    "cores": 10,
+    "threads_per_rank": 10
+  },
+  "schema_version": 1,
+  "simulation": {
+    "boundary_temperature_k": 300.0,
+    "finish_time_s": 0.001478881,
+    "initial_temperature_k": 273.15,
+    "max_iterations": 2000000000,
+    "recoil_model": 2,
+    "solver_profile": "legacy_case_fine_1",
+    "subprocess_id": 1,
+    "void_vapor_pressure_pa": 101325.0
+  }
+}

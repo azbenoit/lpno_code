@@ -1,0 +1,35 @@
+# RIGNO for the calibrated STRAIGHT-PATH task, at processor depth 8.
+#
+# Inherits config_flow3D_RIGNO_randompath_onecycle (the one-cycle lab-frame RIGNO
+# recipe) and changes exactly one thing: `processor_steps` 18 -> 8.
+#
+# WHY A SEPARATE CONFIG RATHER THAN CHANGING THE PARENT. The parent's depth 18 (the
+# d18_g8 recipe) is the random-path setting, and many models resolve through that
+# parent, so flipping it in place would silently re-tune random-path arms.
+# Straight-path submissions name THIS config instead.
+#
+# With one-cycle and num_graph_variants=8 on both sides, depth 8 matched depth 18 on
+# substrate error across seeds and gave a lower and much more stable beam-box error.
+#
+# NOT A CLEAN DEPTH-8 REVERT. Older depth-8 lab configurations ran
+# `num_graph_variants: 1` with the expLR schedule, which confounded depth with both the
+# schedule and the variant count. This config is depth 8 with the one-cycle schedule
+# and ngv 8, a different recipe despite the shared depth.
+defaults:
+  - config_flow3D_RIGNO_randompath_onecycle
+  - _self_
+
+arch:
+  rigno:
+    # The one intended change against the parent.
+    processor_steps: 8
+    # Pinned explicitly rather than inherited: every earlier depth-8 lab arm ran
+    # ngv 1, so a reader comparing this against them would otherwise have to
+    # guess which variant count the measurement above used. It used 8.
+    num_graph_variants: 8
+    # Kept true to match the arms the numbers above come from. The parent marks
+    # it REQUIRED at depth 18 + ngv 8 because that combination sits at ~23.3 GiB
+    # of a 23.46 GiB card; depth 8 has more headroom, so this is a candidate to
+    # turn off for ~one forward's worth of speed -- but it has NOT been measured
+    # off at this depth, so it stays on until it is.
+    grad_checkpointing: true

@@ -1,0 +1,44 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+
+# Packaging artifacts
+*.egg-info/
+.eggs/
+build/
+dist/
+pip-wheel-metadata/
+
+# Test and coverage output
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Type checker and linter caches
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Jupyter / AiiDAlab
+.ipynb_checkpoints/
+
+# OS cruft
+.DS_Store
+
+# Figures
+graphs/
+
+# Web console dev artifacts (machine-specific backend origin + run logs)
+web/public/config.local.json
+web/dev/.run_local_pids
+web/dev/*.log
+web/dev/render_out/
+
+# Machine-specific daemon environment (see daemon.env.example)
+daemon.env

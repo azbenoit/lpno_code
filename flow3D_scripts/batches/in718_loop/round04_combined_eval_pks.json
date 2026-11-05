@@ -1,0 +1,14 @@
+{
+ "combined_m1_all": 99930,
+ "combined_m1_overlap": 99934,
+ "combined_m1_extrap": 99940,
+ "combined_m1_ti64": 99946,
+ "combined_m2_all": 99950,
+ "combined_m2_overlap": 99954,
+ "combined_m2_extrap": 99962,
+ "combined_m2_ti64": 99967,
+ "combined_m3_all": 99974,
+ "combined_m3_overlap": 99982,
+ "combined_m3_extrap": 99987,
+ "combined_m3_ti64": 99994
+}

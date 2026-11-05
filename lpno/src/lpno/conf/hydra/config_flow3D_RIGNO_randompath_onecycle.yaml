@@ -1,0 +1,305 @@
+# One-cycle LR experiment variant of config_flow3D_RIGNO_randompath (8k steps).
+#
+# Identical recipe except the scheduler: upstream RIGNO trains with a one-cycle
+# schedule (cosine_onecycle over 90% then exponential tail, train.py:1193-1211),
+# while the shipped tf_exponential_lr decays LR ~19x by 8k steps. Peak LR is
+# kept at the baseline's 1e-4 so this ablates the schedule *shape* only.
+#
+# AiiDA submissions MUST pass scheduler_decay_rate=null and
+# scheduler_decay_steps=null in the training profile: the adapters otherwise
+# emit scheduler.decay_* overrides, which hydra struct mode rejects on the
+# OneCycleLRConf node (no such fields).
+defaults:
+  - physicsnemo_default
+  - scheduler: one_cycle
+  - optimizer: lion
+  - loss: sum
+  - _self_
+run_mode: train
+
+# Training-time recording is scalar-only: no validator/constraint file dumps
+# (save_filetypes) and no slice figures (custom.validator_plots below). The
+# val error curve Validators/data/l2_relative_error_* still reaches
+# tensorboard/wandb; eval exports (predictions.npz, vti) have their own path.
+save_filetypes : ""
+# WarmupNode is CUDA-graph capture-safe (a torch.where gate, no
+# step.item() sync), so the old hard incompatibility is gone. Kept off until a
+# cuda_graphs=true training smoke is validated end to end.
+cuda_graphs: false
+
+# fp16 autocast on Turing tensor cores; validated by 300-step smoke (no NaN,
+# faster it/s). Disable per-run with amp.enabled=false if a NaN appears.
+# Needs the physicsnemo_ext op registration import in lpno.models.
+amp:
+  enabled: true
+arch:
+  rigno:
+    dimension: 3
+    node_latent_size: 96
+    edge_latent_size: 96
+    # Depth 18 with 8 graph variants: the d18_g8 recipe for the random-path task.
+    # config_flow3D_RIGNO_pvlhs inherits THIS file, not config_flow3D_RIGNO.yaml.
+    processor_steps: 18
+    mlp_hidden_layers: 1
+    subsample_factor: 8.0
+    rmesh_levels: 4
+    k_p2r: 4
+    k_r2p: 6
+    # rp3 default. rp4 ran 0.1 (the config-M value) together with the gradient
+    # loss below: it did remove rp3's patchy decode speckle but the pair
+    # regressed accuracy (test vol MAE 12.0->15.4 K), so the default stays at
+    # the rp3-proven 0.0. The rp5/rp6 ablations pass 0.1 explicitly to
+    # attribute the smoothing vs the bias between the two changes.
+    p_edge_masking: 0.0
+    graph_seed: 0
+    cache_dir: outputs/rigno_graphs
+    # Recompute encoder (p2r), every processor step (r2r) and decoder (r2p) in
+    # backward to cut activation memory (~one extra forward). Off by default
+    # (baseline unchanged); set true to fit multi-step AR unrolling
+    # (unroll_steps>=3) in 24 GB, or any arm that adds memory on top of the
+    # baseline recipe -- that already sits at ~23.3 GiB of a 23.46 GiB card.
+    # REQUIRED with processor_steps=18 + num_graph_variants=8: the depth-8
+    # baseline already sits at ~23.3 GiB of a 23.46 GiB card, so either
+    # addition alone tips it over. The d18_g8 recipe runs with it True.
+    # Costs ~one extra forward.
+    grad_checkpointing: true
+    # Multi-graph regularisation: pre-build N region graphs (seeds graph_seed..
+    # graph_seed+N-1) and rotate per training forward; eval uses variant 0. The
+    # JAX reference resamples the rmesh every epoch; 1 = single cached graph.
+    num_graph_variants: 8
+    # Reference-style stochastic eval: edge-mask probability applied when NOT
+    # training (test.py:791-913 ensembling). 0 keeps eval deterministic.
+    inference_edge_masking: 0.0
+    # Pin the regional-node count regardless of grid resolution (0 = derive
+    # from subsample_factor). Set at eval to the trained count when scoring a
+    # checkpoint on a different stride (reference: rmesh_correction_dsf).
+    rnode_count: 0
+    # FiLM conditioning: move broadcast-constant scalar input channels (their
+    # spatial mean) out of the pnode features and into per-processor-step
+    # FiLM modulation of the regional latents. [] = off.
+    # See config_flow3D_RIGNO.yaml: FiLM'ing the broadcast scalars was measured at
+    # ~-28% T MAE and left off here, so pvlhs was the only config that enabled it.
+    # Limited to the three inputs every RIGNO config declares, because rigno_arch
+    # asserts film_keys are a subset of the input keys.
+    film_keys: [P, V_scan, H_norm]
+
+scheduler:
+  # total_steps is derived from training.max_steps by
+  # config_loading._sync_one_cycle_total_steps; never hand-set it.
+  max_lr: 1e-4
+  # the trainer steps once per iteration; the tail LR is flat there anyway.
+  pct_start: 0.05
+  div_factor: 10.0
+  final_div_factor: 10.0
+
+optimizer:
+  lr: 1e-4
+
+training:
+  # rec_results_freq gates constraint/monitor/inference recording (files) —
+  # pushed to max_steps so only validation records periodically.
+  rec_results_freq: 8000
+  rec_validation_freq: 500
+  print_stats_freq: 100
+  # summary_freq gates weight-histogram recording (320 histograms per record
+  # in rp3) — pushed to max_steps.
+  summary_freq: 8000
+  max_steps: 8000
+
+# Early stop when the data-validator T error stops improving. Val curves of
+# rp3/rp4 still improved at 32k, so this is a safety net, not the usual exit.
+stop_criterion:
+  metric: "beambox_mae_T"
+  min_delta: 0.0
+  patience: 1000000
+  mode: "min"
+  freq: 500
+  strict: true
+
+batch_size:
+  grid: 1
+  validation: 1
+
+custom:
+  name: rigno_randompath_onecycle
+  model_family: rigno
+  data_dir: data/flow3D/random_paths/train
+  val_data_dir: data/flow3D/random_paths/val
+  param_dir: "DEFAULT"
+  split_mode: standard
+  k_folds: 8
+  fold_index: -1
+  # H1-seminorm data loss (custom_utils/losses.py GridGradientLoss): pointwise
+  # L2 plus gradient-mismatch at this relative weight. A weight of 1.0
+  # regressed accuracy (large coherent bias blobs), so the default is 0
+  # (plain PointwiseLossNorm).
+  gradient_loss_weight: 0.0
+  # Spatial edge-downweight beta for GridGradientLoss: w = 1/(1+beta*|gradT|/mean).
+  # Down-weights the sharp keyhole/melt edge (base already fits it) so a refinement
+  # head focuses on the smooth global wake. 0 = uniform (off). Forces GridGradientLoss on.
+  edge_downweight: 0.0
+  pde_loss: false
+  VOF_pde_loss: false
+  Diff_loss: false
+  Diff_weight: 1e14
+  pde_weight: 1.0e-1
+  super_res: 1
+  detect_anomaly: false
+  sharp_alpha: false
+  alpha_masking: true
+  # Restrict the headline metric REPORT to the substrate, excluding the free gas
+  # gap above the material (~25% of a FLOW-3D domain, filled with the same
+  # constant in prediction and truth so it dilutes every mean by ~1/0.75).
+  # Declared here because the AiiDA adapters emit it as a `custom.` override and
+  # Hydra runs in struct mode: an undeclared key is a hard failure at startup.
+  metrics_exclude_gas: false
+  tail_weight: 0.0
+  tail_k: 256
+  # Step at which hard alpha-masking switches on (cold starts only).
+  # null = shipped default (500). Set it PAST the LR warmup: masking a
+  # model that has not begun to learn alpha zeroes its gradients.
+  mask_warmup_steps: null
+  include_time: true
+  time_avg_window: 30
+  moving_frame_steps: 30
+  moving_ref_frame: false
+  wandb_offline: true
+  inference_batch_size: 1
+  use_2D: false
+  time_as_dim: false
+  time_as_batch: true
+  # In-training validation on a seeded subset of N val cases (0 = full split).
+  # A full 52-case pass at batch 1 costs ~43 min cold, recurring every
+  # rec_validation_freq steps; ~5 cases track the same signal.
+  val_max_cases: 5
+  infer_velocities: false
+  fast_training: false
+  autoregressive:
+    enabled: false
+    mode: masked_patch
+    state_prev_suffix: "_prev"
+    patch_size: [32, 16, 16]
+    context_steps: 1
+    mask_mode: block
+    mask_ratio: 0.15
+    train_patches_per_epoch: 256
+    val_patches_per_epoch: 64
+    eval_horizon_k: 10
+    eval_use_gt_init: true
+    require_time: true
+    prev_noise_std: 0.0
+    prev_noise_resample: false
+    clamp_feedback: false
+    clamp_t_min: null
+    clamp_t_max: null
+    unroll_steps: 1
+    # B>1: one forward predicts B future frames (temporal bundling); rollout
+    # jumps B frames per forward. Requires mode=rollout, unroll_steps=1.
+    bundle_steps: 1
+    unroll_detach_grad: false
+    # Residual-in-time reparametrization: u_{t+1} = u_t + f(x). Adds the fed-back
+    # *_prev state to the net output so it predicts only the increment. Requires
+    # enabled=true. Off by default; train under unroll_steps>=2 to test it.
+    predict_delta: false
+  cuda_device: 0
+  cuda_visible_devices: null
+  cuda_local_device: 0
+
+  software: flow3D
+  geometry:
+    x_range: [-4.5e-4, 4.5e-4]
+    y_range: [-2e-4, 2e-4]
+    z_range: [-3e-4, 0]
+    resolution: [90, 40, 30]
+
+  ref_scales:
+    L: 1e-4
+    T: 3000
+    V: 0.1
+    P: 10
+    Rho: 4.506e3
+    H: 203
+
+  laser:
+    type: given
+    x0: 0.0
+    z0: -5e-6
+
+  material_params:
+    rho: 4.506e3
+    c:
+      coeffs: [0.1341, 531]
+    K:
+      coeffs: [0.0151, 1.433]
+    V_scan: null
+    L: 3.45e5
+    Kl: null
+    Ks: null
+    cl: null
+    cs: null
+    rho_l: null
+    rho_s: null
+    T_s: 1873
+    T_l: 1923
+    weight: null
+    c_g: 520
+    K_g: 0.018
+    T_l_g: 10
+    T_s_g: 1
+    rho_g: 1.7
+    L_g: 1
+
+  vtk_fields:
+    - Temperature
+    - Velocity
+    - Fraction Of Fluid
+    - Pressure
+
+  FNO_input_keys:
+    - V_scan
+    - P
+    - H_norm
+    - x
+    - y
+    - z
+    - beam_x
+    - beam_y
+    - beam_dist
+    - path_dose
+    # Recency (exp-decay) dose: causal "recent vs old heat" memory. Default ON; it
+    # improved the base RIGNO on random paths. Tune tau via
+    # PINO_DOSE_RECENT_TAU_S. NOTE: this makes the input 11-channel, so warm-starting
+    # the 10-channel rp3 checkpoint no longer matches — train a fresh recency base for
+    # base_init_ckpt going forward.
+    - path_dose_recent
+
+  FNO_output_keys:
+    - T
+    - alpha
+
+  Energy_input_keys:
+    - u
+    - v
+    - w
+    - Deposition
+
+  Energy_output_keys:
+    - energy
+
+  VOF_input_keys:
+    - u
+    - v
+    - w
+
+  VOF_output_keys:
+    - VOF
+
+  Diff_input_keys: []
+
+  Diff_output_keys:
+    - T_diffTerm
+
+summary_histograms: "log2"
+hydra:
+  run:
+    dir: outputs/${custom.name}_${now:%m%d_%H%M}

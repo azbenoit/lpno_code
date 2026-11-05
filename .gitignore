@@ -1,0 +1,24 @@
+__pycache__/
+*.pyc
+# Development notebooks and notes stay out of the public history; they stay on disk and can be brought back
+# with `git add -f <path>`. The public summaries are in each component's README, docs/ and potential_bugs.md.
+CHANGELOG.md
+future_work.md
+# Written by lpno's tests into the working directory.
+lpno/ckpt/
+# Downloaded Zenodo records (data_deposit/scripts/download.py)
+data_deposit/open_record/
+data_deposit/restricted_record/
+# Local site configuration for cluster runs: never committed (tools/check_site_leaks.py)
+site.env
+*.site.env
+reproducibility/rerun/local/
+# conda writes this next to environment.yml while `conda env create` runs
+condaenv.*.requirements.txt
+# FLOW-3D field data (ground truth) is distributed only in the restricted record; never commit it
+three_cases.pkl
+figure_frames.npz
+twoalloy_figure_frames.npz
+*_truth_frames.npz
+reproducibility/figures/data/path_frames/*_gt.npz
+reproducibility/figures/data/path_frames/*_gt_*.npz

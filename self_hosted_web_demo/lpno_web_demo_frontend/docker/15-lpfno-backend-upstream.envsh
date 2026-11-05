@@ -1,0 +1,30 @@
+#!/bin/sh
+set -eu
+
+upstream="${LPFNO_BACKEND_UPSTREAM:-http://lpno-demo-backend:8000}"
+scheme="${upstream%%://*}"
+authority="${upstream#*://}"
+authority="${authority%%/*}"
+host="${authority%%:*}"
+
+if [ -n "${LPFNO_BACKEND_SERVER_NAME:-}" ]; then
+  host="${LPFNO_BACKEND_SERVER_NAME}"
+fi
+
+export LPFNO_BACKEND_HOST_HEADER="${host}"
+
+case "${scheme}" in
+  https)
+    export LPFNO_BACKEND_TLS_DIRECTIVES="proxy_ssl_server_name on;
+        proxy_ssl_name ${host};
+        proxy_ssl_verify on;
+        proxy_ssl_trusted_certificate /etc/nginx/upstream-certs/backend.crt;"
+    ;;
+  http)
+    export LPFNO_BACKEND_TLS_DIRECTIVES=""
+    ;;
+  *)
+    echo "Unsupported LPFNO_BACKEND_UPSTREAM scheme '${scheme}'. Expected http:// or https://." >&2
+    exit 1
+    ;;
+esac

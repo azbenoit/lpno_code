@@ -1,0 +1,22 @@
+# GAOT on the homoscedastic-aggregator recipe (see config_flow3D_RIGNO_homosc
+# for why the aggregator swap needs a dedicated config). This is to
+# config_flow3D_GAOT what RIGNO_homosc is to config M: the architecture swap is
+# inherited wholesale from config_flow3D_GAOT so every non-aggregator
+# hyperparameter stays byte-identical to the recipe the GAOT numbers were
+# measured with; only the loss node changes.
+#
+# Used for the straight-path velocity-output variants and their no-velocity
+# controls. Comparable only within this config, not to relobralo runs.
+defaults:
+  - config_flow3D_GAOT
+  - override /loss: homoscedastic
+  - _self_
+
+custom:
+  # Velocity-arm knobs (read by model_domain; defaults match the code).
+  # Warmup engages the velocity gradient only after the T/alpha/fl fields are
+  # roughly right; the loss VALUE is emitted from step 0 so the homoscedastic
+  # sigma calibrates (see GridGradientLoss).
+  vel_warmup_steps: 4000
+  vel_ramp_steps: 1000
+  vel_tau: 0.05

@@ -1,0 +1,211 @@
+table,block,row,column,aggregate,evaluations,printed
+tab:arch-steady,Quasi-steady formulation,FNO,T MAE,mean_sd,3697ebc0-592e-4d4e-9ee9-baa153f44338 1c78a5c3-b070-4854-a2ab-d86131d747d9 ff73099a-6040-456e-a3db-730bc9b458f8,7.71 ± 0.05
+tab:arch-steady,Quasi-steady formulation,FNO,T RMSE,mean_sd,3697ebc0-592e-4d4e-9ee9-baa153f44338 1c78a5c3-b070-4854-a2ab-d86131d747d9 ff73099a-6040-456e-a3db-730bc9b458f8,29.6 ± 0.8
+tab:arch-steady,Quasi-steady formulation,FNO,BB MAE,mean_sd,3697ebc0-592e-4d4e-9ee9-baa153f44338 1c78a5c3-b070-4854-a2ab-d86131d747d9 ff73099a-6040-456e-a3db-730bc9b458f8,15.0 ± 1.1
+tab:arch-steady,Quasi-steady formulation,FNO,Rel. err.,mean_sd,3697ebc0-592e-4d4e-9ee9-baa153f44338 1c78a5c3-b070-4854-a2ab-d86131d747d9 ff73099a-6040-456e-a3db-730bc9b458f8,1.25 ± 0.01
+tab:arch-steady,Quasi-steady formulation,FNO,Melt-pool IoU,mean_sd,3697ebc0-592e-4d4e-9ee9-baa153f44338 1c78a5c3-b070-4854-a2ab-d86131d747d9 ff73099a-6040-456e-a3db-730bc9b458f8,0.920 ± 0.001
+tab:arch-steady,Quasi-steady formulation,RIGNO,T MAE,mean_sd,9dfb29cb-e6d3-41f6-a562-63a5b7344b4d 563a655b-7704-4e3b-842a-68cada320366 73db9717-2945-438d-bcb6-2ac4b2234e43,11.36 ± 1.69
+tab:arch-steady,Quasi-steady formulation,RIGNO,T RMSE,mean_sd,9dfb29cb-e6d3-41f6-a562-63a5b7344b4d 563a655b-7704-4e3b-842a-68cada320366 73db9717-2945-438d-bcb6-2ac4b2234e43,40.0 ± 9.7
+tab:arch-steady,Quasi-steady formulation,RIGNO,BB MAE,mean_sd,9dfb29cb-e6d3-41f6-a562-63a5b7344b4d 563a655b-7704-4e3b-842a-68cada320366 73db9717-2945-438d-bcb6-2ac4b2234e43,23.6 ± 2.3
+tab:arch-steady,Quasi-steady formulation,RIGNO,Rel. err.,mean_sd,9dfb29cb-e6d3-41f6-a562-63a5b7344b4d 563a655b-7704-4e3b-842a-68cada320366 73db9717-2945-438d-bcb6-2ac4b2234e43,1.84 ± 0.27
+tab:arch-steady,Quasi-steady formulation,RIGNO,Melt-pool IoU,mean_sd,9dfb29cb-e6d3-41f6-a562-63a5b7344b4d 563a655b-7704-4e3b-842a-68cada320366 73db9717-2945-438d-bcb6-2ac4b2234e43,0.926 ± 0.004
+tab:arch-steady,Quasi-steady formulation,GAOT,T MAE,mean_sd,afa1531e-cc91-44ce-b2dc-c91d9ec794db bf661bb1-1e8a-4e30-a406-bce0c53bfae4 5de3218a-d68c-47f1-8b0e-fd58f5847931,9.74 ± 0.44
+tab:arch-steady,Quasi-steady formulation,GAOT,T RMSE,mean_sd,afa1531e-cc91-44ce-b2dc-c91d9ec794db bf661bb1-1e8a-4e30-a406-bce0c53bfae4 5de3218a-d68c-47f1-8b0e-fd58f5847931,32.3 ± 0.9
+tab:arch-steady,Quasi-steady formulation,GAOT,BB MAE,mean_sd,afa1531e-cc91-44ce-b2dc-c91d9ec794db bf661bb1-1e8a-4e30-a406-bce0c53bfae4 5de3218a-d68c-47f1-8b0e-fd58f5847931,16.8 ± 0.2
+tab:arch-steady,Quasi-steady formulation,GAOT,Rel. err.,mean_sd,afa1531e-cc91-44ce-b2dc-c91d9ec794db bf661bb1-1e8a-4e30-a406-bce0c53bfae4 5de3218a-d68c-47f1-8b0e-fd58f5847931,1.58 ± 0.07
+tab:arch-steady,Quasi-steady formulation,GAOT,Melt-pool IoU,mean_sd,afa1531e-cc91-44ce-b2dc-c91d9ec794db bf661bb1-1e8a-4e30-a406-bce0c53bfae4 5de3218a-d68c-47f1-8b0e-fd58f5847931,0.915 ± 0.005
+tab:arch-steady,Laboratory frame,FNO,T MAE,mean_sd,1358c375-9cb6-48eb-8a34-22861e49999e ef556342-f529-433b-a454-6abfa8be2261 dbff37a3-c2ca-4dcb-86c6-a52c99cf37ed,10.01 ± 0.10
+tab:arch-steady,Laboratory frame,FNO,T RMSE,mean_sd,1358c375-9cb6-48eb-8a34-22861e49999e ef556342-f529-433b-a454-6abfa8be2261 dbff37a3-c2ca-4dcb-86c6-a52c99cf37ed,27.3 ± 1.1
+tab:arch-steady,Laboratory frame,FNO,BB MAE,mean_sd,1358c375-9cb6-48eb-8a34-22861e49999e ef556342-f529-433b-a454-6abfa8be2261 dbff37a3-c2ca-4dcb-86c6-a52c99cf37ed,49.1 ± 2.7
+tab:arch-steady,Laboratory frame,FNO,Rel. err.,mean_sd,1358c375-9cb6-48eb-8a34-22861e49999e ef556342-f529-433b-a454-6abfa8be2261 dbff37a3-c2ca-4dcb-86c6-a52c99cf37ed,2.25 ± 0.02
+tab:arch-steady,Laboratory frame,FNO,Melt-pool IoU,mean_sd,1358c375-9cb6-48eb-8a34-22861e49999e ef556342-f529-433b-a454-6abfa8be2261 dbff37a3-c2ca-4dcb-86c6-a52c99cf37ed,0.863 ± 0.002
+tab:arch-steady,Laboratory frame,RIGNO,T MAE,mean_sd,09de3d62-3180-4270-8063-df65f212e786 b83e3bec-3b76-48c4-b4f4-aa1774cd9d68 d09a7ed7-f3c0-454e-a6e2-b1a0f57e4d96,6.65 ± 0.46
+tab:arch-steady,Laboratory frame,RIGNO,T RMSE,mean_sd,09de3d62-3180-4270-8063-df65f212e786 b83e3bec-3b76-48c4-b4f4-aa1774cd9d68 d09a7ed7-f3c0-454e-a6e2-b1a0f57e4d96,21.4 ± 0.5
+tab:arch-steady,Laboratory frame,RIGNO,BB MAE,mean_sd,09de3d62-3180-4270-8063-df65f212e786 b83e3bec-3b76-48c4-b4f4-aa1774cd9d68 d09a7ed7-f3c0-454e-a6e2-b1a0f57e4d96,30.9 ± 0.5
+tab:arch-steady,Laboratory frame,RIGNO,Rel. err.,mean_sd,09de3d62-3180-4270-8063-df65f212e786 b83e3bec-3b76-48c4-b4f4-aa1774cd9d68 d09a7ed7-f3c0-454e-a6e2-b1a0f57e4d96,1.49 ± 0.10
+tab:arch-steady,Laboratory frame,RIGNO,Melt-pool IoU,mean_sd,09de3d62-3180-4270-8063-df65f212e786 b83e3bec-3b76-48c4-b4f4-aa1774cd9d68 d09a7ed7-f3c0-454e-a6e2-b1a0f57e4d96,0.926 ± 0.001
+tab:arch-steady,Laboratory frame,GAOT,T MAE,mean_sd,d703ab75-16f5-4044-b98e-edbcfed9bedf 56f741b6-d0ba-4f41-8ca2-8c79df764e9c 6f0c1aa5-2e04-45ba-a736-c1824ec30cad,11.13 ± 0.09
+tab:arch-steady,Laboratory frame,GAOT,T RMSE,mean_sd,d703ab75-16f5-4044-b98e-edbcfed9bedf 56f741b6-d0ba-4f41-8ca2-8c79df764e9c 6f0c1aa5-2e04-45ba-a736-c1824ec30cad,41.7 ± 5.3
+tab:arch-steady,Laboratory frame,GAOT,BB MAE,mean_sd,d703ab75-16f5-4044-b98e-edbcfed9bedf 56f741b6-d0ba-4f41-8ca2-8c79df764e9c 6f0c1aa5-2e04-45ba-a736-c1824ec30cad,72.8 ± 2.6
+tab:arch-steady,Laboratory frame,GAOT,Rel. err.,mean_sd,d703ab75-16f5-4044-b98e-edbcfed9bedf 56f741b6-d0ba-4f41-8ca2-8c79df764e9c 6f0c1aa5-2e04-45ba-a736-c1824ec30cad,2.50 ± 0.02
+tab:arch-steady,Laboratory frame,GAOT,Melt-pool IoU,mean_sd,d703ab75-16f5-4044-b98e-edbcfed9bedf 56f741b6-d0ba-4f41-8ca2-8c79df764e9c 6f0c1aa5-2e04-45ba-a736-c1824ec30cad,0.826 ± 0.004
+tab:paths-accuracy,Variable-length free-form paths,FNO,T MAE,single,cc341977-27ba-4545-b1fa-3cae93fb45b0,18.45
+tab:paths-accuracy,Variable-length free-form paths,FNO,T RMSE,single,cc341977-27ba-4545-b1fa-3cae93fb45b0,57.92
+tab:paths-accuracy,Variable-length free-form paths,FNO,BB MAE,single,cc341977-27ba-4545-b1fa-3cae93fb45b0,106.9
+tab:paths-accuracy,Variable-length free-form paths,FNO,Rel. err.,single,cc341977-27ba-4545-b1fa-3cae93fb45b0,4.87
+tab:paths-accuracy,Variable-length free-form paths,FNO,Melt-pool IoU,single,cc341977-27ba-4545-b1fa-3cae93fb45b0,0.723
+tab:paths-accuracy,Variable-length free-form paths,RIGNO,T MAE,single,18724e73-df9e-4284-b2a6-a25a5006ca15,16.48
+tab:paths-accuracy,Variable-length free-form paths,RIGNO,T RMSE,single,18724e73-df9e-4284-b2a6-a25a5006ca15,45.94
+tab:paths-accuracy,Variable-length free-form paths,RIGNO,BB MAE,single,18724e73-df9e-4284-b2a6-a25a5006ca15,118.2
+tab:paths-accuracy,Variable-length free-form paths,RIGNO,Rel. err.,single,18724e73-df9e-4284-b2a6-a25a5006ca15,4.35
+tab:paths-accuracy,Variable-length free-form paths,RIGNO,Melt-pool IoU,single,18724e73-df9e-4284-b2a6-a25a5006ca15,0.733
+tab:paths-accuracy,Variable-length free-form paths,GAOT,T MAE,single,74bc63cc-f4d8-4ffb-b8a0-5050b2d53925,14.10
+tab:paths-accuracy,Variable-length free-form paths,GAOT,T RMSE,single,74bc63cc-f4d8-4ffb-b8a0-5050b2d53925,40.92
+tab:paths-accuracy,Variable-length free-form paths,GAOT,BB MAE,single,74bc63cc-f4d8-4ffb-b8a0-5050b2d53925,100.9
+tab:paths-accuracy,Variable-length free-form paths,GAOT,Rel. err.,single,74bc63cc-f4d8-4ffb-b8a0-5050b2d53925,3.72
+tab:paths-accuracy,Variable-length free-form paths,GAOT,Melt-pool IoU,single,74bc63cc-f4d8-4ffb-b8a0-5050b2d53925,0.772
+tab:paths-accuracy,Variable speed along free-form paths,FNO,T MAE,single,4d7bbef2-585e-46db-8c88-b659df9be46a,7.35
+tab:paths-accuracy,Variable speed along free-form paths,FNO,T RMSE,single,4d7bbef2-585e-46db-8c88-b659df9be46a,29.60
+tab:paths-accuracy,Variable speed along free-form paths,FNO,BB MAE,single,4d7bbef2-585e-46db-8c88-b659df9be46a,95.8
+tab:paths-accuracy,Variable speed along free-form paths,FNO,Rel. err.,single,4d7bbef2-585e-46db-8c88-b659df9be46a,2.20
+tab:paths-accuracy,Variable speed along free-form paths,FNO,Melt-pool IoU,single,4d7bbef2-585e-46db-8c88-b659df9be46a,0.741
+tab:paths-accuracy,Variable speed along free-form paths,RIGNO,T MAE,single,646fb56a-3e59-43ba-bf74-52bcc5579513,11.44
+tab:paths-accuracy,Variable speed along free-form paths,RIGNO,T RMSE,single,646fb56a-3e59-43ba-bf74-52bcc5579513,41.89
+tab:paths-accuracy,Variable speed along free-form paths,RIGNO,BB MAE,single,646fb56a-3e59-43ba-bf74-52bcc5579513,164.5
+tab:paths-accuracy,Variable speed along free-form paths,RIGNO,Rel. err.,single,646fb56a-3e59-43ba-bf74-52bcc5579513,3.42
+tab:paths-accuracy,Variable speed along free-form paths,RIGNO,Melt-pool IoU,single,646fb56a-3e59-43ba-bf74-52bcc5579513,0.751
+tab:paths-accuracy,Variable speed along free-form paths,GAOT,T MAE,single,478fa0b2-96c8-4b91-8018-190803cc14b7,7.56
+tab:paths-accuracy,Variable speed along free-form paths,GAOT,T RMSE,single,478fa0b2-96c8-4b91-8018-190803cc14b7,27.37
+tab:paths-accuracy,Variable speed along free-form paths,GAOT,BB MAE,single,478fa0b2-96c8-4b91-8018-190803cc14b7,96.1
+tab:paths-accuracy,Variable speed along free-form paths,GAOT,Rel. err.,single,478fa0b2-96c8-4b91-8018-190803cc14b7,2.26
+tab:paths-accuracy,Variable speed along free-form paths,GAOT,Melt-pool IoU,single,478fa0b2-96c8-4b91-8018-190803cc14b7,0.773
+tab:paths-accuracy,"Multiple beams, free-form paths",FNO,T MAE,single,9656aa83-b8e8-4f1e-9129-5a0ea3d16565,17.31
+tab:paths-accuracy,"Multiple beams, free-form paths",FNO,T RMSE,single,9656aa83-b8e8-4f1e-9129-5a0ea3d16565,61.31
+tab:paths-accuracy,"Multiple beams, free-form paths",FNO,BB MAE,single,9656aa83-b8e8-4f1e-9129-5a0ea3d16565,97.5
+tab:paths-accuracy,"Multiple beams, free-form paths",FNO,Rel. err.,single,9656aa83-b8e8-4f1e-9129-5a0ea3d16565,5.12
+tab:paths-accuracy,"Multiple beams, free-form paths",FNO,Melt-pool IoU,single,9656aa83-b8e8-4f1e-9129-5a0ea3d16565,0.471
+tab:paths-accuracy,"Multiple beams, free-form paths",RIGNO,T MAE,single,1b707ec7-2377-4a5b-9c47-3e32a182013f,22.76
+tab:paths-accuracy,"Multiple beams, free-form paths",RIGNO,T RMSE,single,1b707ec7-2377-4a5b-9c47-3e32a182013f,71.30
+tab:paths-accuracy,"Multiple beams, free-form paths",RIGNO,BB MAE,single,1b707ec7-2377-4a5b-9c47-3e32a182013f,111.5
+tab:paths-accuracy,"Multiple beams, free-form paths",RIGNO,Rel. err.,single,1b707ec7-2377-4a5b-9c47-3e32a182013f,6.74
+tab:paths-accuracy,"Multiple beams, free-form paths",RIGNO,Melt-pool IoU,single,1b707ec7-2377-4a5b-9c47-3e32a182013f,0.469
+tab:paths-accuracy,"Multiple beams, free-form paths",GAOT,T MAE,single,8209d25f-8f98-46ab-a649-339b22d59f6c,17.65
+tab:paths-accuracy,"Multiple beams, free-form paths",GAOT,T RMSE,single,8209d25f-8f98-46ab-a649-339b22d59f6c,59.95
+tab:paths-accuracy,"Multiple beams, free-form paths",GAOT,BB MAE,single,8209d25f-8f98-46ab-a649-339b22d59f6c,94.6
+tab:paths-accuracy,"Multiple beams, free-form paths",GAOT,Rel. err.,single,8209d25f-8f98-46ab-a649-339b22d59f6c,5.22
+tab:paths-accuracy,"Multiple beams, free-form paths",GAOT,Melt-pool IoU,single,8209d25f-8f98-46ab-a649-339b22d59f6c,0.508
+tab:preheat,Beam-radius variation,FNO,T MAE,single,59748a96-4068-4e8c-852c-e983c6187804,8.5
+tab:preheat,Beam-radius variation,FNO,T RMSE,single,59748a96-4068-4e8c-852c-e983c6187804,30.9
+tab:preheat,Beam-radius variation,FNO,BB MAE,single,59748a96-4068-4e8c-852c-e983c6187804,32.6
+tab:preheat,Beam-radius variation,FNO,Rel. err.,single,59748a96-4068-4e8c-852c-e983c6187804,2.05
+tab:preheat,Beam-radius variation,FNO,Melt-pool IoU,single,59748a96-4068-4e8c-852c-e983c6187804,0.923
+tab:preheat,Beam-radius variation,RIGNO,T MAE,single,d24a9416-bc6e-41a8-9afd-928463da22f0,9.4
+tab:preheat,Beam-radius variation,RIGNO,T RMSE,single,d24a9416-bc6e-41a8-9afd-928463da22f0,42.4
+tab:preheat,Beam-radius variation,RIGNO,BB MAE,single,d24a9416-bc6e-41a8-9afd-928463da22f0,30.9
+tab:preheat,Beam-radius variation,RIGNO,Rel. err.,single,d24a9416-bc6e-41a8-9afd-928463da22f0,2.26
+tab:preheat,Beam-radius variation,RIGNO,Melt-pool IoU,single,d24a9416-bc6e-41a8-9afd-928463da22f0,0.932
+tab:preheat,Beam-radius variation,GAOT,T MAE,single,20ddc515-f0a7-4f8c-bc79-0a4eb339a6a4,6.7
+tab:preheat,Beam-radius variation,GAOT,T RMSE,single,20ddc515-f0a7-4f8c-bc79-0a4eb339a6a4,26.6
+tab:preheat,Beam-radius variation,GAOT,BB MAE,single,20ddc515-f0a7-4f8c-bc79-0a4eb339a6a4,27.8
+tab:preheat,Beam-radius variation,GAOT,Rel. err.,single,20ddc515-f0a7-4f8c-bc79-0a4eb339a6a4,1.62
+tab:preheat,Beam-radius variation,GAOT,Melt-pool IoU,single,20ddc515-f0a7-4f8c-bc79-0a4eb339a6a4,0.930
+tab:preheat,Preheat and beam shape,FNO,T MAE,single,51c4618f-c7e2-41e5-8f13-b998a60898c2,21.0
+tab:preheat,Preheat and beam shape,FNO,T RMSE,single,51c4618f-c7e2-41e5-8f13-b998a60898c2,47.9
+tab:preheat,Preheat and beam shape,FNO,BB MAE,single,51c4618f-c7e2-41e5-8f13-b998a60898c2,38.2
+tab:preheat,Preheat and beam shape,FNO,Rel. err.,single,51c4618f-c7e2-41e5-8f13-b998a60898c2,3.18
+tab:preheat,Preheat and beam shape,FNO,Melt-pool IoU,single,51c4618f-c7e2-41e5-8f13-b998a60898c2,0.823
+tab:preheat,Preheat and beam shape,RIGNO,T MAE,single,207db797-e863-4095-a82f-6973e5f00cc9,11.4
+tab:preheat,Preheat and beam shape,RIGNO,T RMSE,single,207db797-e863-4095-a82f-6973e5f00cc9,37.0
+tab:preheat,Preheat and beam shape,RIGNO,BB MAE,single,207db797-e863-4095-a82f-6973e5f00cc9,26.9
+tab:preheat,Preheat and beam shape,RIGNO,Rel. err.,single,207db797-e863-4095-a82f-6973e5f00cc9,1.72
+tab:preheat,Preheat and beam shape,RIGNO,Melt-pool IoU,single,207db797-e863-4095-a82f-6973e5f00cc9,0.867
+tab:preheat,Preheat and beam shape,GAOT,T MAE,single,4b9d9235-67ab-4e5f-a789-76da3d394963,41.9
+tab:preheat,Preheat and beam shape,GAOT,T RMSE,single,4b9d9235-67ab-4e5f-a789-76da3d394963,63.4
+tab:preheat,Preheat and beam shape,GAOT,BB MAE,single,4b9d9235-67ab-4e5f-a789-76da3d394963,44.0
+tab:preheat,Preheat and beam shape,GAOT,Rel. err.,single,4b9d9235-67ab-4e5f-a789-76da3d394963,6.35
+tab:preheat,Preheat and beam shape,GAOT,Melt-pool IoU,single,4b9d9235-67ab-4e5f-a789-76da3d394963,0.837
+tab:twoalloy,IN718 only test set,"FNO, Ti-6Al-4V only",T MAE,single,6705cd86-2126-4ee8-8064-aa2a05f1bc11,124.38
+tab:twoalloy,IN718 only test set,"FNO, Ti-6Al-4V only",T RMSE,single,6705cd86-2126-4ee8-8064-aa2a05f1bc11,284.1
+tab:twoalloy,IN718 only test set,"FNO, Ti-6Al-4V only",BB MAE,single,6705cd86-2126-4ee8-8064-aa2a05f1bc11,456
+tab:twoalloy,IN718 only test set,"FNO, Ti-6Al-4V only",Rel. err.,single,6705cd86-2126-4ee8-8064-aa2a05f1bc11,30.02
+tab:twoalloy,IN718 only test set,"FNO, Ti-6Al-4V only",Melt-pool IoU,single,6705cd86-2126-4ee8-8064-aa2a05f1bc11,0.350
+tab:twoalloy,IN718 only test set,"FNO, maximin half",T MAE,mean,792274be-e1ac-4047-a4dd-0e225ffa2d66 a6ecf7f1-4e6e-46e8-9126-79a92d0d824a e068bf08-5646-41cc-ab24-e70acbd5347b,13.64
+tab:twoalloy,IN718 only test set,"FNO, maximin half",T RMSE,mean,792274be-e1ac-4047-a4dd-0e225ffa2d66 a6ecf7f1-4e6e-46e8-9126-79a92d0d824a e068bf08-5646-41cc-ab24-e70acbd5347b,41.2
+tab:twoalloy,IN718 only test set,"FNO, maximin half",BB MAE,mean,792274be-e1ac-4047-a4dd-0e225ffa2d66 a6ecf7f1-4e6e-46e8-9126-79a92d0d824a e068bf08-5646-41cc-ab24-e70acbd5347b,84
+tab:twoalloy,IN718 only test set,"FNO, maximin half",Rel. err.,mean,792274be-e1ac-4047-a4dd-0e225ffa2d66 a6ecf7f1-4e6e-46e8-9126-79a92d0d824a e068bf08-5646-41cc-ab24-e70acbd5347b,3.31
+tab:twoalloy,IN718 only test set,"FNO, maximin half",Melt-pool IoU,mean,792274be-e1ac-4047-a4dd-0e225ffa2d66 a6ecf7f1-4e6e-46e8-9126-79a92d0d824a e068bf08-5646-41cc-ab24-e70acbd5347b,0.831
+tab:twoalloy,IN718 only test set,"FNO, bandit half",T MAE,mean,a965c557-7a9f-4e7d-812f-53e8da54c1eb 879bc5a9-565f-4365-9e80-952da9e7bea2 def570a1-8b58-4312-b7b9-0efe3e065759,14.00
+tab:twoalloy,IN718 only test set,"FNO, bandit half",T RMSE,mean,a965c557-7a9f-4e7d-812f-53e8da54c1eb 879bc5a9-565f-4365-9e80-952da9e7bea2 def570a1-8b58-4312-b7b9-0efe3e065759,44.2
+tab:twoalloy,IN718 only test set,"FNO, bandit half",BB MAE,mean,a965c557-7a9f-4e7d-812f-53e8da54c1eb 879bc5a9-565f-4365-9e80-952da9e7bea2 def570a1-8b58-4312-b7b9-0efe3e065759,88
+tab:twoalloy,IN718 only test set,"FNO, bandit half",Rel. err.,mean,a965c557-7a9f-4e7d-812f-53e8da54c1eb 879bc5a9-565f-4365-9e80-952da9e7bea2 def570a1-8b58-4312-b7b9-0efe3e065759,3.40
+tab:twoalloy,IN718 only test set,"FNO, bandit half",Melt-pool IoU,mean,a965c557-7a9f-4e7d-812f-53e8da54c1eb 879bc5a9-565f-4365-9e80-952da9e7bea2 def570a1-8b58-4312-b7b9-0efe3e065759,0.833
+tab:twoalloy,IN718 only test set,"FNO, joint",T MAE,mean,f4ee5f18-291d-4818-b1ac-28f1d18f42c1 80ca1121-8576-48e8-9889-aeab74af4d55 7fa48631-ae33-40f1-8baa-41f2c7db72d2,12.79
+tab:twoalloy,IN718 only test set,"FNO, joint",T RMSE,mean,f4ee5f18-291d-4818-b1ac-28f1d18f42c1 80ca1121-8576-48e8-9889-aeab74af4d55 7fa48631-ae33-40f1-8baa-41f2c7db72d2,40.8
+tab:twoalloy,IN718 only test set,"FNO, joint",BB MAE,mean,f4ee5f18-291d-4818-b1ac-28f1d18f42c1 80ca1121-8576-48e8-9889-aeab74af4d55 7fa48631-ae33-40f1-8baa-41f2c7db72d2,83
+tab:twoalloy,IN718 only test set,"FNO, joint",Rel. err.,mean,f4ee5f18-291d-4818-b1ac-28f1d18f42c1 80ca1121-8576-48e8-9889-aeab74af4d55 7fa48631-ae33-40f1-8baa-41f2c7db72d2,3.10
+tab:twoalloy,IN718 only test set,"FNO, joint",Melt-pool IoU,mean,f4ee5f18-291d-4818-b1ac-28f1d18f42c1 80ca1121-8576-48e8-9889-aeab74af4d55 7fa48631-ae33-40f1-8baa-41f2c7db72d2,0.843
+tab:twoalloy,IN718 only test set,"RIGNO, joint",T MAE,single,548f2633-43e4-4f77-88dd-ae768304511d,13.55
+tab:twoalloy,IN718 only test set,"RIGNO, joint",T RMSE,single,548f2633-43e4-4f77-88dd-ae768304511d,40.8
+tab:twoalloy,IN718 only test set,"RIGNO, joint",BB MAE,single,548f2633-43e4-4f77-88dd-ae768304511d,78
+tab:twoalloy,IN718 only test set,"RIGNO, joint",Rel. err.,single,548f2633-43e4-4f77-88dd-ae768304511d,3.29
+tab:twoalloy,IN718 only test set,"RIGNO, joint",Melt-pool IoU,single,548f2633-43e4-4f77-88dd-ae768304511d,0.835
+tab:twoalloy,IN718 only test set,"GAOT, joint",T MAE,single,e2e71dde-d4f4-4c38-bf37-b7e6cdde350d,12.86
+tab:twoalloy,IN718 only test set,"GAOT, joint",T RMSE,single,e2e71dde-d4f4-4c38-bf37-b7e6cdde350d,42.2
+tab:twoalloy,IN718 only test set,"GAOT, joint",BB MAE,single,e2e71dde-d4f4-4c38-bf37-b7e6cdde350d,92
+tab:twoalloy,IN718 only test set,"GAOT, joint",Rel. err.,single,e2e71dde-d4f4-4c38-bf37-b7e6cdde350d,3.12
+tab:twoalloy,IN718 only test set,"GAOT, joint",Melt-pool IoU,single,e2e71dde-d4f4-4c38-bf37-b7e6cdde350d,0.837
+tab:twoalloy,Ti-6Al-4V only test set,"FNO, Ti-6Al-4V only",T MAE,single,df4cc30c-de88-4c63-b389-60c2cc4ac889,10.97
+tab:twoalloy,Ti-6Al-4V only test set,"FNO, Ti-6Al-4V only",T RMSE,single,df4cc30c-de88-4c63-b389-60c2cc4ac889,38.7
+tab:twoalloy,Ti-6Al-4V only test set,"FNO, Ti-6Al-4V only",BB MAE,single,df4cc30c-de88-4c63-b389-60c2cc4ac889,47
+tab:twoalloy,Ti-6Al-4V only test set,"FNO, Ti-6Al-4V only",Rel. err.,single,df4cc30c-de88-4c63-b389-60c2cc4ac889,2.41
+tab:twoalloy,Ti-6Al-4V only test set,"FNO, Ti-6Al-4V only",Melt-pool IoU,single,df4cc30c-de88-4c63-b389-60c2cc4ac889,0.903
+tab:twoalloy,Ti-6Al-4V only test set,"FNO, maximin half",T MAE,mean,39a76143-5131-4e01-ba5c-9d902b705542 4cc6f5f6-7c18-4ca1-9eff-002ef68a8b64 57028749-f97d-476c-86aa-ca46b24e16f4,9.89
+tab:twoalloy,Ti-6Al-4V only test set,"FNO, maximin half",T RMSE,mean,39a76143-5131-4e01-ba5c-9d902b705542 4cc6f5f6-7c18-4ca1-9eff-002ef68a8b64 57028749-f97d-476c-86aa-ca46b24e16f4,35.0
+tab:twoalloy,Ti-6Al-4V only test set,"FNO, maximin half",BB MAE,mean,39a76143-5131-4e01-ba5c-9d902b705542 4cc6f5f6-7c18-4ca1-9eff-002ef68a8b64 57028749-f97d-476c-86aa-ca46b24e16f4,42
+tab:twoalloy,Ti-6Al-4V only test set,"FNO, maximin half",Rel. err.,mean,39a76143-5131-4e01-ba5c-9d902b705542 4cc6f5f6-7c18-4ca1-9eff-002ef68a8b64 57028749-f97d-476c-86aa-ca46b24e16f4,2.17
+tab:twoalloy,Ti-6Al-4V only test set,"FNO, maximin half",Melt-pool IoU,mean,39a76143-5131-4e01-ba5c-9d902b705542 4cc6f5f6-7c18-4ca1-9eff-002ef68a8b64 57028749-f97d-476c-86aa-ca46b24e16f4,0.903
+tab:twoalloy,Ti-6Al-4V only test set,"FNO, bandit half",T MAE,mean,57e58dbe-f9df-4e55-aa86-a549434eb102 1e38f63d-22f5-425b-9099-4db94bb4a8aa ec4ef956-2fd5-47f0-b6df-9e354071411d,10.08
+tab:twoalloy,Ti-6Al-4V only test set,"FNO, bandit half",T RMSE,mean,57e58dbe-f9df-4e55-aa86-a549434eb102 1e38f63d-22f5-425b-9099-4db94bb4a8aa ec4ef956-2fd5-47f0-b6df-9e354071411d,35.3
+tab:twoalloy,Ti-6Al-4V only test set,"FNO, bandit half",BB MAE,mean,57e58dbe-f9df-4e55-aa86-a549434eb102 1e38f63d-22f5-425b-9099-4db94bb4a8aa ec4ef956-2fd5-47f0-b6df-9e354071411d,42
+tab:twoalloy,Ti-6Al-4V only test set,"FNO, bandit half",Rel. err.,mean,57e58dbe-f9df-4e55-aa86-a549434eb102 1e38f63d-22f5-425b-9099-4db94bb4a8aa ec4ef956-2fd5-47f0-b6df-9e354071411d,2.21
+tab:twoalloy,Ti-6Al-4V only test set,"FNO, bandit half",Melt-pool IoU,mean,57e58dbe-f9df-4e55-aa86-a549434eb102 1e38f63d-22f5-425b-9099-4db94bb4a8aa ec4ef956-2fd5-47f0-b6df-9e354071411d,0.906
+tab:twoalloy,Ti-6Al-4V only test set,"FNO, joint",T MAE,mean,c926e431-e86e-43fb-9062-f9c806e649e9 3336d9a1-cb85-4639-bb33-7ed3b9f7fafb f3fbfda0-9a70-4196-ac16-b7913202fdaf,10.47
+tab:twoalloy,Ti-6Al-4V only test set,"FNO, joint",T RMSE,mean,c926e431-e86e-43fb-9062-f9c806e649e9 3336d9a1-cb85-4639-bb33-7ed3b9f7fafb f3fbfda0-9a70-4196-ac16-b7913202fdaf,35.9
+tab:twoalloy,Ti-6Al-4V only test set,"FNO, joint",BB MAE,mean,c926e431-e86e-43fb-9062-f9c806e649e9 3336d9a1-cb85-4639-bb33-7ed3b9f7fafb f3fbfda0-9a70-4196-ac16-b7913202fdaf,43
+tab:twoalloy,Ti-6Al-4V only test set,"FNO, joint",Rel. err.,mean,c926e431-e86e-43fb-9062-f9c806e649e9 3336d9a1-cb85-4639-bb33-7ed3b9f7fafb f3fbfda0-9a70-4196-ac16-b7913202fdaf,2.30
+tab:twoalloy,Ti-6Al-4V only test set,"FNO, joint",Melt-pool IoU,mean,c926e431-e86e-43fb-9062-f9c806e649e9 3336d9a1-cb85-4639-bb33-7ed3b9f7fafb f3fbfda0-9a70-4196-ac16-b7913202fdaf,0.899
+tab:twoalloy,Ti-6Al-4V only test set,"RIGNO, joint",T MAE,single,6c883ef6-a6be-4c1b-9675-74e09fbc6ea5,14.40
+tab:twoalloy,Ti-6Al-4V only test set,"RIGNO, joint",T RMSE,single,6c883ef6-a6be-4c1b-9675-74e09fbc6ea5,38.0
+tab:twoalloy,Ti-6Al-4V only test set,"RIGNO, joint",BB MAE,single,6c883ef6-a6be-4c1b-9675-74e09fbc6ea5,51
+tab:twoalloy,Ti-6Al-4V only test set,"RIGNO, joint",Rel. err.,single,6c883ef6-a6be-4c1b-9675-74e09fbc6ea5,3.16
+tab:twoalloy,Ti-6Al-4V only test set,"RIGNO, joint",Melt-pool IoU,single,6c883ef6-a6be-4c1b-9675-74e09fbc6ea5,0.902
+tab:twoalloy,Ti-6Al-4V only test set,"GAOT, joint",T MAE,single,ca0dace9-71fa-4314-b8c7-a0e5fb2b5876,11.90
+tab:twoalloy,Ti-6Al-4V only test set,"GAOT, joint",T RMSE,single,ca0dace9-71fa-4314-b8c7-a0e5fb2b5876,39.8
+tab:twoalloy,Ti-6Al-4V only test set,"GAOT, joint",BB MAE,single,ca0dace9-71fa-4314-b8c7-a0e5fb2b5876,55
+tab:twoalloy,Ti-6Al-4V only test set,"GAOT, joint",Rel. err.,single,ca0dace9-71fa-4314-b8c7-a0e5fb2b5876,2.62
+tab:twoalloy,Ti-6Al-4V only test set,"GAOT, joint",Melt-pool IoU,single,ca0dace9-71fa-4314-b8c7-a0e5fb2b5876,0.887
+tab:frame-difficulty,FNO,"Quasi-steady, native",T MAE,mean,3697ebc0-592e-4d4e-9ee9-baa153f44338 1c78a5c3-b070-4854-a2ab-d86131d747d9 ff73099a-6040-456e-a3db-730bc9b458f8,7.71
+tab:frame-difficulty,FNO,"Quasi-steady, native",T RMSE,mean,3697ebc0-592e-4d4e-9ee9-baa153f44338 1c78a5c3-b070-4854-a2ab-d86131d747d9 ff73099a-6040-456e-a3db-730bc9b458f8,29.6
+tab:frame-difficulty,FNO,"Quasi-steady, native",BB MAE,mean,3697ebc0-592e-4d4e-9ee9-baa153f44338 1c78a5c3-b070-4854-a2ab-d86131d747d9 ff73099a-6040-456e-a3db-730bc9b458f8,15.0
+tab:frame-difficulty,FNO,"Quasi-steady, native",Rel. err.,mean,3697ebc0-592e-4d4e-9ee9-baa153f44338 1c78a5c3-b070-4854-a2ab-d86131d747d9 ff73099a-6040-456e-a3db-730bc9b458f8,1.25
+tab:frame-difficulty,FNO,"Quasi-steady, native",Melt-pool IoU,mean,3697ebc0-592e-4d4e-9ee9-baa153f44338 1c78a5c3-b070-4854-a2ab-d86131d747d9 ff73099a-6040-456e-a3db-730bc9b458f8,0.920
+tab:frame-difficulty,FNO,"Laboratory, native",T MAE,mean,1358c375-9cb6-48eb-8a34-22861e49999e ef556342-f529-433b-a454-6abfa8be2261 dbff37a3-c2ca-4dcb-86c6-a52c99cf37ed,10.01
+tab:frame-difficulty,FNO,"Laboratory, native",T RMSE,mean,1358c375-9cb6-48eb-8a34-22861e49999e ef556342-f529-433b-a454-6abfa8be2261 dbff37a3-c2ca-4dcb-86c6-a52c99cf37ed,27.3
+tab:frame-difficulty,FNO,"Laboratory, native",BB MAE,mean,1358c375-9cb6-48eb-8a34-22861e49999e ef556342-f529-433b-a454-6abfa8be2261 dbff37a3-c2ca-4dcb-86c6-a52c99cf37ed,49.1
+tab:frame-difficulty,FNO,"Laboratory, native",Rel. err.,mean,1358c375-9cb6-48eb-8a34-22861e49999e ef556342-f529-433b-a454-6abfa8be2261 dbff37a3-c2ca-4dcb-86c6-a52c99cf37ed,2.25
+tab:frame-difficulty,FNO,"Laboratory, native",Melt-pool IoU,mean,1358c375-9cb6-48eb-8a34-22861e49999e ef556342-f529-433b-a454-6abfa8be2261 dbff37a3-c2ca-4dcb-86c6-a52c99cf37ed,0.863
+tab:frame-difficulty,FNO,Laboratory -> quasi-steady,T MAE,mean,61130e31-1279-4be8-8e25-61bd429f310c d34caac0-013d-4a32-bbde-c2df4ff2014f 723168a2-6c72-47a4-9f5f-f0c9bfb72a59,17.91
+tab:frame-difficulty,FNO,Laboratory -> quasi-steady,T RMSE,mean,61130e31-1279-4be8-8e25-61bd429f310c d34caac0-013d-4a32-bbde-c2df4ff2014f 723168a2-6c72-47a4-9f5f-f0c9bfb72a59,40.3
+tab:frame-difficulty,FNO,Laboratory -> quasi-steady,BB MAE,mean,61130e31-1279-4be8-8e25-61bd429f310c d34caac0-013d-4a32-bbde-c2df4ff2014f 723168a2-6c72-47a4-9f5f-f0c9bfb72a59,53.2
+tab:frame-difficulty,FNO,Laboratory -> quasi-steady,Rel. err.,mean,61130e31-1279-4be8-8e25-61bd429f310c d34caac0-013d-4a32-bbde-c2df4ff2014f 723168a2-6c72-47a4-9f5f-f0c9bfb72a59,2.92
+tab:frame-difficulty,FNO,Laboratory -> quasi-steady,Melt-pool IoU,mean,61130e31-1279-4be8-8e25-61bd429f310c d34caac0-013d-4a32-bbde-c2df4ff2014f 723168a2-6c72-47a4-9f5f-f0c9bfb72a59,0.866
+tab:frame-difficulty,RIGNO,"Quasi-steady, native",T MAE,mean,9dfb29cb-e6d3-41f6-a562-63a5b7344b4d 563a655b-7704-4e3b-842a-68cada320366 73db9717-2945-438d-bcb6-2ac4b2234e43,11.36
+tab:frame-difficulty,RIGNO,"Quasi-steady, native",T RMSE,mean,9dfb29cb-e6d3-41f6-a562-63a5b7344b4d 563a655b-7704-4e3b-842a-68cada320366 73db9717-2945-438d-bcb6-2ac4b2234e43,40.0
+tab:frame-difficulty,RIGNO,"Quasi-steady, native",BB MAE,mean,9dfb29cb-e6d3-41f6-a562-63a5b7344b4d 563a655b-7704-4e3b-842a-68cada320366 73db9717-2945-438d-bcb6-2ac4b2234e43,23.6
+tab:frame-difficulty,RIGNO,"Quasi-steady, native",Rel. err.,mean,9dfb29cb-e6d3-41f6-a562-63a5b7344b4d 563a655b-7704-4e3b-842a-68cada320366 73db9717-2945-438d-bcb6-2ac4b2234e43,1.84
+tab:frame-difficulty,RIGNO,"Quasi-steady, native",Melt-pool IoU,mean,9dfb29cb-e6d3-41f6-a562-63a5b7344b4d 563a655b-7704-4e3b-842a-68cada320366 73db9717-2945-438d-bcb6-2ac4b2234e43,0.926
+tab:frame-difficulty,RIGNO,"Laboratory, native",T MAE,mean,09de3d62-3180-4270-8063-df65f212e786 b83e3bec-3b76-48c4-b4f4-aa1774cd9d68 d09a7ed7-f3c0-454e-a6e2-b1a0f57e4d96,6.65
+tab:frame-difficulty,RIGNO,"Laboratory, native",T RMSE,mean,09de3d62-3180-4270-8063-df65f212e786 b83e3bec-3b76-48c4-b4f4-aa1774cd9d68 d09a7ed7-f3c0-454e-a6e2-b1a0f57e4d96,21.4
+tab:frame-difficulty,RIGNO,"Laboratory, native",BB MAE,mean,09de3d62-3180-4270-8063-df65f212e786 b83e3bec-3b76-48c4-b4f4-aa1774cd9d68 d09a7ed7-f3c0-454e-a6e2-b1a0f57e4d96,30.9
+tab:frame-difficulty,RIGNO,"Laboratory, native",Rel. err.,mean,09de3d62-3180-4270-8063-df65f212e786 b83e3bec-3b76-48c4-b4f4-aa1774cd9d68 d09a7ed7-f3c0-454e-a6e2-b1a0f57e4d96,1.49
+tab:frame-difficulty,RIGNO,"Laboratory, native",Melt-pool IoU,mean,09de3d62-3180-4270-8063-df65f212e786 b83e3bec-3b76-48c4-b4f4-aa1774cd9d68 d09a7ed7-f3c0-454e-a6e2-b1a0f57e4d96,0.926
+tab:frame-difficulty,RIGNO,Laboratory -> quasi-steady,T MAE,mean,585a9552-19a8-429d-b460-e9038a85d8f8 c13a6112-c37a-4876-9e6a-ffc0f5fb4b77 d3f49137-f40b-4172-a8ea-3a94cbac91e5,11.50
+tab:frame-difficulty,RIGNO,Laboratory -> quasi-steady,T RMSE,mean,585a9552-19a8-429d-b460-e9038a85d8f8 c13a6112-c37a-4876-9e6a-ffc0f5fb4b77 d3f49137-f40b-4172-a8ea-3a94cbac91e5,28.6
+tab:frame-difficulty,RIGNO,Laboratory -> quasi-steady,BB MAE,mean,585a9552-19a8-429d-b460-e9038a85d8f8 c13a6112-c37a-4876-9e6a-ffc0f5fb4b77 d3f49137-f40b-4172-a8ea-3a94cbac91e5,32.7
+tab:frame-difficulty,RIGNO,Laboratory -> quasi-steady,Rel. err.,mean,585a9552-19a8-429d-b460-e9038a85d8f8 c13a6112-c37a-4876-9e6a-ffc0f5fb4b77 d3f49137-f40b-4172-a8ea-3a94cbac91e5,1.88
+tab:frame-difficulty,RIGNO,Laboratory -> quasi-steady,Melt-pool IoU,mean,585a9552-19a8-429d-b460-e9038a85d8f8 c13a6112-c37a-4876-9e6a-ffc0f5fb4b77 d3f49137-f40b-4172-a8ea-3a94cbac91e5,0.935
+tab:frame-difficulty,GAOT,"Quasi-steady, native",T MAE,mean,afa1531e-cc91-44ce-b2dc-c91d9ec794db bf661bb1-1e8a-4e30-a406-bce0c53bfae4 5de3218a-d68c-47f1-8b0e-fd58f5847931,9.74
+tab:frame-difficulty,GAOT,"Quasi-steady, native",T RMSE,mean,afa1531e-cc91-44ce-b2dc-c91d9ec794db bf661bb1-1e8a-4e30-a406-bce0c53bfae4 5de3218a-d68c-47f1-8b0e-fd58f5847931,32.3
+tab:frame-difficulty,GAOT,"Quasi-steady, native",BB MAE,mean,afa1531e-cc91-44ce-b2dc-c91d9ec794db bf661bb1-1e8a-4e30-a406-bce0c53bfae4 5de3218a-d68c-47f1-8b0e-fd58f5847931,16.8
+tab:frame-difficulty,GAOT,"Quasi-steady, native",Rel. err.,mean,afa1531e-cc91-44ce-b2dc-c91d9ec794db bf661bb1-1e8a-4e30-a406-bce0c53bfae4 5de3218a-d68c-47f1-8b0e-fd58f5847931,1.58
+tab:frame-difficulty,GAOT,"Quasi-steady, native",Melt-pool IoU,mean,afa1531e-cc91-44ce-b2dc-c91d9ec794db bf661bb1-1e8a-4e30-a406-bce0c53bfae4 5de3218a-d68c-47f1-8b0e-fd58f5847931,0.915
+tab:frame-difficulty,GAOT,"Laboratory, native",T MAE,mean,d703ab75-16f5-4044-b98e-edbcfed9bedf 56f741b6-d0ba-4f41-8ca2-8c79df764e9c 6f0c1aa5-2e04-45ba-a736-c1824ec30cad,11.13
+tab:frame-difficulty,GAOT,"Laboratory, native",T RMSE,mean,d703ab75-16f5-4044-b98e-edbcfed9bedf 56f741b6-d0ba-4f41-8ca2-8c79df764e9c 6f0c1aa5-2e04-45ba-a736-c1824ec30cad,41.7
+tab:frame-difficulty,GAOT,"Laboratory, native",BB MAE,mean,d703ab75-16f5-4044-b98e-edbcfed9bedf 56f741b6-d0ba-4f41-8ca2-8c79df764e9c 6f0c1aa5-2e04-45ba-a736-c1824ec30cad,72.8
+tab:frame-difficulty,GAOT,"Laboratory, native",Rel. err.,mean,d703ab75-16f5-4044-b98e-edbcfed9bedf 56f741b6-d0ba-4f41-8ca2-8c79df764e9c 6f0c1aa5-2e04-45ba-a736-c1824ec30cad,2.50
+tab:frame-difficulty,GAOT,"Laboratory, native",Melt-pool IoU,mean,d703ab75-16f5-4044-b98e-edbcfed9bedf 56f741b6-d0ba-4f41-8ca2-8c79df764e9c 6f0c1aa5-2e04-45ba-a736-c1824ec30cad,0.826
+tab:frame-difficulty,GAOT,Laboratory -> quasi-steady,T MAE,mean,cde7612d-6064-45c0-a1a9-94ca6f16dea6 9511909d-86fc-400f-bbc2-727c34dc9473 f090b3d8-49aa-428c-adf3-80ed5223f4cd,20.01
+tab:frame-difficulty,GAOT,Laboratory -> quasi-steady,T RMSE,mean,cde7612d-6064-45c0-a1a9-94ca6f16dea6 9511909d-86fc-400f-bbc2-727c34dc9473 f090b3d8-49aa-428c-adf3-80ed5223f4cd,52.2
+tab:frame-difficulty,GAOT,Laboratory -> quasi-steady,BB MAE,mean,cde7612d-6064-45c0-a1a9-94ca6f16dea6 9511909d-86fc-400f-bbc2-727c34dc9473 f090b3d8-49aa-428c-adf3-80ed5223f4cd,78.9
+tab:frame-difficulty,GAOT,Laboratory -> quasi-steady,Rel. err.,mean,cde7612d-6064-45c0-a1a9-94ca6f16dea6 9511909d-86fc-400f-bbc2-727c34dc9473 f090b3d8-49aa-428c-adf3-80ed5223f4cd,3.27
+tab:frame-difficulty,GAOT,Laboratory -> quasi-steady,Melt-pool IoU,mean,cde7612d-6064-45c0-a1a9-94ca6f16dea6 9511909d-86fc-400f-bbc2-727c34dc9473 f090b3d8-49aa-428c-adf3-80ed5223f4cd,0.841

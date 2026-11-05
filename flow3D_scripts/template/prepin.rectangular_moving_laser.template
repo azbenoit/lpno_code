@@ -1,0 +1,292 @@
+Rectangular substrate heated by a linearly moving laser.
+All dimensional quantities in this input are SI (m, kg, s, K, W, Pa).
+The renderer writes this file; do not edit a rendered copy by hand.
+
+ &xput
+    application=4,
+    process=1,
+    subprocess=__SUBPROCESS_ID__,
+    twfin=__FINAL_TIME_S__,
+    itb=1,
+    itwfin=__MAX_ITERATIONS__,
+    teditdt(1)=0.0,
+__SELECTED_DATA_INTERVAL_LINE__
+    ifenrg=2,
+    ihtc=1,
+    ifvisc=1,
+    ifsft=1,
+    imphtc=0,
+    ifvof=6,
+    fclean=__FCLEAN__,
+__XPUT_LEGACY_LINES__
+    ifdynconv=__IFDYNCONV__,
+    omega=1.0,
+    ifrho=1,
+    gz=__GRAVITY_Z__,
+    iwsh_swat=1,
+    ifsld=1,
+    ishrnk=0,
+    if_phchg=1,
+    tabvnam(1)='NVD',
+    tabvnam(2)='T',
+    tabvnam(3)='STNR',
+    tabvnam(4)='RHO',
+    tabvnam(5)='P',
+    tabvnam(6)='TLSS',
+    hflv1=__HFLV1__,
+ /
+
+ &limits
+ /
+
+ &props
+    units='si',
+    tunits='k',
+    munits='kg',
+    lunits='m',
+    timunits='s',
+    cunits='coul',
+    gamma=__GAMMA__,
+__PROPS_LEGACY_PREFIX__
+    fluid1='__MATERIAL_LABEL__',
+__PROPS_LEGACY_FLUID2__
+    mu1=__MATERIAL_MU1__,
+    muctst=__MATERIAL_MUCTST__,
+    cv1=__MATERIAL_CV1__,
+    cv2=__CV2__,
+    tl1=__MATERIAL_TL1__,
+    ts1=__MATERIAL_TS1__,
+    clht1=__MATERIAL_CLHT1__,
+    cvs1=__MATERIAL_CVS1__,
+    thcs1=__MATERIAL_THCS1__,
+    pv1=__MATERIAL_PV1__,
+    tv1=__MATERIAL_TV1__,
+    clhv1=__MATERIAL_CLHV1__,
+    rsize=__RSIZE__,
+__RSIZE_COND_LINE__
+    tvexp=__TVEXP__,
+    pv0=__PV0__,
+    rhof=__MATERIAL_RHOF__,
+    sigma=__SIGMA__,
+__PROPS_LEGACY_GAS__
+    thc1=__MATERIAL_THC1__,
+    isigma=1,
+    irhof=1,
+    ithc1=1,
+    icv1=1,
+    imu1=1,
+    ipgauge=0,
+    imu1dt(1)=2,
+    imu1dt(2)=1,
+    isigmadt(1)=1,
+    isigmadt(2)=1,
+    irhofdt(1)=2,
+    irhofdt(2)=1,
+    iemod1dt(1)=1,
+    iemod1dt(2)=1,
+    iyield1dt(1)=1,
+    iyield1dt(2)=1,
+    imoblty1dt(1)=1,
+    imoblty1dt(2)=1,
+    irelax1dt(1)=1,
+    irelax1dt(2)=1,
+    iclhv1dt(1)=1,
+    iclhv1dt(2)=1,
+    iecond1dt(1)=1,
+    iecond1dt(2)=1,
+    iecondsc2dt(1)=1,
+    iecondsc2dt(2)=1,
+    imu2dt(1)=1,
+    imu2dt(2)=1,
+    iemod2dt(1)=1,
+    iemod2dt(2)=1,
+    iyield2dt(1)=1,
+    iyield2dt(2)=1,
+    imoblty2dt(1)=1,
+    imoblty2dt(2)=1,
+    irelax2dt(1)=1,
+    irelax2dt(2)=1,
+    iecond2dt(1)=1,
+    iecond2dt(2)=1,
+    p_reference=__P_REFERENCE__,
+    t_reference=__T_REFERENCE__,
+ /
+
+ &scalar
+    nsspc=0,
+    nsc=0,
+    imeltopt=1,
+ /
+
+ &chm
+ /
+
+ &bcdata
+    ibct(1)=__BC_XMIN__,
+    pbct(1,1)=__AMBIENT_PRESSURE_PA__,
+    tbct(1,1)=__BOUNDARY_TEMPERATURE_K__,
+    ibct(2)=__BC_XMAX__,
+    pbct(1,2)=__AMBIENT_PRESSURE_PA__,
+    tbct(1,2)=__BOUNDARY_TEMPERATURE_K__,
+    ibct(3)=__BC_YMIN__,
+    pbct(1,3)=__AMBIENT_PRESSURE_PA__,
+    tbct(1,3)=__BOUNDARY_TEMPERATURE_K__,
+    ibct(4)=__BC_YMAX__,
+    pbct(1,4)=__AMBIENT_PRESSURE_PA__,
+    tbct(1,4)=__BOUNDARY_TEMPERATURE_K__,
+    ibct(5)=__BC_ZMIN__,
+    pbct(1,5)=__AMBIENT_PRESSURE_PA__,
+    tbct(1,5)=__BOUNDARY_TEMPERATURE_K__,
+    ibct(6)=__BC_ZMAX__,
+__BC_ZMAX_LINES__
+    if_part=0,
+    timbct(1)=0.0,
+ /
+
+ &mesh
+    MeshName='Rectangular substrate and gas clearance',
+    size=__CELL_SIZE_M__,
+    px(1)=__X_MIN_M__,
+    px(2)=__X_MAX_M__,
+    py(1)=__Y_MIN_M__,
+    py(2)=__Y_MAX_M__,
+    pz(1)=__Z_MIN_M__,
+    pz(2)=__Z_MAX_M__,
+    if_mesh_enabled=1,
+ /
+__EXTRA_MESH_BLOCKS__
+# One rank / one mesh-partition definition required by the vendor parallel
+# launcher, even for this local serial-sized test case.
+ &BCDATA_MPI
+    ibct(1)=__BC_XMIN__,
+    pbct(1,1)=__AMBIENT_PRESSURE_PA__,
+    tbct(1,1)=__BOUNDARY_TEMPERATURE_K__,
+    ibct(2)=__BC_XMAX__,
+    pbct(1,2)=__AMBIENT_PRESSURE_PA__,
+    tbct(1,2)=__BOUNDARY_TEMPERATURE_K__,
+    ibct(3)=__BC_YMIN__,
+    pbct(1,3)=__AMBIENT_PRESSURE_PA__,
+    tbct(1,3)=__BOUNDARY_TEMPERATURE_K__,
+    ibct(4)=__BC_YMAX__,
+    pbct(1,4)=__AMBIENT_PRESSURE_PA__,
+    tbct(1,4)=__BOUNDARY_TEMPERATURE_K__,
+    ibct(5)=__BC_ZMIN__,
+    pbct(1,5)=__AMBIENT_PRESSURE_PA__,
+    tbct(1,5)=__BOUNDARY_TEMPERATURE_K__,
+    ibct(6)=__BC_ZMAX__,
+__BC_ZMAX_LINES__
+    if_part=0,
+    timbct(1)=0.0,
+ /
+
+ &MESH_MPI
+    MeshName='Rectangular substrate and gas clearance - MPI domain 1',
+    size=__CELL_SIZE_M__,
+    px(1)=__X_MIN_M__,
+    px(2)=__X_MAX_M__,
+    py(1)=__Y_MIN_M__,
+    py(2)=__Y_MAX_M__,
+    pz(1)=__Z_MIN_M__,
+    pz(2)=__Z_MAX_M__,
+    if_mesh_enabled=1,
+ /
+__EXTRA_MESH_MPI_BLOCKS__
+
+ &obs
+    nsprp=0,
+ /
+
+__FLUID_INITIALIZATION__
+
+ &bf
+    nbafs=0,
+ /
+
+ &motn
+ /
+
+ &grafic
+    anmtyp(1)='f',
+    anmtyp(2)='melt',
+    anmtyp(3)='p',
+    anmtyp(4)='prec',
+    anmtyp(5)='qw3d',
+    anmtyp(6)='qwhs',
+    anmtyp(7)='sldfrc',
+    anmtyp(8)='tgrd',
+    anmtyp(9)='tn',
+    anmtyp(10)='vel',
+ /
+
+ &renderspace
+    ifcompf=1,
+ /
+
+ &header
+    project='__PROJECT_NAME__',
+    version='double',
+    nprocs=0,
+    runser=0,
+    use_parallel_token=0,
+    run_with_available=0,
+ /
+
+ &parts
+    nvnts=0,
+    pgas_title='Gas particles -1',
+    ipgas_species=0,
+    pliquid_title='Fluid particles -1',
+    ipliquid_species=0,
+    pmass_title='Mass particles -1',
+    ipmass_species=0,
+    pmarker_title='Marker particles -1',
+    nsc_part=0,
+    npxyz=0,
+    ippkt=0,
+ /
+
+ &details
+    f3d_product_name='FLOW-3D WELD',
+    f3d_version_number='25.1.0',
+ /
+
+ &mpivar
+    idyntb=0,
+    impi_mesh=0,
+ /
+
+ &weld
+    if_beam=1,
+__WELD_LEGACY_PREFIX__
+__WELD_ILBEAM_LINE__
+    irefopt=__LASER_REFLECTION_FLAG__,
+    nrefmx=__LASER_MAX_REFLECTIONS__,
+    qreflim=__LASER_REFLECTION_LIMIT__,
+__WELD_LEGACY_AFTER_REFLECTION__
+    ibeamsurfflux=1,
+__WELD_ABSORPTIVITY_FLAG_LINE__
+    cbmengy=__LASER_ABSORPTIVITY__,
+    ereflct=__LASER_REFLECTIVITY__,
+__LASER_IEREFLCT_LINE__
+__WELD_LEGACY_ENERGY_LINES__
+    avprslbm=__LASER_VAPOR_A__,
+    bvprslbm=__LASER_VAPOR_B__,
+__WELD_LEGACY_VAPOR_LINES__
+    if_prsrecoil=__IF_PRSRECOIL__,
+__WELD_LEGACY_RECOIL_LINES__
+    if_frcplume=0,
+__LASER_BEAM_BLOCK__
+ /
+
+# This seed distribution assigns the one rendered mesh block to rank 0.
+# Multi-rank runs ask FLOW-3D's ADT to replace this with a decomposition.
+#start BlocksDistribution
+0 1 __THREADS_PER_RANK__
+#end BlocksDistribution
+
+#start tables:
+#fluid1:
+__MATERIAL_TABLES__
+__FRESNEL_EREFLCT_TABLE__
+#end fluid1
+#end start tables

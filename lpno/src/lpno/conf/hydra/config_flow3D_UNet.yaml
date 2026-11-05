@@ -1,0 +1,199 @@
+defaults:
+  - physicsnemo_default
+  - /arch/pix2pix_cfg@arch.pix2pix
+  - scheduler: tf_exponential_lr
+  - optimizer: lion
+  - loss: relobralo
+  - _self_
+run_mode: train
+
+save_filetypes : "vtk,npz"
+cuda_graphs: false
+arch:
+  pix2pix:
+    dimension: 3
+    conv_layer_size: 128
+    n_downsampling: 3
+    n_blocks: 3
+    scaling_factor: 1
+    batch_norm: false
+    padding_type: reflect
+
+loss:
+  alpha: 0.95
+  beta: 0.99
+  tau: 3.0
+
+scheduler:
+  decay_rate: 0.95
+  decay_steps: 100
+
+optimizer:
+  lr: 1e-5
+
+training:
+  rec_results_freq: 100
+  print_stats_freq: 100
+  summary_freq: 100
+  max_steps: 6000
+
+batch_size:
+  grid: 1
+  validation: 1
+
+custom:
+  name: unnamed
+  model_family: unet
+  data_dir: "DEFAULT"
+  val_data_dir: "DEFAULT"
+  param_dir: "DEFAULT"
+  split_mode: standard
+  k_folds: 8
+  fold_index: -1
+  pde_loss: false
+  VOF_pde_loss: false
+  Diff_loss: false
+  Diff_weight: 1e14
+  pde_weight: 1.0e-1
+  super_res: 1
+  detect_anomaly: false
+  sharp_alpha: false
+  alpha_masking: true
+  # Restrict the headline metric REPORT to the substrate, excluding the free gas
+  # gap above the material (~25% of a FLOW-3D domain, filled with the same
+  # constant in prediction and truth so it dilutes every mean by ~1/0.75).
+  # Declared here because the AiiDA adapters emit it as a `custom.` override and
+  # Hydra runs in struct mode: an undeclared key is a hard failure at startup.
+  metrics_exclude_gas: false
+  # Step at which hard alpha-masking switches on (cold starts only).
+  # null = shipped default (500). Set it PAST the LR warmup: masking a
+  # model that has not begun to learn alpha zeroes its gradients.
+  mask_warmup_steps: null
+  include_time: true
+  time_avg_window: 30
+  moving_frame_steps: 30
+  moving_ref_frame: true
+  wandb_offline: false
+  inference_batch_size: 1
+  use_2D: false
+  time_as_dim: false
+  time_as_batch: false
+  infer_velocities: false
+  fast_training: false
+  autoregressive:
+    enabled: false
+    mode: masked_patch
+    state_prev_suffix: "_prev"
+    patch_size: [32, 16, 16]
+    context_steps: 1
+    mask_mode: block
+    mask_ratio: 0.15
+    train_patches_per_epoch: 256
+    val_patches_per_epoch: 64
+    eval_horizon_k: 10
+    eval_use_gt_init: true
+    require_time: true
+    prev_noise_std: 0.0
+    prev_noise_resample: false
+    clamp_feedback: false
+    clamp_t_min: null
+    clamp_t_max: null
+    unroll_steps: 1
+    unroll_detach_grad: false
+  cuda_device: 0
+  cuda_visible_devices: null
+  cuda_local_device: 0
+
+  software: flow3D
+  geometry:
+    x_range: [-4.5e-4, 4.5e-4]
+    y_range: [-2e-4, 2e-4]
+    z_range: [-3e-4, 0]
+    resolution: [90, 40, 30]
+
+  ref_scales:
+    L: 1e-4
+    T: 3000
+    V: 0.1
+    P: 10
+    Rho: 4.506e3
+    H: 203
+
+  laser:
+    type: given
+    x0: 0.0
+    z0: -5e-6
+
+  material_params:
+    rho: 4.506e3
+    c:
+      coeffs: [0.1341, 531]
+    K:
+      coeffs: [0.0151, 1.433]
+    V_scan: null
+    L: 3.45e5
+    Kl: null
+    Ks: null
+    cl: null
+    cs: null
+    rho_l: null
+    rho_s: null
+    T_s: 1873
+    T_l: 1923
+    weight: null
+    c_g: 520
+    K_g: 0.018
+    T_l_g: 10
+    T_s_g: 1
+    rho_g: 1.7
+    L_g: 1
+
+  vtk_fields:
+    - Temperature
+    - Solid Fraction
+    - Pressure
+    - Fraction Of Fluid
+    - Velocity
+    # NOTE: no X-/Y-/Z-velocity here. The FLOW-3D NPZ exporter writes only the
+    # Velocity vector and drops the per-component arrays as redundant
+    # (flow3D_scripts/README.md, NPZ layout). Naming them was a latent KeyError
+    # that fired as soon as time_as_batch=true routed through the lazy store.
+
+  FNO_input_keys:
+    - V_scan
+    - P
+    - H_norm
+    - x
+    - y
+    - z
+
+  FNO_output_keys:
+    - T
+    - alpha
+
+  Energy_input_keys:
+    - u
+    - v
+    - w
+    - Deposition
+
+  Energy_output_keys:
+    - energy
+
+  VOF_input_keys:
+    - u
+    - v
+    - w
+
+  VOF_output_keys:
+    - VOF
+
+  Diff_input_keys: []
+
+  Diff_output_keys:
+    - T_diffTerm
+
+summary_histograms: "log2"
+hydra:
+  run:
+    dir: outputs/${custom.name}_${now:%m%d_%H%M}

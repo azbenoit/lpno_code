@@ -1,0 +1,9 @@
+nist_frame_number,time_us,vapor_depression_depth_um,vapor_depression_depth_px,used_in_manuscript
+105,127.32,102.51,51,fig:calib-history-depth
+110,227.32,120.6,60,fig:calib-history-depth
+115,327.32,114.57,57,fig:calib-history-depth
+120,427.32,70.35,35,fig:calib-history-depth
+125,527.32,68.34,34,fig:calib-history-depth
+130,627.32,60.3,30,fig:calib-history-depth
+135,727.32,66.33,33,fig:calib-history-depth
+140,827.32,58.29,29,fig:calib-history-depth

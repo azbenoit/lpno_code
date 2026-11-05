@@ -1,0 +1,22 @@
+# RIGNO on the pvlhs/spkh123 recipe, grown toward GAOT's parameter count.
+#
+# The complement of config_flow3D_GAOT_pvlhs_sizematched: that arm shrinks GAOT to
+# RIGNO's size, this one grows RIGNO. Running both brackets the capacity axis from
+# each side, so a result that holds in both directions is not an artifact of which
+# model was perturbed.
+#
+# 128/10 is not invented here: it is the capacity already used by
+# config_flow3D_RIGNO_material_big.yaml, so it is a setting this architecture has
+# been run at before rather than an untested extrapolation. It lands near 1.7M
+# params -- still under GAOT's 5.6M, so this arm alone cannot close the gap; it
+# measures the SLOPE of RIGNO's accuracy against capacity, which is what tells us
+# whether more parameters would ever close it.
+defaults:
+  - config_flow3D_RIGNO_pvlhs
+  - _self_
+
+arch:
+  rigno:
+    node_latent_size: 128
+    edge_latent_size: 128
+    processor_steps: 10

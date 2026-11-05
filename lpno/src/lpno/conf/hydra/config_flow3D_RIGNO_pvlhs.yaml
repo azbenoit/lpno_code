@@ -1,0 +1,103 @@
+# RIGNO on the PV-LHS beam/preheat sweep (ti64_pv_lhs_beam_preheat).
+#
+# Partner of config_flow3D_GAOT_pvlhs -- identical splits, channels and
+# schedule so the pair is an architecture measurement on the process-space task.
+# Inherits config_flow3D_RIGNO_randompath (the validated lab-frame RIGNO recipe:
+# vanilla heads -- the corrector head measured WORSE on varied data -- FiLM
+# conditioning for broadcast scalars, one-cycle). Changes:
+#
+#   1. amp OFF. The parent enables fp16 autocast; RIGNO trains in fp32 (fp16 can
+#      overflow the gradients on this data family), and this dataset's keyhole corners reach
+#      5387 K where half-precision overflow risk concentrates. fp32 first, amp as a
+#      separate experiment -- the same stance the GAOT randompath config records.
+#
+#   2. The three new conditioning channels (preheat_T0 / beam_shape_uniform /
+#      focus_factor, see tests/test_pvlhs_channels.py). FiLM routes these
+#      broadcast-constant channels into conditioning automatically, which is exactly
+#      the mechanism they were shaped for (raw SI values, no baked ref-scale).
+#
+#   3. case_coherent_sampling on (the full-resolution loader recipe; pair with
+#      PINO_LOADER_WORKERS=2 and host_ram_mb=40960 in the submission profile).
+#
+# RIGNO carries no output_bounds mechanism, so the T-ceiling item is GAOT-only.
+# Grid note: 90x40x50 = 180k nodes is well under the 150x100x40 = 600k that forced
+# the recorded stride-2 subsampling -- run FULL RESOLUTION, no PINO_LAZY_STRIDE.
+defaults:
+  # The ONE-CYCLE parent, so this arm is schedule-matched to the GAOT partner. Plain
+  # config_flow3D_RIGNO_randompath uses tf_exponential_lr, which would have made the
+  # architecture comparison a schedule comparison as well.
+  - config_flow3D_RIGNO_randompath_onecycle
+  - _self_
+
+training:
+  max_steps: 32000
+  # 12 val cases x ~282 frames = ~3400 forward passes per validation. At the inherited
+  # freq 500 that is 64 passes -- validation would cost as much as the training itself.
+  # 16 passes still gives 16 checkpoint-selection points over the anneal.
+  rec_validation_freq: 2000
+  # rec_results_freq paces the constraint, monitor and inference records (and validation,
+  # where rec_validation_freq is not set). It is NOT the checkpoint interval: physicsnemo
+  # writes the weights every save_network_freq steps (its default 1000, capped to max_steps
+  # by the pipeline), and u_network.best.pth is written at every improving validation.
+  # 2000 matches the validation cadence.
+  rec_results_freq: 2000
+  summary_freq: 2000
+  # The progress line. Never raise this: it is the only per-step signal, and the stall
+  # detection, step-rate measurement and health monitor all read it.
+  print_stats_freq: 100
+  # The '[step: N] record constraint batch time' heartbeat the monitors parse. The
+  # physicsnemo default is 2000, which left these runs silent between validations and
+  # made healthy training indistinguishable from a stall.
+  rec_constraint_freq: 100
+
+stop_criterion:
+  patience: 32000
+  # MUST be a multiple relationship with rec_validation_freq: physicsnemo enforces it,
+  # but only at the FIRST criterion evaluation -- the inherited 500 against a validation
+  # freq of 2000 fails a run hours in. config_loading now checks this at startup.
+  freq: 2000
+
+amp:
+  enabled: false
+
+arch:
+  rigno:
+    # FiLM was claimed for these channels and was NOT enabled: film_keys defaults to []
+    # in the parent and nothing populates it, so broadcast scalars were entering the
+    # pnode features directly. Listed explicitly now.
+    film_keys: [preheat_T0, focus_factor, beam_shape_uniform, P, V_scan, H_norm]
+
+custom:
+  # Stated here rather than left to the submission profile's tri-state default. Both
+  # partner arms (GAOT, FNO) set it in their configs, so leaving it unset made the three
+  # disagree at CONFIG level and agree only when a profile happened to supply it -- a
+  # submission without that key would have trained this arm unweighted against weighted
+  # partners, and nothing would have said so. Pinned by
+  # tests/test_pvlhs_arms_are_controlled.py.
+  power_weighted_dose: true
+  case_coherent_sampling: true
+  # Only the fields the input/output keys actually consume. Velocity (3 components) and
+  # Pressure are ~9.6 GiB per cached case at nt=597 and are read by nothing here; the
+  # automatic pruner keeps them because the parent's list names them.
+  vtk_fields: [Temperature, Fraction Of Fluid]
+  metrics_exclude_gas: true
+  val_max_cases: 0
+  FNO_input_keys:
+    - V_scan
+    - P
+    - H_norm
+    - x
+    - y
+    - z
+    - beam_x
+    - beam_y
+    - beam_dist
+    - path_dose
+    - path_dose_recent
+    - preheat_T0
+    - beam_shape_uniform
+    - focus_factor
+    # Preheat as a melting-threshold modulation: H* against the LOCAL soak temperature.
+    # The stored H_norm is P/sqrt(V) and preheat-blind; this is the design's own
+    # h_norm_ti64 form with T0 -> soak_field(x,t), so it is a field, not a per-case scalar.
+    - h_norm_local

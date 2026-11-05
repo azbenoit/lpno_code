@@ -1,0 +1,103 @@
+{
+ "what": "Ti-6Al-4V replicate conditions of fig:closing: measured depth, FLOW-3D depth, an earlier FNO surrogate's depth and the FLOW-3D cavity aspect ratio, one row per condition.",
+ "rows": [
+  {
+   "kind": "fusion",
+   "meas_d": 242.6,
+   "sim_d": 230.0,
+   "mdl_d": 250.0,
+   "aspect": 0.9889
+  },
+  {
+   "kind": "depression",
+   "meas_d": 226.766,
+   "sim_d": 235.895,
+   "mdl_d": 220.0,
+   "aspect": 1.55302
+  },
+  {
+   "kind": "depression",
+   "meas_d": 79.48,
+   "sim_d": 65.294,
+   "mdl_d": 70.0,
+   "aspect": 0.46639
+  },
+  {
+   "kind": "fusion",
+   "meas_d": 52.9,
+   "sim_d": 70.0,
+   "mdl_d": 70.0,
+   "aspect": 0.31723
+  },
+  {
+   "kind": "depression",
+   "meas_d": 99.48,
+   "sim_d": 87.143,
+   "mdl_d": 90.0,
+   "aspect": 0.72332
+  },
+  {
+   "kind": "depression",
+   "meas_d": 61.639,
+   "sim_d": 62.593,
+   "mdl_d": 60.0,
+   "aspect": 0.51368
+  },
+  {
+   "kind": "depression",
+   "meas_d": 76.639,
+   "sim_d": 80.318,
+   "mdl_d": 80.0,
+   "aspect": 0.64213
+  },
+  {
+   "kind": "depression",
+   "meas_d": 116.77,
+   "sim_d": 120.741,
+   "mdl_d": 120.0,
+   "aspect": 0.98045
+  },
+  {
+   "kind": "depression",
+   "meas_d": 119.27,
+   "sim_d": 142.064,
+   "mdl_d": 140.0,
+   "aspect": 1.04801
+  },
+  {
+   "kind": "fusion",
+   "meas_d": 141.82,
+   "sim_d": 100.0,
+   "mdl_d": 100.0,
+   "aspect": 0.4129
+  },
+  {
+   "kind": "fusion",
+   "meas_d": 186.55,
+   "sim_d": 140.0,
+   "mdl_d": 140.0,
+   "aspect": 0.61796
+  },
+  {
+   "kind": "depression",
+   "meas_d": 85.323,
+   "sim_d": 92.316,
+   "mdl_d": 90.0,
+   "aspect": 0.63736
+  },
+  {
+   "kind": "fusion",
+   "meas_d": 207.52,
+   "sim_d": 180.0,
+   "mdl_d": 180.0,
+   "aspect": 0.83186
+  },
+  {
+   "kind": "depression",
+   "meas_d": 130.389,
+   "sim_d": 133.895,
+   "mdl_d": 140.0,
+   "aspect": 0.86649
+  }
+ ]
+}

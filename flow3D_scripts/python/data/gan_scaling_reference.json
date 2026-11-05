@@ -1,0 +1,484 @@
+{
+ "schema_version": 1,
+ "source": "Gan, Z., Kafka, O.L., Parab, N. et al. Universal scaling laws of keyhole stability and porosity in 3D printing of metals. Nat Commun 12, 2379 (2021). Derived from Supplementary Data 1 (87 points, 4 alloy/spot groups).",
+ "provenance": "Derived dimensionless pairs (Ke, e/r0) computed from Supplementary Data 1 by validate_scaling_law.py build-reference; the spreadsheet itself is not redistributed here.",
+ "ke_definition": "eta*P / ((Tv-T0)*pi*rho*cp*sqrt(alpha*V*r0^3))",
+ "ke_form": "simple_Tv",
+ "e_star_definition": "keyhole depth e divided by beam spot radius r0",
+ "fit": {
+  "form": "poly2_in_sqrt_ke",
+  "coeffs_sqrt_ke": [
+   0.43207022839146986,
+   1.6718441928711802,
+   -1.8229356167851436
+  ],
+  "residual_sd": 0.9327504529180198,
+  "ke_range": [
+   0.7712897728900974,
+   11.69070746422164
+  ]
+ },
+ "per_group": {
+  "Al6061, spot size 88 \u03bcm": {
+   "n": 9,
+   "residual_sd": 1.4971221665341026,
+   "mean_residual": 2.0837712374595805,
+   "mean_z": 2.234007210546726
+  },
+  "SS316, spot size 110 \u03bcm": {
+   "n": 7,
+   "residual_sd": 0.20358885800053741,
+   "mean_residual": -0.10914459436795491,
+   "mean_z": -0.11701371361065178
+  },
+  "Ti6, spot size 140 \u03bcm": {
+   "n": 23,
+   "residual_sd": 0.357339093873978,
+   "mean_residual": -0.3158874261256122,
+   "mean_z": -0.3386623133094054
+  },
+  "Ti64, spot size 95 \u03bcm": {
+   "n": 48,
+   "residual_sd": 0.3484800705924933,
+   "mean_residual": -0.22342746199315155,
+   "mean_z": -0.23953616028186347
+  }
+ },
+ "points": [
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 2.0592739336401857,
+   "e_over_r0": 0.694905263157894
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 2.918132339968074,
+   "e_over_r0": 1.7962821052631577
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 3.82271967369913,
+   "e_over_r0": 2.7450315789473687
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 5.636219775463119,
+   "e_over_r0": 4.7740210526315785
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 6.417818308475518,
+   "e_over_r0": 5.459368421052631
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 1.2940041754652585,
+   "e_over_r0": 0.3212210526315789
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 2.540820731104409,
+   "e_over_r0": 1.6134484210526314
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 3.235197758512805,
+   "e_over_r0": 2.167452631578947
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 3.9590411733353656,
+   "e_over_r0": 2.510947368421052
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 5.458907435940524,
+   "e_over_r0": 3.566315789473684
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 6.222078600297457,
+   "e_over_r0": 4.304547368421052
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 8.475163283345985,
+   "e_over_r0": 6.545431578947368
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 9.990493105080528,
+   "e_over_r0": 7.600821052631578
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 11.484939978047247,
+   "e_over_r0": 8.419368421052631
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 1.0716378272145177,
+   "e_over_r0": 0.3212210526315789
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 2.1424298589349378,
+   "e_over_r0": 1.297658947368421
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 3.3911069349912,
+   "e_over_r0": 2.458315789473684
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 4.739571651417491,
+   "e_over_r0": 3.4610526315789474
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 6.098623701404118,
+   "e_over_r0": 4.621642105263157
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 7.55458934075495,
+   "e_over_r0": 5.413936842105262
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 8.971206576442889,
+   "e_over_r0": 6.4745894736842
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 10.338383883565497,
+   "e_over_r0": 7.39831578947368
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 11.69070746422164,
+   "e_over_r0": 9.36941052631579
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 1.6486068160642438,
+   "e_over_r0": 1.3075284210526315
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 2.6162960936388178,
+   "e_over_r0": 2.094324210526316
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 3.721863670076502,
+   "e_over_r0": 3.1442105263157893
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 4.865487606994604,
+   "e_over_r0": 3.6151999999999997
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 6.118399597585041,
+   "e_over_r0": 5.0071157894736835
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 7.325625996647387,
+   "e_over_r0": 5.504442105263157
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 8.576024499375103,
+   "e_over_r0": 7.10168421052632
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 9.826067053575727,
+   "e_over_r0": 7.867347368421052
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 2.295344858813748,
+   "e_over_r0": 1.8049263157894733
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 4.381485762390226,
+   "e_over_r0": 3.6678315789473683
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 5.481997167563435,
+   "e_over_r0": 4.375684210526315
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 6.644647129926168,
+   "e_over_r0": 4.715031578947368
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 7.857127901532068,
+   "e_over_r0": 6.133263157894736
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 9.043573996292379,
+   "e_over_r0": 6.498926315789474
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 2.0782576182420756,
+   "e_over_r0": 1.6732715789473684
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 3.971091164728284,
+   "e_over_r0": 3.0625684210526316
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 6.147101642399147,
+   "e_over_r0": 4.87277894736842
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 8.356720235860074,
+   "e_over_r0": 5.972610526315789
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 1.1375334218467317,
+   "e_over_r0": 0.728656842105263
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 1.874069547359097,
+   "e_over_r0": 1.6469557894736842
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 2.6952371336274865,
+   "e_over_r0": 2.012698947368421
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 3.6464458724191684,
+   "e_over_r0": 2.8519789473684205
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 4.603214024146415,
+   "e_over_r0": 3.401936842105263
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 6.680169587043281,
+   "e_over_r0": 4.5543157894736845
+  },
+  {
+   "group": "Ti64, spot size 95 \u03bcm",
+   "ke": 7.720081485128227,
+   "e_over_r0": 5.709536842105262
+  },
+  {
+   "group": "Ti6, spot size 140 \u03bcm",
+   "ke": 1.0007290813676206,
+   "e_over_r0": 0.33466571428571434
+  },
+  {
+   "group": "Ti6, spot size 140 \u03bcm",
+   "ke": 1.3512943843176253,
+   "e_over_r0": 0.3873542857142857
+  },
+  {
+   "group": "Ti6, spot size 140 \u03bcm",
+   "ke": 1.5727706472202307,
+   "e_over_r0": 0.42255000000000004
+  },
+  {
+   "group": "Ti6, spot size 140 \u03bcm",
+   "ke": 1.7570653550793611,
+   "e_over_r0": 0.7435628571428572
+  },
+  {
+   "group": "Ti6, spot size 140 \u03bcm",
+   "ke": 1.9953843466766397,
+   "e_over_r0": 0.7430442857142857
+  },
+  {
+   "group": "Ti6, spot size 140 \u03bcm",
+   "ke": 2.2166870197245054,
+   "e_over_r0": 1.1711485714285714
+  },
+  {
+   "group": "Ti6, spot size 140 \u03bcm",
+   "ke": 2.675861790246337,
+   "e_over_r0": 1.5630714285714287
+  },
+  {
+   "group": "Ti6, spot size 140 \u03bcm",
+   "ke": 3.1263451336198584,
+   "e_over_r0": 2.0979000000000005
+  },
+  {
+   "group": "Ti6, spot size 140 \u03bcm",
+   "ke": 0.7712897728900974,
+   "e_over_r0": 0.2087314285714286
+  },
+  {
+   "group": "Ti6, spot size 140 \u03bcm",
+   "ke": 1.1401421248270065,
+   "e_over_r0": 0.47472000000000003
+  },
+  {
+   "group": "Ti6, spot size 140 \u03bcm",
+   "ke": 1.3871961867655984,
+   "e_over_r0": 0.6345514285714285
+  },
+  {
+   "group": "Ti6, spot size 140 \u03bcm",
+   "ke": 1.6663846294990716,
+   "e_over_r0": 0.8479028571428572
+  },
+  {
+   "group": "Ti6, spot size 140 \u03bcm",
+   "ke": 1.9617408934329956,
+   "e_over_r0": 0.9719685714285715
+  },
+  {
+   "group": "Ti6, spot size 140 \u03bcm",
+   "ke": 2.2714728962876327,
+   "e_over_r0": 1.0424628571428571
+  },
+  {
+   "group": "Ti6, spot size 140 \u03bcm",
+   "ke": 2.9276881822379717,
+   "e_over_r0": 1.5584571428571428
+  },
+  {
+   "group": "Ti6, spot size 140 \u03bcm",
+   "ke": 3.6435599733471236,
+   "e_over_r0": 1.9851
+  },
+  {
+   "group": "Ti6, spot size 140 \u03bcm",
+   "ke": 5.099990361845631,
+   "e_over_r0": 2.999271428571429
+  },
+  {
+   "group": "Ti6, spot size 140 \u03bcm",
+   "ke": 0.8624221596776805,
+   "e_over_r0": 0.2604342857142857
+  },
+  {
+   "group": "Ti6, spot size 140 \u03bcm",
+   "ke": 0.9709795785906757,
+   "e_over_r0": 0.33092857142857146
+  },
+  {
+   "group": "Ti6, spot size 140 \u03bcm",
+   "ke": 1.0735039551499848,
+   "e_over_r0": 0.5264742857142858
+  },
+  {
+   "group": "Ti6, spot size 140 \u03bcm",
+   "ke": 1.2667911601750403,
+   "e_over_r0": 0.52554
+  },
+  {
+   "group": "Ti6, spot size 140 \u03bcm",
+   "ke": 1.4904851523435083,
+   "e_over_r0": 0.7209814285714286
+  },
+  {
+   "group": "Ti6, spot size 140 \u03bcm",
+   "ke": 1.9346907816982275,
+   "e_over_r0": 1.0584514285714286
+  },
+  {
+   "group": "Al6061, spot size 88 \u03bcm",
+   "ke": 3.820659143003788,
+   "e_over_r0": 5.113636363636363
+  },
+  {
+   "group": "Al6061, spot size 88 \u03bcm",
+   "ke": 5.707177608953325,
+   "e_over_r0": 7.545454545454546
+  },
+  {
+   "group": "Al6061, spot size 88 \u03bcm",
+   "ke": 2.597796406299471,
+   "e_over_r0": 4.136363636363636
+  },
+  {
+   "group": "Al6061, spot size 88 \u03bcm",
+   "ke": 3.9218159691772945,
+   "e_over_r0": 5.2727272727272725
+  },
+  {
+   "group": "Al6061, spot size 88 \u03bcm",
+   "ke": 1.9112951426159688,
+   "e_over_r0": 2.0227272727272725
+  },
+  {
+   "group": "Al6061, spot size 88 \u03bcm",
+   "ke": 2.9044246780951406,
+   "e_over_r0": 3.6590909090909087
+  },
+  {
+   "group": "Al6061, spot size 88 \u03bcm",
+   "ke": 1.4814337914497269,
+   "e_over_r0": 1.5909090909090908
+  },
+  {
+   "group": "Al6061, spot size 88 \u03bcm",
+   "ke": 2.2612720566380595,
+   "e_over_r0": 2.6136363636363633
+  },
+  {
+   "group": "Al6061, spot size 88 \u03bcm",
+   "ke": 7.812888382209906,
+   "e_over_r0": 12.05
+  },
+  {
+   "group": "SS316, spot size 110 \u03bcm",
+   "ke": 2.200247769346325,
+   "e_over_r0": 1.701454545454546
+  },
+  {
+   "group": "SS316, spot size 110 \u03bcm",
+   "ke": 4.24682400909503,
+   "e_over_r0": 3.2909090909091
+  },
+  {
+   "group": "SS316, spot size 110 \u03bcm",
+   "ke": 6.542960890474206,
+   "e_over_r0": 4.85454545454546
+  },
+  {
+   "group": "SS316, spot size 110 \u03bcm",
+   "ke": 8.94669847461409,
+   "e_over_r0": 6.9090909090909
+  },
+  {
+   "group": "SS316, spot size 110 \u03bcm",
+   "ke": 4.626572014692683,
+   "e_over_r0": 3.80224628
+  },
+  {
+   "group": "SS316, spot size 110 \u03bcm",
+   "ke": 8.046232861059908,
+   "e_over_r0": 6.066624624842
+  },
+  {
+   "group": "SS316, spot size 110 \u03bcm",
+   "ke": 11.446523460790333,
+   "e_over_r0": 8.947
+  }
+ ]
+}

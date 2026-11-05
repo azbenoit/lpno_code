@@ -1,0 +1,34 @@
+# RIGNO base + residual 3D-FNO refinement head, trained END-TO-END. The
+# leakage-free version of the spatial corrector: the diagnostic (off-pipeline)
+# showed a spatial FNO corrects rp3's smooth-bias error far more than a
+# pointwise MLP does, so we wire the FNO refinement in-model and let the base
+# RIGNO co-adapt. Inherits the rp3 RIGNO recipe (mask 0, grad-loss 0); the head
+# is zero-init so the model starts as pure RIGNO and learns the correction.
+defaults:
+  - config_flow3D_RIGNO_randompath
+  - _self_
+
+# The FNO head's cuFFT needs power-of-two signal sizes in fp16; the grid is
+# [75,50,40], so the whole model runs fp32 (same reason FNO stays fp32).
+amp:
+  enabled: false
+
+arch:
+  refine_head:
+    width: 24
+    modes: [12, 12, 8]
+    layers: 4
+
+custom:
+  name: rigno_refined_randompath
+  # param_dir is only resolved (not read) for random-path data, but the
+  # strict default resolver requires an existing path -> point at data_dir.
+  param_dir: ${custom.data_dir}
+  model_family: rigno_refined
+  # Optional path to a trained RIGNO u_network.0.pth to warm-start the base from
+  # (e.g. rp3). null = train the base from scratch. Set at runtime (instance
+  # path), not committed. Ignored at eval (the trained checkpoint loads instead).
+  base_init_ckpt: null
+  # Optional separate LR for the FNO refinement head (base uses optimizer.lr).
+  # null = single LR. Lets the head train aggressively on a warm-started base.
+  head_lr: null

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PINO Pipeline Console</title>
+  <link rel="icon" type="image/svg+xml" href="logo_aiida.svg" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">aiida-pino</p>
+        <h1>PINO Pipeline Console</h1>
+        <p class="muted small" id="backendLine">connecting…</p>
+      </div>
+      <div class="env-strip" id="envStrip"></div>
+    </header>
+
+    <nav class="tabbar" id="tabbar"></nav>
+    <main id="view"><div class="detail-empty">Loading…</div></main>
+  </div>
+
+  <script src="app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+# FNO on the straight-path / spkh123 recipe, the third architecture of the
+# architecture x frame-treatment grid. Partner of config_flow3D_GAOT_pvlhs and
+# config_flow3D_RIGNO_pvlhs: same budget, same schedule, same input channels, so the
+# only thing that differs between the three is the architecture.
+#
+# The schedule comes from config_flow3D_FNO_randompath_onecycle, which explains why an
+# FNO one-cycle config has to exist at all (the scheduler cannot be overridden on an FNO
+# parent, and it is not a training-profile field).
+defaults:
+  - config_flow3D_FNO_randompath_onecycle
+  - _self_
+
+training:
+  # Matched to the GAOT and RIGNO pvlhs arms, not to the 18000 of the FNO parents --
+  # budget is part of what must be held equal.
+  max_steps: 32000
+  rec_validation_freq: 2000
+  rec_results_freq: 2000
+  summary_freq: 2000
+
+stop_criterion:
+  # Both partners override these and this arm must match, or the comparison is not
+  # controlled. patience must not sit below max_steps: an inherited 4000 fired
+  # mid-descent on a prior run and produced an untrained model, and one-cycle needs
+  # its full anneal. freq MUST divide evenly with rec_validation_freq -- physicsnemo
+  # enforces it but only at the FIRST criterion evaluation, so the inherited 500
+  # against a validation freq of 2000 fails a run hours in. config_loading
+  # now catches it at startup.
+  patience: 32000
+  freq: 2000
+
+custom:
+  power_weighted_dose: true
+  # The SAME 15 keys as config_flow3D_GAOT_pvlhs and config_flow3D_RIGNO_pvlhs. Kept
+  # identical for the steady and moving-ref arms too, where beam_x/beam_y go
+  # near-constant because the beam is fixed by construction: redundant, not wrong, and
+  # it keeps the three frame treatments comparable and warm-startable from one another.
+  FNO_input_keys:
+    - V_scan
+    - P
+    - H_norm
+    - x
+    - y
+    - z
+    - beam_x
+    - beam_y
+    - beam_dist
+    - path_dose
+    - path_dose_recent
+    - preheat_T0
+    - beam_shape_uniform
+    - focus_factor
+    - h_norm_local
