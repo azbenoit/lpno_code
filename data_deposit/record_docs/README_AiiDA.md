@@ -24,7 +24,7 @@ The nodes were produced with, and open cleanly under:
 | --- | --- | --- |
 | Python | 3.10 | |
 | `aiida-core` | 2.8.0 | reading the archive. Newer 2.x reads it after an automatic migration; an older aiida-core than the one that wrote it cannot (archive migration is forward-only) |
-| `aiida-pino` | 0.1.0, from the code repository at **[TO FILL: tag]** | the `PinoSimulationData`, `PinoDatasetCollectionData`, `PinoModelData` and `PinoModelEvaluationData` classes, the workflows, and the `aiida-pino` command |
+| `aiida-pino` | 0.1.0, from the code repository at `v0.1.0` | the `PinoSimulationData`, `PinoDatasetCollectionData`, `PinoModelData` and `PinoModelEvaluationData` classes, the workflows, and the `aiida-pino` command |
 | `lpno` | 0.1.0, same repository | imported by `aiida-pino`; the datasource, models and metrics |
 | `nvidia-physicsnemo` | 1.2.0, `torch` 2.8.0 | to load weights or re-run an evaluation or a training |
 

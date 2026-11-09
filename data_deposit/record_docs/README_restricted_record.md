@@ -2,14 +2,14 @@
 
 This record holds the FLOW-3D WELD simulation output behind the manuscript
 A. Benoit and E. Iseli, *Provenance-tracked, experimentally validated neural operator surrogates of
-three-dimensional laser melting with keyholes and free-form paths* (2026; preprint: **[TO FILL: arXiv link]**): the simulated fields of the 1,096 simulations its models were
+three-dimensional laser melting with keyholes and free-form paths* (2026; preprint on arXiv, linked from the code repository): the simulated fields of the 1,096 simulations its models were
 trained and scored on, and the files carrying solver output that were moved
 out of the AiiDA archives of the companion open record. The open record
 doi:10.5281/zenodo.23325086 holds the provenance graph, the trained models, every
 evaluation and the configuration of every simulation; its `README.md`
 describes the whole deposit.
 
-Code repository: https://github.com/azbenoit/lpno_code, release **[TO FILL: tag]**.
+Code repository: https://github.com/azbenoit/lpno_code, release `v0.1.0`.
 This record: doi:10.5281/zenodo.23325088. Licence: CC BY-NC-SA 4.0 (see `LICENSE.txt`).
 
 ## Access
@@ -93,8 +93,25 @@ with tarfile.open("restricted_files_main.tar") as t:
   title  = {Provenance-tracked, experimentally validated neural operator surrogates of
             three-dimensional laser melting with keyholes and free-form paths},
   year   = {2026},
-  note   = {Preprint, arXiv:[TO FILL]}
+  note   = {Preprint}
 }
 ```
 
-**[TO FILL: BibTeX for both records with their DOIs.]**
+```bibtex
+@dataset{benoit_lpno_open_2026,
+  author    = {Benoit, Alix and Iseli, Elia},
+  title     = {{LP-NO} data, open record: provenance graph, trained neural operator models and simulation configurations},
+  year      = {2026},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.23325086}
+}
+
+@dataset{benoit_lpno_restricted_2026,
+  author    = {Benoit, Alix and Iseli, Elia},
+  title     = {{LP-NO} data, restricted-access record: {FLOW-3D WELD} simulation output},
+  year      = {2026},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.23325088}
+}
+```
+

@@ -2,14 +2,14 @@
 
 This record holds every trained model and evaluation behind the results tables
 and figures of the manuscript A. Benoit and E. Iseli, *Provenance-tracked, experimentally validated neural operator surrogates of
-three-dimensional laser melting with keyholes and free-form paths* (2026; preprint: **[TO FILL: arXiv link]**), the configuration of every simulation they
+three-dimensional laser melting with keyholes and free-form paths* (2026; preprint on arXiv, linked from the code repository), the configuration of every simulation they
 trained and were scored on, and the full AiiDA provenance graph that links
 them. A reader can trace any printed number to the model, the evaluation and
 the simulations it was computed from. With the companion restricted-access
 record, which holds the simulated fields, a reader can also re-run any
 evaluation and re-train any model on the same data.
 
-Code repository: https://github.com/azbenoit/lpno_code, release **[TO FILL: tag]**.
+Code repository: https://github.com/azbenoit/lpno_code, release `v0.1.0`.
 This record: doi:10.5281/zenodo.23325086. Restricted-access record with the FLOW-3D WELD
 output: doi:10.5281/zenodo.23325088. Licence of both: CC BY-NC-SA 4.0 (see `LICENSE.txt`).
 
@@ -340,9 +340,18 @@ These readouts are not comparable with the printed values.
   title  = {Provenance-tracked, experimentally validated neural operator surrogates of
             three-dimensional laser melting with keyholes and free-form paths},
   year   = {2026},
-  note   = {Preprint, arXiv:[TO FILL]}
+  note   = {Preprint}
 }
 ```
 
-**[TO FILL: BibTeX for this record with its DOI.]**
+```bibtex
+@dataset{benoit_lpno_open_2026,
+  author    = {Benoit, Alix and Iseli, Elia},
+  title     = {{LP-NO} data, open record: provenance graph, trained neural operator models and simulation configurations},
+  year      = {2026},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.23325086}
+}
+```
+
 Please cite the paper for the method and this record for the data.
