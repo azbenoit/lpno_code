@@ -1,7 +1,7 @@
 # LP-NO: neural-operator surrogates for laser melting
 
 Code for the manuscript A. Benoit and E. Iseli, *Provenance-tracked, experimentally validated neural operator
-surrogates of three-dimensional laser melting with keyholes and free-form paths* (2026; preprint, arXiv link to follow).
+surrogates of three-dimensional laser melting with keyholes and free-form paths* (2026; preprint, [arXiv:2611.14561](https://arxiv.org/abs/2611.14561)).
 
 The repository covers the whole pipeline behind the paper. It generates FLOW-3D WELD
 simulations of laser melting from JSON configurations, trains and evaluates neural-operator
@@ -107,11 +107,14 @@ If you use this code or the data, please cite the paper:
 
 ```bibtex
 @misc{benoit_lpno_2026,
-  author = {Benoit, Alix and Iseli, Elia},
-  title  = {Provenance-tracked, experimentally validated neural operator surrogates of
-            three-dimensional laser melting with keyholes and free-form paths},
-  year   = {2026},
-  note   = {Preprint}
+  author        = {Benoit, Alix and Iseli, Elia},
+  title         = {Provenance-tracked, experimentally validated neural operator surrogates of
+                   three-dimensional laser melting with keyholes and free-form paths},
+  year          = {2026},
+  eprint        = {2611.14561},
+  archivePrefix = {arXiv},
+  doi           = {10.48550/arXiv.2611.14561},
+  note          = {Preprint}
 }
 ```
 

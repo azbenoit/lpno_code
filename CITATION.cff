@@ -37,7 +37,11 @@ preferred-citation:
       given-names: Elia
   year: 2026
   status: preprint
-  notes: "arXiv identifier to be added when the preprint is posted."
+  doi: 10.48550/arXiv.2611.14561
+  url: "https://arxiv.org/abs/2611.14561"
+  identifiers:
+    - type: other
+      value: "arXiv:2611.14561"
 references:
   - type: data
     title: >-
